@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<% if(val != null) { %>
+<%
+let date = new Date(val.attributes.updated_at);
+let dateStr = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
++ ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+%>
+<div class="topicNames">
+<table>
+    <tr>
+        <td>
+            <%= dateStr %>
+        </td>
+        <td>
+            <a href="/main/<%= val.attributes.id %>/1">
+                <%= val.attributes.name %>
+            </a>
+        </td>
+        <td>
+        <% if( val.attributes.user_id == id ) { %>
+            <form action="/delete/<%= val.attributes.id %>" method="POST">
+                <input type="submit" value="削除">
+            </form>
+        <% } %>
+        </td>
+    </tr>
+</table>
+</div>
+<% } %>

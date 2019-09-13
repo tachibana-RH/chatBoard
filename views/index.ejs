@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <head>
+        <h1><%= title %></h1>
+    </head>
+    <form method="POST" action="/logout" style="text-align: right;">
+      <input type="submit" value="ログアウト">  
+    </form>
+    <h2 style="margin-left: 10%;">Welcome to <%= login.name %></h2>
+    <div role="main" class="topics">
+        <form method="POST" action="/main/createTopic">
+            <p>
+            <input type="text" name="topicname" size="50" placeholder="作成したいトピックの名前を入力してください。">
+            <input type="submit" value="作成">
+            </p>
+        </form>
+        <hr>
+        <% for(let index in collection) { %>
+            <%- include('data_item_topic', {val:collection[index], id:login.id}) %>
+        <% } %>
+        <p>
+            <% if (pagination.page > 1) { %>
+            <span>
+                <a href="/<%= pagination.page - 1 %>">&lt;&lt; prev</a>
+            </span>
+            <% } else { %>
+            <span>
+                &lt;&lt; prev
+            </span>
+            <% } %>
+
+            <% if (pagination.page < pagination.pageCount) { %>
+            <span>
+                <a href="/<%= pagination.page + 1 %>">Next &gt;&gt;</a>
+            </span>
+            <% } else { %>
+            <span>
+                Next &gt;&gt;
+            </span>
+            <% } %>
+        </p>
+    </div>
+  </body>
+</html>

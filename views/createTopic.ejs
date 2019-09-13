@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+    <head>
+        <h1><%= title %></h1>
+    </head>
+    <div class="createTopic">
+    <form action="./createTopic/submit" method="POST">
+    <table>
+        <tr>
+            <th>title</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="topicname" size="50" value="<%= topicName %>"></td>
+        </tr>
+        <tr>
+            <th>ひと言</th>
+        </tr>
+        <tr>
+            <td><textarea name="msg" cols="55" rows="10"></textarea></td>
+        </tr>
+        <tr><td><input type="submit"></td></tr>
+    </table>
+    </form>
+    </div>
+</body>
+</html>

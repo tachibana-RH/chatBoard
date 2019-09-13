@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<% if(val != null) { %>
+<%
+let date = new Date(val.attributes.created_at);
+let dateStr = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
++ ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+%>
+<table style="margin-left: 0%;">
+    <tr>
+        <th>
+            <a class="home">
+                <%= dateStr %>
+            </a>
+        </th>
+        <td><%= val.attributes.message %></td>
+    </tr>
+</table>
+<% } %>

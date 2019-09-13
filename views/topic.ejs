@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+  </script>
+  <body>
+    <head>
+      <h1><%= title %></h1>
+    </head>
+    <div class="fixed">
+      <h2 style="margin-left: 10%;"><%= topicName %></h2>
+    </div>
+    <div role="main">
+      <hr>
+      <p>
+        <% for(let index in collection) { %>
+          <%- include('data_item', {val:collection[index], id:login.id}) %>
+        <% } %>
+      </p>
+      <div class="sendMsg">
+          <p>
+            <% if (pagination.page > 1) { %>
+              <span>
+                <a href="./<%= pagination.page - 1 %>">&lt;&lt; prev</a>
+              </span>
+            <% } else { %>
+              <span>
+                &lt;&lt; prev
+              </span>
+            <% } %>
+    
+            <% if (pagination.page < pagination.pageCount) { %>
+              <span>
+                <a href="./<%= pagination.page + 1 %>">Next &gt;&gt;</a>
+              </span>
+            <% } else { %>
+              <span>
+                Next &gt;&gt;
+              </span>
+            <% } %>
+          </p>
+          <p>
+              <span>
+                <a href="/main">Topへ</a>
+              </span>
+          </p>
+          <form method="POST" action="./sendMsg">
+            <table>
+              <tr>
+                <th><textarea name="msg" id="msg" cols="50" rows="3"></textarea></th>
+                <td><input type="submit" value="送信"></td>
+              </tr>
+            </table>
+          </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -8,11 +8,12 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/javascripts/uploadImage.js"></script>
-<body style="margin-left: 20%;">
+<body>
     <head>
         <a href="/main"><h1><%= title %></h1></a>
     </head>
-    <div role="main" style="width: 80%;">
+    <div role="main">
+        <div class="userdoc">
         <% if( collection[0].relations.user.attributes.icon == '' ){ %>
             <img src="/images/icon_default.jpeg" width="80px" height="80px">
         <% } else { %>
@@ -30,6 +31,7 @@
         <% } %>
         <h2><%= collection[0].relations.user.attributes.name %> 's Home</h2>
         <p><%= collection[0].relations.user.attributes.comment %></p>
+        </div>
         <hr>
         <% for(let index in collection) { %>
             <%- include('data_item_home', {val:collection[index]}) %>

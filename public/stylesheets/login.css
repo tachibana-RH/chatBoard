@@ -4,9 +4,19 @@ padding: 25px;
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 color: rgb(148, 148, 148);
 margin: 5px;
+width: 1000px;
+margin-right:auto;
+margin-left:auto;
 }
+@media screen and (max-width: 1300px){
+body {
+    width: 750px;
+}
+}
+
 a {
-color: #00B7FF;
+color: rgb(0, 204, 17);
+text-decoration: none;
 }
 h1 {
 color: rgb(146, 146, 146);
@@ -26,14 +36,21 @@ padding: 8px;
 table tr td {
 padding: 8px;
 }
-
+.submit {
+text-align: left;
+}
 .login {
 text-align: center;
 }
 .useradd {
 text-align: center;
+margin-top: 5%;
 }
 table {
 margin-right:auto;
 margin-left:auto;
+}
+
+.error {
+color: red;
 }

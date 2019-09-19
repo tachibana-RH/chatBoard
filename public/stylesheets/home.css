@@ -1,18 +1,18 @@
 
 body {
-padding: 25px;
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 color: rgb(148, 148, 148);
-margin: 5px;
+width: 1000px;
+margin-right:auto;
+margin-left:auto;
 }
 a {
 color: rgb(0, 204, 17);
 text-decoration: none;
 }
 h1 {
-color: rgb(146, 146, 146);
+color: rgb(0, 204, 17);
 text-align: right;
-margin: 0%;
 }
 h2 {
 font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -31,12 +31,14 @@ table,th,td {
     word-wrap:break-word;
 }
 .date {
-    width: 30%;
+    width: 20%;
 }
 .message {
-    width: 70%;
+    width: 80%;
 }
-
+.userdoc {
+    padding-left: 15px;
+}
 .pagenations p {
     text-align: center;
 }
@@ -51,4 +53,16 @@ padding: 2px; /* ラベルとテキスト間の余白を指定する */
 border: double 4px rgb(255, 255, 255);/* ラベルのボーダーを指定する */
 border-radius: 10px; /* ラベルボックスの角丸を指定する */
 cursor:pointer; /*マウスカーソルの形を指定する */
+}
+
+@media screen and (max-width: 1300px){
+body {
+    width: 750px;
+}
+.date {
+    width: 25%;
+}
+.message {
+    width: 75%;
+}
 }

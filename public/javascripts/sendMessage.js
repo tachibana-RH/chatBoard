@@ -47,7 +47,7 @@ const getSelfMessage = (data,messages) => {
     const child = '<div class="message">\n' +
                 '<table>\n' + 
                     '<tr>\n' +
-                        '<td style="width: 30%;"></td>\n' +
+                        '<td class="messageDummy"></td>\n' +
                         '<td class="messageRight">\n' +
                         messages +
                         '</td>\n' +
@@ -87,7 +87,7 @@ const getOtherMessage = (data,messages) => {
                         '<td class="messageLeft">\n' +
                         messages +
                         '</td>\n' +
-                        '<td style="width: 30%;"></td>\n' +
+                        '<td class="messageDummy"></td>\n' +
                     '</tr>\n' +
                     '<tr>\n' +
                         '<th></th>\n' +

@@ -3,7 +3,7 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: rgb(148, 148, 148);
   margin: 5px;
-  width: 80%;
+  width: 1000px;
   margin-right:auto;
   margin-left:auto;
 }
@@ -18,6 +18,8 @@ h1 {
 }
 h2 {
   font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-left: 10%;
+  
 }
 p {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -28,7 +30,7 @@ table {
 }
 th {
   width: 30%;
-  text-align: right;
+  text-align: center;
 }
 .topics table {
   margin-right:auto;
@@ -45,7 +47,7 @@ th {
 
 @media screen and (max-width: 1300px){
 body {
-    width: 95%;
+  width: 750px;
 }
 .topics table {
   margin-right:auto;

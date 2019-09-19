@@ -24,7 +24,7 @@ var User = Bookshelf.Model.extend({
 
 router.get('/login', function(req, res, next) {
   var data = {
-    title: 'Users/Login',
+    title: 'Login',
     form: {name:'',password:''},
     content:'※名前とパスワードを入力してください。※'
   }
@@ -47,7 +47,7 @@ router.post('/login', function(req, res, next) {
       content += '</ul>';
 
       const data = {
-        title: 'Users/Login',
+        title: 'Login',
         content: content,
         form: req.body
       }
@@ -78,7 +78,7 @@ router.post('/login', function(req, res, next) {
 /* GET users listing. */
 router.get('/add', function(req, res, next) {
   var data = {
-    title: 'Users/Add',
+    title: 'Create',
     form: {name:'',password:'',comment:''},
     content:'※登録する名前・パスワード・コメントを入力してください。※'
   }
@@ -101,15 +101,30 @@ router.post('/add', function(req, res, next) {
       content += '</ul>';
 
       const data = {
-        title: 'Users/Add',
+        title: 'Create',
         content: content,
         form: req.body
       }
       response.render('users/add', data);
     } else {
-      request.session.login = null;
-      new User(req.body).save().then((model) => {
-        response.redirect('/');
+      const nm = req.body.name;
+      const pw = req.body.password;
+      User.query({where: {name: nm}, andWhere: {password: pw}})
+      .fetch()
+      .then((model) => {
+        if (model == null) {
+          request.session.login = null;
+          new User(req.body).save().then((model) => {
+            response.redirect('/');
+          });
+        } else {
+          var data = {
+            title: 'Create',
+            form: {name: req.body.name,password: req.body.password,comment: req.body.comment},
+            content:'<a class="error">※すでに利用されているユーザー名です※</a>'
+          }
+          res.render('users/add', data);
+        }
       });
     }
   });

@@ -22,9 +22,8 @@ const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + 
                 <%= val.attributes.name %>
             </a>
         </td>
-        <th>
+        <th class="delete">
         <% if( val.attributes.user_id == id ) { %>
-        
             <form action="/delete/<%= val.attributes.id %>" method="POST">
                 <input type="submit" value="削除">
             </form>

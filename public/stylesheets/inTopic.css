@@ -2,11 +2,10 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     color: rgb(148, 148, 148);
     margin: 5px;
-    width: 70%;
+    width: 1000px;
     margin-right:auto;
     margin-left:auto;
 }
-
 .title {
 color: rgb(0, 204, 17);
 text-decoration: none;
@@ -14,7 +13,6 @@ font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
 padding:15px;
 }
 .topicname {
-display: block;
 text-align: center;
 }
 
@@ -22,15 +20,16 @@ text-align: center;
 position: fixed;
 background-color: white;
 top: 0px;
-height: 85px; 
+height: 60px; 
 margin-right:auto;
 margin-left:auto;
-width: 70%;
+width: 1000px;
 left: 0;
 right: 0;
 z-index: 10;
 border-radius: 0;
 box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
+
 }
 
 a.home {
@@ -63,26 +62,9 @@ padding: 10px;
 .message table {
 margin-right:auto;
 margin-left:auto;
-width: 70%;
+width: 95%;
 table-layout:fixed;
 }
-@media screen and (max-width: 1300px){
-body {
-    width: 95%;
-}
-.message table {
-    margin-right:auto;
-    margin-left:auto;
-    width: 90%;
-}
-.fixed {
-width: 95%;
-}
-.message table th {
-width: 30%;
-}
-}
-
 .message table,th,td {
 word-wrap:break-word;
 }
@@ -90,7 +72,25 @@ word-wrap:break-word;
 width: 20%;
 }
 .messageDummy {
-    width: 33%;
+    width: 35%;
+}
+
+@media screen and (max-width: 1300px){
+body {
+    width: 750px;
+}
+.message table {
+    width: 100%;
+}
+.fixed {
+width: 750px;
+}
+.message table th {
+width: 20%;
+}
+.messageDummy {
+    width: 35%;
+}
 }
 
 .msgform {

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <% if(val != null) { %>
-<div class="message">
-<table>
-    
-    <%
-        let date = new Date(val.attributes.created_at);
-        let dateStr = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-        + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-        
-        let clockIconStyle = 'color: gray;';
-        let message = val.attributes.message.split(/\r?\n/g);
-    %>
+<%
+const date = new Date(val.attributes.updated_at);
+const dateYear = date.getFullYear();
+const dateMonth = ((date.getMonth() + 1).toString().length == 1)?'0' + (date.getMonth() + 1):(date.getMonth() + 1);
+const dateDate = (date.getDate().toString().length == 1)?'0' + date.getDate():date.getDate();
+const dateHours = (date.getHours().toString().length == 1)?'0' + date.getHours():date.getHours();
+const dateMinutes = (date.getMinutes().toString().length == 1)?'0' + date.getMinutes():date.getMinutes();
+const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSeconds():date.getSeconds();
 
+const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
+    
+let clockIconStyle = 'color: gray;';
+let message = val.attributes.message.split(/\r?\n/g);
+%>
+<div id="<%= msgid %>" class="message">
+<table>
     <% if(val.attributes.user_id != id) { %>
     <tr>
         <th>
@@ -19,7 +23,7 @@
                 <% if( val.relations.user.attributes.icon == '' ){ %>
                     <img src="/images/icon_default.jpeg" width="30px" height="30px">
                 <% } else { %>
-                    <img src="/images/<% val.relations.user.attributes.icon %>" width="30px" height="30px">
+                    <img src="/images/<%= val.relations.user.attributes.icon %>" width="30px" height="30px">
                 <% } %>
                 <figcaption><%= val.relations.user.attributes.name %></figcaption>
             </a>
@@ -74,7 +78,7 @@
                 <% if( val.relations.user.attributes.icon == '' ){ %>
                     <img src="/images/icon_default.jpeg" width="30px" height="30px">
                 <% } else { %>
-                    <img src="/images/<% val.relations.user.attributes.icon %>" width="30px" height="30px">
+                    <img src="/images/<%= val.relations.user.attributes.icon %>" width="30px" height="30px">
                 <% } %>
                 <figcaption><%= val.relations.user.attributes.name %></figcaption>
             </a>

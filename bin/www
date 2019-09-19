@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('miniboard:server');
+var debug = require('debug')('chatboard:server');
 var http = require('http');
 
 /**
@@ -22,11 +22,14 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Create socket.
+ * Create websocket.
  */
-var io = require('socket.io')(http);
-io.on('connection', function(socket){
-  console.log('a user connected');
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  socket.on('message', function (data) {
+    io.sockets.emit('news', data);
+  });
 });
 
 /**

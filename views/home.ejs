@@ -5,25 +5,36 @@
         <%= title %>
     </title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/javascripts/uploadImage.js"></script>
 <body style="margin-left: 20%;">
     <head>
-        <h1><%= title %></h1>
+        <a href="/main"><h1><%= title %></h1></a>
     </head>
     <div role="main" style="width: 80%;">
         <% if( collection[0].relations.user.attributes.icon == '' ){ %>
             <img src="/images/icon_default.jpeg" width="80px" height="80px">
         <% } else { %>
-            <img src="/images/<% collection[0].relations.user.attributes.icon %>" width="30px" height="30px">
+            <img src="/images/<%= collection[0].relations.user.attributes.icon %>" width="80px" height="80px">
+        <% } %>
+        <% if( collection[0].relations.user.attributes.id == login.id ) { %>
+            <br>
+            <br>
+            <form action="./upload" method="POST" enctype="multipart/form-data">
+            <label for="file_upload">
+            アイコンにする画像を選択
+            <input type="file" id="file_upload" name="uploadfile">
+            </label>
+            </form>
         <% } %>
         <h2><%= collection[0].relations.user.attributes.name %> 's Home</h2>
         <p style="text-align: left;"><%= collection[0].relations.user.attributes.comment %></p>
         <hr>
-        <p>
-            <% for(let index in collection) { %>
-                <%- include('data_item_my', {val:collection[index]}) %>
-            <% } %>
-        </p>
+        <% for(let index in collection) { %>
+            <%- include('data_item_my', {val:collection[index]}) %>
+        <% } %>
         <p style="text-align: left;">
             <% if (pagination.page > 1) { %>
                 <span>
@@ -45,7 +56,6 @@
                 </span>
             <% } %>
         </p>
-        <p> </p>
         <p style="text-align: left;"><a href="/">&lt;&lt; Top</a></p>
     </div>
 </body>

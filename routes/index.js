@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var knex = require('knex') ({
+const knex = require('knex') ({
   client: 'mysql',
   connection: {
     host    :'localhost',
@@ -14,16 +14,16 @@ var knex = require('knex') ({
   }
 });
 
-var Bookshelf = require('bookshelf')(knex);
+const Bookshelf = require('bookshelf')(knex);
 
 Bookshelf.plugin('pagination');
 // Bookshelf.plugin('bookshelf-update');
 
-var User = Bookshelf.Model.extend({
+const User = Bookshelf.Model.extend({
   tableName: 'users'
 });
 
-var Topic = Bookshelf.Model.extend({
+const Topic = Bookshelf.Model.extend({
   tableName: 'topics',
   hasTimestamps: true,
   user: function() {
@@ -31,7 +31,7 @@ var Topic = Bookshelf.Model.extend({
   }
 });
 
-var Message = Bookshelf.Model.extend({
+const Message = Bookshelf.Model.extend({
   tableName: 'messages',
   hasTimestamps: true,
   user: function() {
@@ -39,7 +39,7 @@ var Message = Bookshelf.Model.extend({
   }
 });
 
-var TopicMessage = Bookshelf.Model.extend({
+const TopicMessage = Bookshelf.Model.extend({
   tableName: 'topics',
   hasTimestamps: true,
   user: function() {
@@ -67,18 +67,18 @@ router.get('/main/:page', function(req, res, next) {
       pg = 1;
     }
     new Topic().orderBy('updated_at', 'DESC')
-        .fetchPage({page:pg, pageSize:10})
-        .then((collection) => {
-          const data = {
-            title: 'miniBoard',
-            login: {name: req.session.login.name, id: req.session.login.id},
-            collection: collection.toArray(),
-            pagination: collection.pagination
-          };
-          res.render('index', data);
-        }).catch((err) => {
-          res.status(500).json({error: true, data: {messages: err.message}});
-        });
+    .fetchPage({page:pg, pageSize:10})
+    .then((collection) => {
+      const data = {
+        title: 'chatBoard',
+        login: {name: req.session.login.name, id: req.session.login.id},
+        collection: collection.toArray(),
+        pagination: collection.pagination
+      };
+      res.render('index', data);
+    }).catch((err) => {
+      res.status(500).json({error: true, data: {messages: err.message}});
+    });
   }
 });
 
@@ -87,7 +87,7 @@ router.post('/main/createTopic', function(req, res, next) {
     res.redirect('/users/login');
   } else {
     const data  = {
-      title: 'miniBoard',
+      title: 'chatBoard',
       topicName: req.body.topicname
     }
     res.render('createTopic', data);
@@ -102,21 +102,22 @@ router.post('/main/:topicId/sendMsg',function(req, res, next){
   }
   new Message(rec).save().then((model) => {
     new Topic().where('id','=',req.params.topicId)
-      .fetch()
-      .then((topic) => {
-        let cnt = topic.attributes.count + 1;
-        new Topic().where('id','=',req.params.topicId)
-          .save({count: cnt},{patch:true})
-          .then((result) =>{
-            console.log(result.toJSON());
-            res.status(303);
-            res.redirect('./1');
-          })
-          .catch((err) => {
-            res.status(500).json({error: true, data: {messages: err.message}});
-            res.redirect('./1');
-          });
+    .fetch()
+    .then((topic) => {
+      let cnt = topic.attributes.count + 1;
+      new Topic().where('id','=',req.params.topicId)
+      .save({count: cnt},{patch:true})
+      .then((result) =>{
+        console.log(result);
+        rec['user_name'] = req.session.login.name;
+        rec['user_icon'] = req.session.login.icon;
+        res.json(rec);
+      })
+      .catch((err) => {
+        res.status(500).json({error: true, data: {messages: err.message}});
+        res.redirect('./1');
       });
+    });
   });
 });
 
@@ -132,27 +133,28 @@ router.get('/main/:topicId/:page', function(req, res, next) {
       pg = 1;
     }
     new Topic().where('id','=',id)
-      .fetch()
-      .then((Record) => {
-        new Message().orderBy('created_at', 'DESC')
-          .where('topic_id','=',id)
-          .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
-          .then((collection) => {
-            const data = {
-              title: 'miniBoard',
-              topicName: Record.attributes.name,
-              login: {name: req.session.login.name, id: req.session.login.id},
-              collection: collection.toArray().reverse(),
-              pagination: collection.pagination
-            };
-            res.render('topic', data);
-          }).catch((err) => {
-            res.status(500).json({error: true, data: {messages: err.message}});
-            res.redirect('/main');
-          });
+    .fetch()
+    .then((Record) => {
+      new Message().orderBy('created_at', 'DESC')
+      .where('topic_id','=',id)
+      .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+      .then((collection) => {
+        const data = {
+          title: 'chatBoard',
+          topicName: Record.attributes.name,
+          topicId: id,
+          login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon},
+          collection: collection.toArray().reverse(),
+          pagination: collection.pagination
+        };
+        res.render('topic', data);
       }).catch((err) => {
+        res.status(500).json({error: true, data: {messages: err.message}});
         res.redirect('/main');
-      })
+      });
+    }).catch((err) => {
+      res.redirect('/main');
+    })
   }
 });
 

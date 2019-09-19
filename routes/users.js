@@ -56,26 +56,21 @@ router.post('/login', function(req, res, next) {
       const nm = req.body.name;
       const pw = req.body.password;
       User.query({where: {name: nm}, andWhere: {password: pw}})
-        .fetch()
-        .then((model) => {
-          if (model == null) {
-            const data = {
-              title: '再入力',
-              content: '<p>名前またはパスワードが違います。</p>',
-              form: req.body
-            }
-            response.render('users/login',data);
-          } else {
-            request.session.login = model.attributes;
-            request.session.login.password = crypto.randomBytes(N).toString('base64').substring(0, N);
-            const data = {
-              title: 'Users/Login',
-              content: '<p>ログインしました!<br>トップページに戻ってメッセージを送信してください。</p>',
-              form: req.body
-            }
-            response.render('users/login',data);
+      .fetch()
+      .then((model) => {
+        if (model == null) {
+          const data = {
+            title: '再入力',
+            content: '<p>名前またはパスワードが違います。</p>',
+            form: req.body
           }
-        });
+          response.render('users/login',data);
+        } else {
+          request.session.login = model.attributes;
+          request.session.login.password = crypto.randomBytes(N).toString('base64').substring(0, N);
+          response.redirect('/main/1');
+        }
+      });
     }
   });
 });

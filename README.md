@@ -1,7 +1,7 @@
 # chatBoard
 チャット式の掲示板アプリ
 
-DBname: miniboard-db
+DBname: chatboard-db
 tables:
     messages:
         id(praymary) - int

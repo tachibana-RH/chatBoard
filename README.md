@@ -1,4 +1,4 @@
-# miniBoard
+# chatBoard
 チャット式の掲示板アプリ
 
 DBname: miniboard-db

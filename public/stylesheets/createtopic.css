@@ -1,0 +1,31 @@
+body {
+padding: 25px;
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: rgb(148, 148, 148);
+margin: 5px;
+width: 50%;
+margin-right:auto;
+margin-left:auto;
+}
+h1 {
+color: rgb(146, 146, 146);
+text-align: right;
+margin: 0%;
+}
+table {
+margin-right:auto;
+margin-left:auto;
+}
+table tr th {
+padding: 8px;
+}
+table tr td {
+padding: 8px;
+}
+
+.createTopic tr th {
+text-align: left;
+}
+.error {
+color: red;
+}

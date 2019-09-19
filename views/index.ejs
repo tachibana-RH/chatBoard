@@ -3,7 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
   </head>
   <body>
     <head>
@@ -22,7 +22,7 @@
         </form>
         <hr>
         <% for(let index in collection) { %>
-            <%- include('data_item_topic', {val:collection[index], id:login.id}) %>
+            <%- include('data_item_index', {val:collection[index], id:login.id}) %>
         <% } %>
         <p>
             <% if (pagination.page > 1) { %>

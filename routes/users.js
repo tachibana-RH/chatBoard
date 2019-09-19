@@ -8,11 +8,11 @@ const N = 16
 var knex = require('knex') ({
   client: 'mysql',
   connection: {
-    host    :'localhost',
-    user    :'root',
-    password:'',
-    database:'miniboard-db',
-    charset :'utf8'
+    host    : process.env.CHATBOARD_DB_HOST,
+    user    : process.env.CHATBOARD_DB_USER,
+    password: process.env.CHATBOARD_DB_PASSWORD,
+    database: process.env.CHATBOARD_DB_NAME,
+    charset : 'utf8'
   }
 });
 

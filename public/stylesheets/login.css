@@ -1,0 +1,39 @@
+
+body {
+padding: 25px;
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: rgb(148, 148, 148);
+margin: 5px;
+}
+a {
+color: #00B7FF;
+}
+h1 {
+color: rgb(146, 146, 146);
+text-align: right;
+margin: 0%;
+}
+h2 {
+font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+p {
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+margin: 0px 10px;
+}
+table tr th {
+padding: 8px;
+}
+table tr td {
+padding: 8px;
+}
+
+.login {
+text-align: center;
+}
+.useradd {
+text-align: center;
+}
+table {
+margin-right:auto;
+margin-left:auto;
+}

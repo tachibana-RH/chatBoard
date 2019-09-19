@@ -1,3 +1,46 @@
+
+body {
+padding: 25px;
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: rgb(148, 148, 148);
+margin: 5px;
+}
+a {
+color: rgb(0, 204, 17);
+text-decoration: none;
+}
+h1 {
+color: rgb(146, 146, 146);
+text-align: right;
+margin: 0%;
+}
+h2 {
+font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+p {
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    table-layout:fixed;
+}
+table,th,td {
+    padding: 8px;
+    border: 1px solid #bbb;
+    word-wrap:break-word;
+}
+.date {
+    width: 30%;
+}
+.message {
+    width: 70%;
+}
+
+.pagenations p {
+    text-align: center;
+}
+
 label > input {
 display:none; /* アップロードボタンのスタイルを無効にする */
 }

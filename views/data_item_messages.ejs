@@ -47,13 +47,13 @@ let message = val.attributes.message.split(/\r?\n/g);
             <% } %>
         <% } %>
         </td>
-        <td style="width: 30%;"></td>
+        <td class="messageDummy"></td>
     </tr>
 
     <% } else { %>
     
     <tr>
-        <td style="width: 30%;"></td>
+        <td class="messageDummy"></td>
         <td class="messageRight">
         <% for(let index in message) { %>
             <% if(message[index] == '') { %>

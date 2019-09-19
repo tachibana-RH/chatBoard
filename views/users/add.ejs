@@ -3,13 +3,13 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
 </head>
 <body>
     <head>
         <h1><%= title %></h1>
     </head>
-    <div role="main">
+    <div role="main" class="useradd">
         <p><%- content %></p>
         <form method="POST" action="/users/add">
             <table>
@@ -23,7 +23,7 @@
                 </tr>
                 <tr>
                     <th>COMMENT</th>
-                    <td><textarea name="comment"><%= form.comment %></textarea></td>
+                    <td><textarea name="comment" rows="5" cols="22"><%= form.comment %></textarea></td>
                 </tr>
                 <tr>
                     <th></th>

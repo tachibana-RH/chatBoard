@@ -1,0 +1,62 @@
+body {
+  padding: 25px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: rgb(148, 148, 148);
+  margin: 5px;
+  width: 80%;
+  margin-right:auto;
+  margin-left:auto;
+}
+a {
+  color: rgb(0, 204, 17);
+  text-decoration: none;
+}
+h1 {
+  color: rgb(146, 146, 146);
+  text-align: right;
+  margin: 0%;
+}
+h2 {
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+p {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0px 10px;
+}
+table {
+  padding: 8px;
+}
+th {
+  width: 30%;
+  text-align: right;
+}
+.topics table {
+  margin-right:auto;
+  margin-left:auto;
+  width: 60%;
+}
+.topics tr td {
+  width: 100px;
+  text-align: center;
+}
+.topics p {
+  text-align: center;
+}
+
+@media screen and (max-width: 1300px){
+body {
+    width: 95%;
+}
+.topics table {
+  margin-right:auto;
+  margin-left:auto;
+  width: 80%;
+}
+th {
+  width: 28%;
+}
+}
+
+.error {
+color: red;
+}

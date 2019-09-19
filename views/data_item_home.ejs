@@ -10,26 +10,30 @@ const dateMinutes = (date.getMinutes().toString().length == 1)?'0' + date.getMin
 const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSeconds():date.getSeconds();
 
 const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
+let message = val.attributes.message.split(/\r?\n/g);
 %>
-<div class="topicNames">
 <table>
     <tr>
-        <td>
+        <td class="date">
             <%= dateStr %>
         </td>
-        <td>
-            <a href="/main/<%= val.attributes.id %>/1">
-                <%= val.attributes.name %>
-            </a>
-        </td>
-        <td>
-        <% if( val.attributes.user_id == id ) { %>
-            <form action="/delete/<%= val.attributes.id %>" method="POST">
-                <input type="submit" value="削除">
-            </form>
+        <td class="message">
+        <% for(let index in message) { %>
+            <% if(message[index] == '') { %>
+                <br>
+            <% } else { %>
+                <% if(message[index].substr(0,4) == 'http') { %>
+                    <br>
+                    <a href="<%= message[index] %>" target="_blank">
+                        <%= message[index] %>
+                    </a>
+                <% } else { %>
+                    <br>
+                    <%= message[index] %>
+                <% } %>
+            <% } %>
         <% } %>
         </td>
     </tr>
 </table>
-</div>
 <% } %>

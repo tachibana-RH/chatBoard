@@ -6,11 +6,11 @@ const mysql = require('mysql');
 const knex = require('knex') ({
   client: 'mysql',
   connection: {
-    host    :'localhost',
-    user    :'root',
-    password:'',
-    database:'miniboard-db',
-    charset :'utf8'
+    host    : process.env.CHATBOARD_DB_HOST,
+    user    : process.env.CHATBOARD_DB_USER,
+    password: process.env.CHATBOARD_DB_PASSWORD,
+    database: process.env.CHATBOARD_DB_NAME,
+    charset : 'utf8'
   }
 });
 
@@ -147,7 +147,7 @@ router.get('/main/:topicId/:page', function(req, res, next) {
           collection: collection.toArray().reverse(),
           pagination: collection.pagination
         };
-        res.render('topic', data);
+        res.render('inTopic', data);
       }).catch((err) => {
         res.status(500).json({error: true, data: {messages: err.message}});
         res.redirect('/main');

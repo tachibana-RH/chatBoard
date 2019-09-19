@@ -3,7 +3,7 @@
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/inTopic.css" />
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
@@ -13,22 +13,21 @@
     <header data-topicid="<%= topicId %>" data-userid="<%= login.id %>">
       <!-- <h1><%= title %></h1> -->
         <!-- fixed -->
-        <h2><a href="/main"><%= title %></a> <%= topicName %></h2>
+        <h2><a href="/main" class="title"><%= title %></a><a class="topicname"><%= topicName %></a></h2>
     </header>
     </div>
     <div id="main" role="main">
       <hr>
       <div id="msgParent">
         <% for(let index in collection) { %>
-          <%- include('data_item', {val:collection[index], id:login.id, msgid:index}) %>
+          <%- include('data_item_messages', {val:collection[index], id:login.id, msgid:index}) %>
         <% } %>
       </div>
-      <div id="dummy" class="sendMsg"></div>
-      <div id="sendMsg" class="sendMsg msgfixed">
+      <div id="dummy" class="msgform"></div>
+      <div id="msgform" class="msgform msgfixed">
           <!-- msgfixed -->
           <div id="page" class="">
           <!-- disable -->
-          <p>
             <% if (pagination.page > 1) { %>
               <span>
                 <a href="./<%= pagination.page - 1 %>">&lt;&lt; prev</a>
@@ -48,16 +47,10 @@
                 Next &gt;&gt;
               </span>
             <% } %>
-          </p>
-          <span>
-            <a href="/main">Topへ</a>
-          </span>
           </div>
-          <table>
-            <tr>
-              <th><textarea name="msg" id="msg" class="msg" onfocus="focusA(this);" onblur="blurA(this);"></textarea></th>
-              <td><input type="submit" value="送信" id="submit" ></td>
-            </tr>
+          <table class="sendMsg">
+            <th><textarea name="msg" id="msg" class="msg" onfocus="focusA(this);" onblur="blurA(this);"></textarea></th>
+            <td><input type="submit" value="送信" id="submit" ></td>
           </table>
       </div>
     </div>

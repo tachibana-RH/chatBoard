@@ -39,14 +39,6 @@ const Message = Bookshelf.Model.extend({
   }
 });
 
-const TopicMessage = Bookshelf.Model.extend({
-  tableName: 'topics',
-  hasTimestamps: true,
-  user: function() {
-    return this.belongsTo(Message);
-  }
-});
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.redirect('/main');
@@ -67,7 +59,7 @@ router.get('/main/:page', function(req, res, next) {
       pg = 1;
     }
     new Topic().orderBy('updated_at', 'DESC')
-    .fetchPage({page:pg, pageSize:10})
+    .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
     .then((collection) => {
       const data = {
         title: 'chatBoard',
@@ -82,83 +74,18 @@ router.get('/main/:page', function(req, res, next) {
   }
 });
 
-router.post('/main/createTopic', function(req, res, next) {
+router.get('/main/topic/create', function(req, res, next) {
   if(req.session.login == null){
     res.redirect('/users/login');
   } else {
     const data  = {
-      title: 'chatBoard',
-      topicName: req.body.topicname
+      title: 'chatBoard'
     }
     res.render('createTopic', data);
   }
 })
 
-router.post('/main/:topicId/sendMsg',function(req, res, next){
-  var rec = {
-    message: req.body.msg,
-    user_id: req.session.login.id,
-    topic_id: req.params.topicId
-  }
-  new Message(rec).save().then((model) => {
-    new Topic().where('id','=',req.params.topicId)
-    .fetch()
-    .then((topic) => {
-      let cnt = topic.attributes.count + 1;
-      new Topic().where('id','=',req.params.topicId)
-      .save({count: cnt},{patch:true})
-      .then((result) =>{
-        console.log(result);
-        rec['user_name'] = req.session.login.name;
-        rec['user_icon'] = req.session.login.icon;
-        res.json(rec);
-      })
-      .catch((err) => {
-        res.status(500).json({error: true, data: {messages: err.message}});
-        res.redirect('./1');
-      });
-    });
-  });
-});
-
-router.get('/main/:topicId/:page', function(req, res, next) {
-
-  if(req.session.login == null){
-    res.redirect('/users/login');
-  } else {
-    let id = req.params.topicId;
-    let pg = req.params.page;
-    pg *= 1;
-    if (pg < 1) {
-      pg = 1;
-    }
-    new Topic().where('id','=',id)
-    .fetch()
-    .then((Record) => {
-      new Message().orderBy('created_at', 'DESC')
-      .where('topic_id','=',id)
-      .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
-      .then((collection) => {
-        const data = {
-          title: 'chatBoard',
-          topicName: Record.attributes.name,
-          topicId: id,
-          login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon},
-          collection: collection.toArray().reverse(),
-          pagination: collection.pagination
-        };
-        res.render('inTopic', data);
-      }).catch((err) => {
-        res.status(500).json({error: true, data: {messages: err.message}});
-        res.redirect('/main');
-      });
-    }).catch((err) => {
-      res.redirect('/main');
-    })
-  }
-});
-
-router.post('/main/createTopic/submit', function(req, res, next) {
+router.post('/main/topic/create/submit', function(req, res, next) {
   const topicRec  = {
     name: req.body.topicname,
     user_id: req.session.login.id
@@ -177,15 +104,34 @@ router.post('/main/createTopic/submit', function(req, res, next) {
       });
     });
   });
-})
+});
 
-router.get('/logout',function(req, res, next){
+router.post('/main/delete/:topicid',function(req, res, next){
+  new Topic().orderBy('created_at', 'DESC')
+  .where('id', '=', req.params.topicid)
+  .fetch()
+  .then((topic) => {
+    new Message().orderBy('created_at', 'DESC')
+    .where('topic_id', '=', topic.id)
+    .fetchAll()
+    .then((messages) => {
+      msgObj = messages.toArray();
+      for (let i of Object.keys(msgObj)) {
+        msgObj[i].destroy();
+      }
+      topic.destroy();
+      res.send('OK');
+    });
+  });
+});
+
+router.get('/main/logout',function(req, res, next){
   res.redirect('/main');
 });
 
-router.post('/logout',function(req, res, next){
+router.post('/main/logout',function(req, res, next){
   delete req.session.login;
-  res.redirect('/users/login');
+  res.send('OK');
 });
 
 module.exports = router;

@@ -39,16 +39,14 @@ padding: 8px;
 .submit {
 text-align: left;
 }
-.login {
-text-align: center;
-}
-.useradd {
+.login,.useradd {
 text-align: center;
 margin-top: 5%;
 }
 table {
 margin-right:auto;
 margin-left:auto;
+border: 1px solid #bbb;
 }
 
 .error {

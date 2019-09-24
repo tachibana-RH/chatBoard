@@ -1,7 +1,7 @@
 
 function fileupload(fileObj){
-    var fd = new FormData();                //　FormDataオブジェクト生成
-    fd.append('uploadfile', fileObj);       //フォームアイテム名でオブジェクトをfdに追加
+    //　FormDataオブジェクト生成
+    const fd = new FormData().append('uploadfile', fileObj);
     $.ajax({
         url: './upload',        //　ファイルを渡すサーバのurl
         type: 'POST',
@@ -10,8 +10,9 @@ function fileupload(fileObj){
         dataType : "text",
         data: fd
     })
-    .done( function(text){
-        console.log(text);
+    .done(function(result){
+        console.log(result);
+        location.reload();
     });
 }
 
@@ -28,8 +29,9 @@ $(function(){
             return false;
         }
 
-        if (window.FormData){             //　FormDataにブラウザが対応しているかチェック
-            var fileObj = $('#file_upload')[0].files[0];    // ファイルオブジェクトの取り出し
+        //　FormDataにブラウザが対応しているかチェック
+        if (window.FormData){
+            const fileObj = $('#file_upload')[0].files[0];
             if ( fileObj != null ){
                 fileupload(fileObj);
             }

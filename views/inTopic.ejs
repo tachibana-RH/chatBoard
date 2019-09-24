@@ -4,52 +4,82 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/inTopic.css" />
+    <link rel="stylesheet" href="/stylesheets/drawer.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/css/drawer.min.css"> -->
   </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/js/drawer.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/javascripts/sendMessage.js"></script>
-  <body>
-    <div id="title" class="">
-    <header data-topicid="<%= topicId %>" data-userid="<%= login.id %>">
-        <h2><a href="/main" class="title"><%= title %></a><a class="topicname"><%= topicName %></a></h2>
+  <script src="/javascripts/visualChange.js"></script>
+  <script src="/javascripts/messageDeleteEdit.js"></script>
+  <script>
+    $(document).ready(function() {
+        $('.drawer').drawer();
+    });
+  </script>
+  <body class="drawer drawer--right">
+    <header role="banner">
+      <nav class="drawer-nav" role="navigation">
+        <ul class="drawer-menu">
+          <div class="header">
+          <li>edit menu</li>
+          </div>
+          <div class="menu">
+          <li><textarea name="msg" id="retouchMsg" data-msgid="" cols="50" rows="10"></textarea></li>
+          <div class="side-form">
+          <li class="retouchSubmit">メッセージを修正</li>
+          <li class="retouchCancel">キャンセル</li>
+          </div>
+          </div>
+        </ul>
+      </nav>
     </header>
+    <div id="titleDummy" class="disable"></div>
+    <div id="title" class="" data-topicid="<%= topicId %>" data-userid="<%= login.id %>">
+      <div class="title-inner">
+      <li class="topicname"><%= topicName %></li>
+      <li class="titleback"><a href="/main"><%= title %></a>へ戻る</li>
+      </div>
     </div>
     <div id="main" role="main">
-      <hr>
-      <div id="msgParent">
-        <% for(let index in collection) { %>
-          <%- include('data_item_messages', {val:collection[index], id:login.id, msgid:index}) %>
-        <% } %>
-      </div>
-      <div id="dummy" class="msgform"></div>
-      <div id="msgform" class="msgform msgfixed">
-          <!-- msgfixed -->
-          <div id="page" class="">
-          <!-- disable -->
-            <% if (pagination.page > 1) { %>
-              <span>
-                <a href="./<%= pagination.page - 1 %>">&lt;&lt; prev</a>
-              </span>
-            <% } else { %>
-              <span>
-                &lt;&lt; prev
-              </span>
-            <% } %>
-    
-            <% if (pagination.page < pagination.pageCount) { %>
-              <span>
-                <a href="./<%= pagination.page + 1 %>">Next &gt;&gt;</a>
-              </span>
-            <% } else { %>
-              <span>
-                Next &gt;&gt;
-              </span>
-            <% } %>
-          </div>
-          <table class="sendMsg">
-            <th><textarea name="msg" id="msg" class="msg" onfocus="focusA(this);" onblur="blurA(this);"></textarea></th>
-            <td><input type="submit" value="送信" id="submit" ></td>
-          </table>
+      <div class="mainBody">
+        <div id="msgParent">
+          <% for(let index in collection) { %>
+            <%- include('data_item_messages', {val:collection[index], id:login.id, msgid:index}) %>
+          <% } %>
+        </div>
+        <div id="dummy" class="msgform"></div>
+        <div id="msgform" class="msgform msgfixed">
+            <!-- msgfixed -->
+            <div id="page" class="">
+            <!-- disable -->
+              <% if (pagination.page > 1) { %>
+                <span>
+                  <a href="./<%= pagination.page - 1 %>">&lt;&lt; prev</a>
+                </span>
+              <% } else { %>
+                <span>
+                  &lt;&lt; prev
+                </span>
+              <% } %>
+      
+              <% if (pagination.page < pagination.pageCount) { %>
+                <span>
+                  <a href="./<%= pagination.page + 1 %>">Next &gt;&gt;</a>
+                </span>
+              <% } else { %>
+                <span>
+                  Next &gt;&gt;
+                </span>
+              <% } %>
+            </div>
+            <table class="sendMsg">
+              <th><textarea name="msg" id="msg" class="msg" onfocus="focusA(this);" onblur="blurA(this);"></textarea></th>
+              <td><input type="submit" value="送信" id="submit" ></td>
+            </table>
+        </div>
       </div>
     </div>
   </body>

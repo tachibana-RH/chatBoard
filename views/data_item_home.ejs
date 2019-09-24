@@ -10,30 +10,47 @@ const dateMinutes = (date.getMinutes().toString().length == 1)?'0' + date.getMin
 const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSeconds():date.getSeconds();
 
 const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
-let message = val.attributes.message.split(/\r?\n/g);
+
 %>
-<table>
-    <tr>
-        <td class="date">
-            <%= dateStr %>
-        </td>
-        <td class="message">
-        <% for(let index in message) { %>
-            <% if(message[index] == '') { %>
-                <br>
-            <% } else { %>
-                <% if(message[index].substr(0,4) == 'http') { %>
+
+<% if (contents == 'message') { %>
+    <% let message = val.attributes.message.split(/\r?\n/g); %>
+    <table>
+        <tr>
+            <td class="date">
+                <%= dateStr %>
+            </td>
+            <td class="message">
+            <% for(let index in message) { %>
+                <% if(message[index] == '') { %>
                     <br>
-                    <a href="<%= message[index] %>" target="_blank">
-                        <%= message[index] %>
-                    </a>
                 <% } else { %>
-                    <br>
-                    <%= message[index] %>
+                    <% if(message[index].substr(0,4) == 'http') { %>
+                        <br>
+                        <a href="<%= message[index] %>" target="_blank">
+                            <%= message[index] %>
+                        </a>
+                    <% } else { %>
+                        <br>
+                        <%= message[index] %>
+                    <% } %>
                 <% } %>
             <% } %>
-        <% } %>
-        </td>
-    </tr>
-</table>
+            </td>
+        </tr>
+    </table>
+<% } else { %>
+    <table>
+        <tr>
+            <td class="date">
+                <%= dateStr %>
+            </td>
+            <td class="topic">
+                <a href="/topic/<%= val.attributes.id %>/1">
+                    <%= val.attributes.name %>
+                </a>
+            </td>
+        </tr>
+    </table>
+<% } %>
 <% } %>

@@ -10,20 +10,25 @@ a {
 color: rgb(0, 204, 17);
 text-decoration: none;
 }
-h1 {
-color: rgb(0, 204, 17);
-text-align: right;
+.header {
+    text-align: right;
+    padding: 15px;
+    width: 1050px;
 }
 h2 {
-font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 p {
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 table {
-    width: 100%;
+    width: 710px;
     table-layout:fixed;
+    background-color: rgb(214, 255, 208);
+}
+th,td {
+    background-color:white;
 }
 table,th,td {
     padding: 8px;
@@ -31,15 +36,54 @@ table,th,td {
     word-wrap:break-word;
 }
 .date {
-    width: 20%;
+    width: 80px;
 }
 .message {
-    width: 80%;
+    width: 50%;
+}
+.topic {
+    width: 50%;
 }
 .userdoc {
-    padding-left: 15px;
+    position: fixed;
+    width: 300px;
+    height: 368px;
 }
-.pagenations p {
+.comment {
+    margin-top: 10px;
+}
+.comment-contents {
+    border: 1px solid #bbb;
+    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+    margin-bottom: 30px;
+    padding: 5px;
+}
+.menu li,#pageback {
+    display: inline-block;
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #bbb;
+    padding: 10px;
+}
+li:hover {
+    background-color: #bbb;
+    color: white;
+}
+.contents {
+    margin-left: 33%;
+    position: relative;
+    width: 730px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 760px;
+    border: double 4px rgb(155, 155, 155);/* ラベルのボーダーを指定する */
+    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+}
+.views {
+    position: absolute;
+}
+.pagenations {
     text-align: center;
 }
 
@@ -48,14 +92,14 @@ display:none; /* アップロードボタンのスタイルを無効にする */
 }
 label {
 color: rgb(255, 255, 255); /* ラベルテキストの色を指定する */
-background-color: rgb(0, 195, 255);/* ラベルの背景色を指定する */
-padding: 2px; /* ラベルとテキスト間の余白を指定する */
-border: double 4px rgb(255, 255, 255);/* ラベルのボーダーを指定する */
-border-radius: 10px; /* ラベルボックスの角丸を指定する */
+background-color: rgb(16, 199, 255);/* ラベルの背景色を指定する */
+padding: 5px; /* ラベルとテキスト間の余白を指定する */
+border: solid 4px rgb(255, 255, 255);/* ラベルのボーダーを指定する */
+border-radius: 5px; /* ラベルボックスの角丸を指定する */
 cursor:pointer; /*マウスカーソルの形を指定する */
 }
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1100px){
 body {
     width: 750px;
 }

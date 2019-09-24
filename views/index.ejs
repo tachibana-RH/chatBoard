@@ -5,25 +5,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/index.css" />
   </head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/javascripts/logout.js"></script>
+  <script src="/javascripts/topicDelete.js"></script>
   <body>
-    <head>
-        <h1><%= title %></h1>
-    </head>
-    <form method="POST" action="/logout" style="text-align: right;">
-      <input type="submit" value="ログアウト">  
-    </form>
-    <h2>ようこそ、<a href="/home/<%=login.id%>/1"><%= login.name %></a>さん</h2>
+    <div class="head">
+        <li class="list-title">
+            <%= title %>
+        </li>
+        <li class="list-form">
+            <a href="/main/topic/create">
+            トピックを作成
+            </a>
+        </li>
+        <li class="list-form">
+            <a id="logout">ログアウト</a>
+        </li>
+    </div>
     <div role="main" class="topics">
-        <form method="POST" action="/main/createTopic">
-            <p>
-            <input type="text" name="topicname" size="50" placeholder="作成したいトピックの名前を入力してください。">
-            <input type="submit" value="作成">
-            </p>
-        </form>
+        <h2>ようこそ、<a href="/home/<%=login.id%>/message/1"><%= login.name %></a>さん</h2>
         <hr>
+        <div class="contents">
         <% for(let index in collection) { %>
             <%- include('data_item_index', {val:collection[index], id:login.id}) %>
         <% } %>
+        </div>
         <p>
             <% if (pagination.page > 1) { %>
             <span>

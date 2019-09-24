@@ -6,33 +6,32 @@ socket.on('news',function(data){
 });
 
 const displayMessage = (data) => {
-    if($('header').data('topicid') == data.topic_id) {
+    if($('#title').data('topicid') == data.topic_id) {
         const messagesArray = data.message.split(/\r?\n/g);
         let messages = '';
         for (let index in messagesArray) {
-            console.log(index + ':' + messages);
             if (messagesArray[index] === '') {
                 messages += '<br>\n';
             } else { 
                 if (messagesArray[index].substr(0,4) == 'http') {
                     messages += '<p>\n' + 
-                    '<a style="color: white;" href="' + messagesArray[index] + '" target="_blank">\n' +
+                    '<a style="color: rgb(219, 255, 222);" href="' + messagesArray[index] + '" target="_blank">\n' +
                     messagesArray[index] + '</a>\n</p>\n';
                 } else {
                     messages += '<p>\n' + messagesArray[index] + '\n' + '</p>\n';
                 };
             };
-            console.log(index + ':' + messages);
         };
 
         if ($('#msgParent').children().length == 10) {
             $('#msgParent div:first-child').remove();
         };
 
-        if($('header').data('userid') == data.user_id) {
+        if($('#title').data('userid') == data.user_id) {
             const child = getSelfMessage(data,messages);
             $('#msgParent').append(child);
             $('html, body').animate({scrollTop: $(document).height()},0);
+            location.reload();
         } else {
             const child = getOtherMessage(data,messages);
             $('#msgParent').append(child);
@@ -89,15 +88,15 @@ const getOtherMessage = (data,messages) => {
                         '</td>\n' +
                         '<td class="messageDummy"></td>\n' +
                     '</tr>\n' +
-                    '<tr>\n' +
-                        '<th></th>\n' +
-                        '<td style = "color: gray;">\n' +
-                        '<span>\n' +
-                        '<i class="fa fa-clock-o"></i>\n' +
-                        currentTime + '\n' +
-                        '</span>\n' +
-                        '</td>\n' +
-                    '</tr>\n' +
+                    // '<tr>\n' +
+                    //     '<th></th>\n' +
+                    //     '<td style = "color: gray;">\n' +
+                    //     '<span>\n' +
+                    //     '<i class="fa fa-clock-o"></i>\n' +
+                    //     currentTime + '\n' +
+                    //     '</span>\n' +
+                    //     '</td>\n' +
+                    // '</tr>\n' +
                 '</table>\n' +
             '</div>';
     return child;
@@ -122,23 +121,4 @@ $(function(){
         })
     });
 
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 99) {
-            $('#title').addClass('fixed');
-        } else {
-            $('#title').removeClass('fixed');
-        };
-    });
-
 });
-
-function focusA( $this ) {
-    $("#msg").removeClass('msg');
-    $("#msg").addClass('msgFocus');
-    $("#page").addClass('disable');
-}
-function blurA( $this ) {
-    $("#msg").removeClass('msgFocus');
-    $("#msg").addClass('msg');
-    $("#page").removeClass('disable');
-}

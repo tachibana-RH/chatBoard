@@ -1,25 +1,19 @@
 body {
-  padding: 25px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: rgb(148, 148, 148);
-  margin: 5px;
   width: 1000px;
   margin-right:auto;
   margin-left:auto;
 }
-a {
-  color: rgb(0, 204, 17);
-  text-decoration: none;
+li {
+  display: inline-block;
 }
 h1 {
   color: rgb(146, 146, 146);
-  text-align: right;
   margin: 0%;
 }
 h2 {
   font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin-left: 10%;
-  
 }
 p {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -29,36 +23,79 @@ table {
   padding: 8px;
 }
 th {
-  width: 30%;
+  width: 20%;
   text-align: center;
+}
+
+.head {
+  width: 100%;
+  font-size: 15px;
+}
+.list-title {
+  width: 785px;
+  font-size: 20px;
+}
+.list-form li {
+ float: right;
+}
+.list-form a {
+  text-decoration:none;
+  background-color:#ffffff;
+  color: rgb(146, 146, 146);
+  display:inline-block;
+  padding: 3px;
+  border: outset rgb(206, 206, 206);
+  cursor: pointer;
+  transition: all .1s linear;
+  -webkit-transition: all .1s linear;
+}
+.list-form a:hover {
+  color: white;
+  background-color:rgb(0, 243, 0);
+}
+
+.contents {
+  background: url(../images/cork-board/cork-board/cork-board.png);
+  padding: 10px;
+}
+.topics a {
+  color: rgb(0, 204, 17);
+  text-decoration: none;
 }
 .topics table {
   margin-right:auto;
   margin-left:auto;
-  width: 60%;
+  border: double 4px rgb(155, 155, 155);/* ラベルのボーダーを指定する */
+  border-radius: 10px; /* ラベルボックスの角丸を指定する */
+  width: 80%;
+  background-color: white;
 }
 .topics tr td {
-  width: 100px;
   text-align: center;
 }
 .topics p {
   text-align: center;
 }
+.delete {
+  color: red;
+  cursor: pointer;
+  padding-left: 100px;
+}
+.error {
+color: red;
+}
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1100px){
 body {
   width: 750px;
 }
 .topics table {
-  margin-right:auto;
-  margin-left:auto;
-  width: 80%;
+  width: 95%;
 }
 th {
-  width: 28%;
+  width: 20%;
 }
+.delete {
+  padding-left: 18px;
 }
-
-.error {
-color: red;
 }

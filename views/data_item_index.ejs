@@ -12,24 +12,35 @@ const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSec
 const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
 %>
 <div class="topicNames">
-<table>
-    <tr>
-        <th>
-            <%= dateStr %>
-        </th>
-        <td>
-            <a href="/main/<%= val.attributes.id %>/1">
-                <%= val.attributes.name %>
-            </a>
-        </td>
-        <th class="delete">
-        <% if( val.attributes.user_id == id ) { %>
-            <form action="/delete/<%= val.attributes.id %>" method="POST">
-                <input type="submit" value="削除">
-            </form>
-        <% } %>
-        </th>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>
+                <%= dateStr %>
+            </th>
+            <td>
+                <a href="/topic/<%= val.attributes.id %>/1">
+                    <%= val.attributes.name %>
+                </a>
+            </td>
+            <th class="creater">
+                <a class="home" href="/home/<%= val.attributes.user_id %>/message/1">
+                    <% if( val.relations.user.attributes.icon == '' ){ %>
+                        <img src="/images/icon_default.jpeg" width="30px" height="30px">
+                    <% } else { %>
+                        <img src="/images/<%= val.relations.user.attributes.icon %>" width="30px" height="30px">
+                    <% } %>
+                    <figcaption><%= val.relations.user.attributes.name %></figcaption>
+                </a>
+            </th>
+        </tr>
+    </table>
+<% if( val.attributes.user_id == id ) { %>
+    <span id="deleteBtn" class="delete" data-topicid="<%= val.attributes.id %>">
+    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        削除
+    </span>
 </div>
+<% } else { %>
+</div><br>
+<% } %>
 <% } %>

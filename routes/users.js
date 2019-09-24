@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var mysql = require('mysql');
-var crypto = require('crypto');
+const mysql = require('mysql');
+const crypto = require('crypto');
 const N = 16
 
-var knex = require('knex') ({
+const knex = require('knex') ({
   client: 'mysql',
   connection: {
     host    : process.env.CHATBOARD_DB_HOST,
@@ -16,14 +16,14 @@ var knex = require('knex') ({
   }
 });
 
-var Bookshelf = require('bookshelf')(knex);
+const Bookshelf = require('bookshelf')(knex);
 
-var User = Bookshelf.Model.extend({
+const User = Bookshelf.Model.extend({
   tableName: 'users'
 });
 
 router.get('/login', function(req, res, next) {
-  var data = {
+  const data = {
     title: 'Login',
     form: {name:'',password:''},
     content:'※名前とパスワードを入力してください。※'
@@ -77,7 +77,7 @@ router.post('/login', function(req, res, next) {
 
 /* GET users listing. */
 router.get('/add', function(req, res, next) {
-  var data = {
+  const data = {
     title: 'Create',
     form: {name:'',password:'',comment:''},
     content:'※登録する名前・パスワード・コメントを入力してください。※'
@@ -118,7 +118,7 @@ router.post('/add', function(req, res, next) {
             response.redirect('/');
           });
         } else {
-          var data = {
+          const data = {
             title: 'Create',
             form: {name: req.body.name,password: req.body.password,comment: req.body.comment},
             content:'<a class="error">※すでに利用されているユーザー名です※</a>'

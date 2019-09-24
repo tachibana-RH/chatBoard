@@ -8,11 +8,9 @@
 <body>
     <h1><%= title %></h1>
     <div role="main" class="login">
+        <p><%- content %></p><br>
         <form method="POST" action="/users/login">
             <table style="width: 10%;">
-                <tr>
-                    <p><%- content %></p>
-                </tr>
                 <tr>
                     <th>NAME</th>
                     <td><input type="text" name="name" value="<%= form.name %>"></td>
@@ -21,13 +19,12 @@
                     <th>PASSWORD</th>
                     <td><input type="password" name="password" value="<%= form.password %>"></td>
                 </tr>
+                <tr>
+                    <th><input type="submit" value="ログイン"></th>
+                    <td><p><a href="/users/add">アカウントの作成&gt;&gt;</a></p></td>
+                </tr>
             </table>
-            <input type="submit" value="ログイン">
         </form>
-        <br>
-        <p>
-            <a href="/users/add">アカウントの作成&gt;&gt;</a>
-        </p>
     </div>
 </body>
 </html>

@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const multer = require('multer');
-var path = require('path')
+const path = require('path')
 
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var knex = require('knex') ({
+const knex = require('knex') ({
   client: 'mysql',
   connection: {
     host    : process.env.CHATBOARD_DB_HOST,
@@ -16,16 +16,24 @@ var knex = require('knex') ({
   }
 });
 
-var Bookshelf = require('bookshelf')(knex);
+const Bookshelf = require('bookshelf')(knex);
 
 Bookshelf.plugin('pagination');
 
-var User = Bookshelf.Model.extend({
+const User = Bookshelf.Model.extend({
   tableName: 'users'
 });
 
-var Message = Bookshelf.Model.extend({
+const Message = Bookshelf.Model.extend({
   tableName: 'messages',
+  hasTimestamps: true,
+  user: function() {
+    return this.belongsTo(User);
+  }
+});
+
+const Topic = Bookshelf.Model.extend({
+  tableName: 'topics',
   hasTimestamps: true,
   user: function() {
     return this.belongsTo(User);
@@ -40,18 +48,50 @@ router.get('/:id', (req,res,next) => {
     res.redirect('/home/' + req.params.id + '/1');
 });
 
-router.get('/:id/:page', (req,res,next) => {
+// router.get('/:id/:page', (req,res,next) => {
 
-    if (req.session.login == null) {
-        res.redirect('/users/login');
-    } else {
-        let id = req.params.id;
-        id *= 1;
-        let pg = req.params.page;
-        pg *= 1;
-        if (pg < 1) {
-            pg = 1;
-        }
+//     if (req.session.login == null) {
+//         res.redirect('/users/login');
+//     } else {
+//         let id = req.params.id;
+//         id *= 1;
+//         let pg = req.params.page;
+//         pg *= 1;
+//         if (pg < 1) {
+//             pg = 1;
+//         }
+//         new Message().orderBy('created_at','DESC')
+//         .where('user_id','=',id)
+//         .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+//         .then((collection) => {
+//             const data = {
+//                 title: 'chatBoard',
+//                 login: req.session.login,
+//                 user_id: id,
+//                 collection: collection.toArray(),
+//                 pagination: collection.pagination
+//             };
+//             res.render('home', data);
+//         }).catch((err) => {
+//             res.status(500).json({error: true, data: {message: err.message}});
+//         });
+//     }
+// });
+
+router.get('/:id/:contents/:page', (req,res,next) => {
+
+  if (req.session.login == null) {
+      res.redirect('/users/login');
+  } else {
+      let id = req.params.id;
+      id *= 1;
+      let pg = req.params.page;
+      pg *= 1;
+      if (pg < 1) {
+          pg = 1;
+      }
+
+      if (req.params.contents == 'message') {
         new Message().orderBy('created_at','DESC')
         .where('user_id','=',id)
         .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
@@ -60,6 +100,7 @@ router.get('/:id/:page', (req,res,next) => {
                 title: 'chatBoard',
                 login: req.session.login,
                 user_id: id,
+                contents: req.params.contents,
                 collection: collection.toArray(),
                 pagination: collection.pagination
             };
@@ -67,7 +108,25 @@ router.get('/:id/:page', (req,res,next) => {
         }).catch((err) => {
             res.status(500).json({error: true, data: {message: err.message}});
         });
-    }
+      } else {
+        new Topic().orderBy('updated_at','DESC')
+        .where('user_id','=',id)
+        .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+        .then((collection) => {
+            const data = {
+                title: 'chatBoard',
+                login: req.session.login,
+                user_id: id,
+                contents: req.params.contents,
+                collection: collection.toArray(),
+                pagination: collection.pagination
+            };
+            res.render('home', data);
+        }).catch((err) => {
+            res.status(500).json({error: true, data: {message: err.message}});
+        });
+      }
+  }
 });
 
 const storage = multer.diskStorage({
@@ -79,7 +138,7 @@ const storage = multer.diskStorage({
   }
 })
 
-// アップロードディレクトリを設定したmulterモジュール
+// アップロードディレクトリをmulterモジュールに設定
 const uploadDir = multer({ storage: storage });
 
 router.post('/:id/upload', uploadDir.single('uploadfile'), (req, res) => {
@@ -91,13 +150,11 @@ router.post('/:id/upload', uploadDir.single('uploadfile'), (req, res) => {
   new User().where('id','=',req.params.id)
   .save({icon: req.file.filename},{patch:true})
   .then((result) =>{
-    console.log(result);
     req.session.login.icon = req.file.filename;
-    res.redirect('./');
+    res.json(result);
   })
   .catch((err) => {
     res.status(500).json({error: true, data: {messages: err.message}});
-    res.redirect('./');
   });
 });
 

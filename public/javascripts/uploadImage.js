@@ -1,9 +1,11 @@
 
 function fileupload(fileObj){
     //　FormDataオブジェクト生成
-    const fd = new FormData().append('uploadfile', fileObj);
+    const fd = new FormData();
+    fd.append('uploadfile', fileObj);
+
     $.ajax({
-        url: './upload',        //　ファイルを渡すサーバのurl
+        url: './image/upload',        //　ファイルを渡すサーバのurl
         type: 'POST',
         processData : false,    //　重要！これがないと動作しない
         contentType : false,    //　重要！これがないと動作しない

@@ -89,6 +89,10 @@ color: red;
 body {
   width: 750px;
 }
+.list-title {
+  width: 530px;
+  font-size: 20px;
+}
 .topics table {
   width: 95%;
 }

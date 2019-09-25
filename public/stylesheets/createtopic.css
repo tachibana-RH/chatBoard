@@ -1,20 +1,20 @@
 body {
-padding: 25px;
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-color: rgb(148, 148, 148);
-margin: 5px;
-width: 50%;
-margin-right:auto;
-margin-left:auto;
 }
 h1 {
-color: rgb(146, 146, 146);
+color: rgb(235, 235, 235);
 text-align: right;
-margin: 0%;
+font-size: 50px;
 }
 table {
+width: 650px;
+height: 200px;
 margin-right:auto;
 margin-left:auto;
+background-color: white;
+position: relative;
+border: solid 2px rgb(155, 155, 155);
+border-radius: 10px;
 }
 table tr th {
 padding: 8px;
@@ -23,9 +23,68 @@ table tr td {
 padding: 8px;
 }
 
+.main {
+width: 1000px;
+margin-right:auto;
+margin-left:auto;
+}
+.createTopic {
+background: url(../images/cork-board/cork-board/cork-board.png);
+padding: 10px;
+padding-top: 180px;
+height: 500px;
+}
 .createTopic tr th {
 text-align: left;
 }
+#title,#msg {
+    width: 350px;
+    border: double 4px rgb(155, 155, 155);
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+#submit {
+    position: absolute;
+    left: 415px;
+    bottom: 120px;
+    width: 200px;
+    height: 85px;
+    background-color: rgb(68, 255, 193);
+    border-radius: 10px;
+    color: white;
+    cursor:pointer;
+    opacity: 0.6;
+}
+#submit:hover {
+    opacity: 1.0;
+}
+#return {
+    text-decoration: none;
+    color: white;
+}
+.return {
+    cursor:pointer;
+    position: absolute;
+    border: outset 2px rgb(184, 184, 184);/* ラベルのボーダーを指定する */
+    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+    background-color: rgb(127, 219, 255);
+    padding: 13px;
+    width: 170px;
+    text-align: center;
+    left: 415px;
+    bottom: 50px;
+    opacity: 0.6;
+}
+.return:hover {
+    opacity: 1.0;
+}
 .error {
 color: red;
+}
+
+@media screen and (max-width: 1000px){
+    .main {
+        width: 750px;
+    }
 }

@@ -10,10 +10,9 @@
 <script src="/javascripts/uploadImage.js"></script>
 <script src="/javascripts/mypageMenu.js"></script>
 <body>
-    <div class="header">
+    <div role="main" class="background">
         <h2><%= collection[0].relations.user.attributes.name %>さんのマイページ</h2>
-    </div>
-    <div role="main">
+        <div class="maincontents">
         <div class="userdoc">
             <div class="icon">
             <% if( collection[0].relations.user.attributes.icon == null ){ %>
@@ -24,12 +23,14 @@
             <% if( collection[0].relations.user.attributes.id == login.id ) { %>
                 <br>
                 <br>
+                <div class="upload">
                 <form action="./image/upload" method="POST" enctype="multipart/form-data">
                 <label for="file_upload">
-                アイコンにする画像を選択
-                <input type="file" id="file_upload" name="uploadfile">
+                    アイコンにする画像を選択
+                    <input type="file" id="file_upload" name="uploadfile">
                 </label>
                 </form>
+                </div>
             <% } %>
                 <div class="comment">
                     comment
@@ -79,5 +80,6 @@
         </p>
         </div>
         </div>
+    </div>
 </body>
 </html>

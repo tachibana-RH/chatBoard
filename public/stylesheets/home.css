@@ -2,28 +2,38 @@
 body {
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 color: rgb(148, 148, 148);
-width: 1000px;
-margin-right:auto;
-margin-left:auto;
 }
 a {
 color: rgb(0, 204, 17);
 text-decoration: none;
 }
 h2 {
-font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: white;
 }
 p {
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.background {
+    background: url(../images/cork-board/cork-board/cork-board.png);
+    width: 1000px;
+    margin-right:auto;
+    margin-left:auto;
+    padding: 10px;
+}
+.maincontents {
+    background-color: white;
+    padding: 8px;
+    border: 2px double #bbb;
+    border-radius: 10px;
+}
 .header {
     text-align: right;
     padding: 15px;
-    width: 1050px;
 }
 table {
-    width: 730px;
+    width: 600px;
     table-layout:fixed;
     background-color: rgb(214, 255, 208);
 }
@@ -45,7 +55,7 @@ table,th,td {
     width: 50%;
 }
 .userdoc {
-    position: fixed;
+    position: absolute;
     width: 300px;
     height: 368px;
 }
@@ -54,7 +64,7 @@ table,th,td {
 }
 .comment-contents {
     border: 1px solid #bbb;
-    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+    border-radius: 10px;
     margin-bottom: 30px;
     padding: 5px;
 }
@@ -71,40 +81,41 @@ li:hover {
     color: white;
 }
 .contents {
-    margin-left: 33%;
+    margin-left: 36%;
     position: relative;
-    width: 730px;
+    width: 615px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     height: 760px;
-    border: double 4px rgb(155, 155, 155);/* ラベルのボーダーを指定する */
-    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+    border: double 4px rgb(155, 155, 155);
+    border-radius: 10px;
 }
 .views {
-    position: absolute;
+    /* position: absolute; */
 }
 .pagenations {
     text-align: center;
 }
+.upload {
+    background-color: rgb(16, 199, 255);
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border: solid 4px rgb(255, 255, 255);
+    width: 180px;
+    text-align: center;
+}
 label > input {
-display:none; /* アップロードボタンのスタイルを無効にする */
+display:none;
 }
 label {
-color: rgb(255, 255, 255); /* ラベルテキストの色を指定する */
-background-color: rgb(16, 199, 255);/* ラベルの背景色を指定する */
-padding: 5px; /* ラベルとテキスト間の余白を指定する */
-border: solid 4px rgb(255, 255, 255);/* ラベルのボーダーを指定する */
-border-radius: 5px; /* ラベルボックスの角丸を指定する */
-cursor:pointer; /*マウスカーソルの形を指定する */
+    cursor:pointer;
 }
 
-@media screen and (max-width: 1100px){
-body {
+@media screen and (max-width: 1000px){
+.background {
     width: 750px;
-}
-.header {
-    text-align: right;
-    width: 750px;
+    height: 700px;
 }
 table {
     width: 400px;
@@ -120,12 +131,12 @@ table {
     height: 368px;
 }
 .contents {
-    width: 400px;
+    width: 415px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     height: 500px;
-    margin-left: 45%;
-    border: double 4px rgb(155, 155, 155);/* ラベルのボーダーを指定する */
-    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+    margin-left: 42%;
+    border: double 4px rgb(155, 155, 155);
+    border-radius: 10px;
 }
 }

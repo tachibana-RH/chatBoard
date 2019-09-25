@@ -1,16 +1,9 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: rgb(148, 148, 148);
-  width: 1000px;
-  margin-right:auto;
-  margin-left:auto;
 }
 li {
   display: inline-block;
-}
-h1 {
-  color: rgb(146, 146, 146);
-  margin: 0%;
 }
 h2 {
   font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -26,14 +19,19 @@ th {
   width: 20%;
   text-align: center;
 }
-
+.main {
+  width: 1000px;
+  margin-right:auto;
+  margin-left:auto;
+}
 .head {
   width: 100%;
   font-size: 15px;
 }
 .list-title {
   width: 785px;
-  font-size: 20px;
+  font-size: 50px;
+  color: rgb(235, 235, 235);
 }
 .list-form li {
  float: right;
@@ -44,7 +42,7 @@ th {
   color: rgb(146, 146, 146);
   display:inline-block;
   padding: 3px;
-  border: outset rgb(206, 206, 206);
+  border: outset 2px rgb(219, 219, 219);
   cursor: pointer;
   transition: all .1s linear;
   -webkit-transition: all .1s linear;
@@ -85,13 +83,13 @@ th {
 color: red;
 }
 
-@media screen and (max-width: 1100px){
-body {
+@media screen and (max-width: 1000px){
+.main {
   width: 750px;
 }
 .list-title {
   width: 530px;
-  font-size: 20px;
+  font-size: 30px;
 }
 .topics table {
   width: 95%;

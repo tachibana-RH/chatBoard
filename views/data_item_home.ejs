@@ -26,13 +26,11 @@ const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + 
                     <br>
                 <% } else { %>
                     <% if(message[index].substr(0,4) == 'http') { %>
-                        <br>
                         <a href="<%= message[index] %>" target="_blank">
                             <%= message[index] %>
-                        </a>
+                        </a><br>
                     <% } else { %>
-                        <br>
-                        <%= message[index] %>
+                        <%= message[index] %><br>
                     <% } %>
                 <% } %>
             <% } %>

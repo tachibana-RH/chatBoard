@@ -1,32 +1,17 @@
-
 body {
 font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 color: rgb(148, 148, 148);
-width: 1000px;
-margin-right:auto;
-margin-left:auto;
 }
-@media screen and (max-width: 1300px){
-body {
-    width: 750px;
-}
-}
-
 a {
 color: rgb(0, 204, 17);
 text-decoration: none;
 }
 h1 {
-color: rgb(146, 146, 146);
+color: rgb(235, 235, 235);
 text-align: right;
-margin: 0%;
 }
 h2 {
 font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-p {
-font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-margin: 0px 10px;
 }
 table tr th {
 padding: 8px;
@@ -34,19 +19,89 @@ padding: 8px;
 table tr td {
 padding: 8px;
 }
-.submit {
-text-align: left;
-}
 .login,.useradd {
-text-align: center;
-margin-top: 5%;
-}
-table {
+width: 1000px;
+height: 500px;
 margin-right:auto;
 margin-left:auto;
-border: 1px solid #bbb;
+position: relative;
 }
-
+.form {
+    background: url(../images/light-veneer/light-veneer/light-veneer.png);
+    height: 500px;
+}
+.formdata {
+    position: absolute;
+}
+.formInput {
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+#login,#add {
+    width: 180px;
+    height: 50px;
+    background-color: rgb(92, 255, 220);
+    color: white;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+.submit {
+    position: absolute;
+    left: 350px;
+    bottom: 55px;
+}
+.add {
+    bottom: 120px;
+}
+.returnlogin {
+    position: absolute;
+    left: 350px;
+    bottom: 80px;
+    width: 200px;
+}
+.create {
+    position: absolute;
+    left: 350px;
+    bottom: 8px;
+    width: 200px;
+}
+table {
+position: absolute;
+left: 200px;
+top: 180px;
+}
 .error {
 color: red;
+}
+
+@media screen and (max-width: 1000px){
+.login,.useradd {
+width: 750px;
+}
+.formdata {
+bottom: 150px;
+}
+.submit {
+    top: 130px;
+    left: 70px;
+}
+.create {
+    left: 90px;
+    bottom: 0px;
+    top: 200px;
+}
+.add {
+    top: 240px;
+}
+.addform {
+    padding-bottom: 80px;
+}
+.returnlogin {
+    top: 310px;
+    bottom: 8px;
+    left: 130px;
+}
 }

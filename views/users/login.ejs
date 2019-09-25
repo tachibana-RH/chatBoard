@@ -6,25 +6,29 @@
     <link rel="stylesheet" href="/stylesheets/login.css" />
 </head>
 <body>
-    <h1><%= title %></h1>
     <div role="main" class="login">
+        <h1><%= title %></h1>
+        <div class="form">
         <p><%- content %></p><br>
         <form method="POST" action="/users/login">
             <table>
+                <div class="formdata">
                 <tr>
                     <th>NAME</th>
-                    <td><input type="text" name="name" value="<%= form.name %>"></td>
+                    <td><input class="formInput" type="text" name="name" value="<%= form.name %>" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <th>PASSWORD</th>
-                    <td><input type="password" name="password" value="<%= form.password %>"></td>
+                    <td><input class="formInput" type="password" name="password" value="<%= form.password %>"  autocomplete="off"></td>
                 </tr>
+                </div>
                 <tr>
-                    <th><input type="submit" value="ログイン"></th>
-                    <td><p><a href="/users/add">アカウントの作成&gt;&gt;</a></p></td>
+                    <td class="submit"><input id="login" type="submit" value="ログイン"></td>
+                    <td class="create"><a href="/users/add">アカウントの作成&gt;&gt;</a></td>
                 </tr>
             </table>
         </form>
+        </div>
     </div>
 </body>
 </html>

@@ -6,29 +6,30 @@
     <link rel="stylesheet" href="/stylesheets/login.css" />
 </head>
 <body>
-    <head>
-        <h1><%= title %></h1>
-    </head>
     <div role="main" class="useradd">
+        <h1><%= title %></h1>
+        <div class="form addform">
         <p><%- content %></p><br>
         <form method="POST" action="/users/add">
             <table>
+                <div class="formdata">
                 <tr>
                     <th>NAME</th>
-                    <td><input type="text" name="name" value="<%= form.name %>"></td>
+                    <td><input class="formInput" type="text" name="name" value="<%= form.name %>" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <th>PASSWORD</th>
-                    <td><input type="text" name="password" value="<%= form.password %>"></td>
+                    <td><input class="formInput" type="text" name="password" value="<%= form.password %>" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <th>COMMENT</th>
-                    <td><textarea name="comment" rows="5" cols="22"><%= form.comment %></textarea></td>
+                    <td><textarea class="formInput" name="comment" rows="5" cols="22"><%= form.comment %></textarea></td>
                 </tr>
-                <tr class="submit">
-                    <th><a href="/users/login">&lt;&lt; 戻る</a></th>
-                    <td><input type="submit" value="作成"></td>
+                <tr>
+                    <td class="returnlogin"><a href="/users/login">&lt;&lt; 戻る</a></td>
+                    <td class="submit add"><input id="add" type="submit" value="作成"></td>
                 </tr>
+                </div>
             </table>
         </form>
     </div>

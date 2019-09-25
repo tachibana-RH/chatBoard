@@ -5,27 +5,42 @@
     <link rel="stylesheet" href="/stylesheets/createtopic.css" />
 </head>
 <body>
-    <head>
-        <h1><a href="/home"><%= title %></a></h1>
-    </head>
-    <div class="createTopic">
-    <form action="./create/submit" method="POST">
-    <table>
-        <tr>
-            <th>title</th>
-        </tr>
-        <tr>
-            <td><input type="text" name="topicname" size="50"></td>
-        </tr>
-        <tr>
-            <th>ひと言</th>
-        </tr>
-        <tr>
-            <td><textarea name="msg" cols="55" rows="10"></textarea></td>
-        </tr>
-        <tr><td><input type="submit"></td></tr>
-    </table>
-    </form>
+    <div class="main">
+        <header>
+            <h1><%= title %></h1>
+        </header>
+        <div class="createTopic">
+        <form action="./create/submit" method="POST">
+        <table>
+            <tr>
+                <th>title</th>
+            </tr>
+            <tr>
+                <td><input id="title" type="text" name="topicname" autocomplete="off"></td>
+            </tr>
+            <tr>
+                <th>ひと言</th>
+            </tr>
+            <tr>
+                <td><textarea id="msg" name="msg"></textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="submit" type="submit" value="トピックを作成する">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a id="return" href="/main/1">
+                    <div class="return">
+                    トップへ戻る
+                    </div>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        </form>
+        </div>
     </div>
 </body>
 </html>

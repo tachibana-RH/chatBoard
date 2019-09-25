@@ -1,6 +1,5 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    width: 99.6%;
     margin-right:auto;
     margin-left:auto;
 }
@@ -33,7 +32,6 @@ li {
     left: 0;
     right: 0;
     z-index: 1;
-    border-radius: 0;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
 }
 
@@ -124,15 +122,30 @@ table,tr,th,td {
     margin-right:auto;
     margin-left:auto;
 }
+#submit {
+    background-color: rgb(0, 252, 126);
+    color: white;
+    border-radius: 10px;
+    width: 70px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+#submit:hover {
+    opacity: 1.0;
+}
+
 .msg {
     width: 400px;
     height: 20PX;
-    margin-left: 50px;
+    margin-left: 90px;
+    border-radius: 8px;
 }
 .msgFocus {
     width: 400px;
     height: 80px;
-    margin-left: 50px;
+    margin-left: 90px;
+    border-radius: 8px;
+    outline: none;
 }
 .msgfixed {
     position: fixed;
@@ -202,14 +215,14 @@ table,tr,th,td {
     color: red;
 }
 
-@media screen and (max-width: 1100px){
+@media screen and (max-width: 1000px){
 .mainBody {
     width: 750px;
     margin-right:auto;
     margin-left:auto;
 }
 .title-inner {
-    width: 750px;
+    width: 700px;
 }
 .messageDummy {
     width: 30%;
@@ -218,7 +231,7 @@ table,tr,th,td {
     width: 100%;
 }
 .fixed {
-    width: 1000px;
+    width: 100%;
 }
 .message table th {
     width: 20%;

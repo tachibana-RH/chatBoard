@@ -10,19 +10,20 @@
             <h1><%= title %></h1>
         </header>
         <div class="createTopic">
-        <form action="./create/submit" method="POST">
+        <form action="/createTopic" method="POST">
         <table>
+            <%- content %>
             <tr>
-                <th>title</th>
+                <th>トピック名</th>
             </tr>
             <tr>
-                <td><input id="title" type="text" name="topicname" autocomplete="off"></td>
+                <td><input id="title" type="text" name="topicname" autocomplete="off" value="<%= form.topicname %>"></td>
             </tr>
             <tr>
                 <th>ひと言</th>
             </tr>
             <tr>
-                <td><textarea id="msg" name="msg"></textarea></td>
+                <td><textarea id="msg" name="msg"><%= form.msg %></textarea></td>
             </tr>
             <tr>
                 <td>

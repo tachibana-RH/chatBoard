@@ -74,38 +74,6 @@ router.get('/main/:page', function(req, res, next) {
   }
 });
 
-router.get('/main/topic/create', function(req, res, next) {
-  if(req.session.login == null){
-    res.redirect('/users/login');
-  } else {
-    const data  = {
-      title: 'chatBoard'
-    }
-    res.render('createTopic', data);
-  }
-})
-
-router.post('/main/topic/create/submit', function(req, res, next) {
-  const topicRec  = {
-    name: req.body.topicname,
-    user_id: req.session.login.id
-  }
-  new Topic(topicRec).save().then((model) => {
-    new Topic().orderBy('created_at', 'DESC')
-    .where('user_id', '=', topicRec.user_id)
-    .fetch().then((collection) => {
-      const messageRec = {
-        message: req.body.msg,
-        user_id: collection.attributes.user_id,
-        topic_id: collection.attributes.id
-      }
-      new Message(messageRec).save().then((model) => {
-        res.redirect('/main');
-      });
-    });
-  });
-});
-
 router.post('/main/delete/:topicid',function(req, res, next){
   new Topic().orderBy('created_at', 'DESC')
   .where('id', '=', req.params.topicid)

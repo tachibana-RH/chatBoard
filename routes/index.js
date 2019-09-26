@@ -1,43 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const mysql = require('mysql');
-
-const knex = require('knex') ({
-  client: 'mysql',
-  connection: {
-    host    : process.env.CHATBOARD_DB_HOST,
-    user    : process.env.CHATBOARD_DB_USER,
-    password: process.env.CHATBOARD_DB_PASSWORD,
-    database: process.env.CHATBOARD_DB_NAME,
-    charset : 'utf8'
-  }
-});
-
-const Bookshelf = require('bookshelf')(knex);
-
-Bookshelf.plugin('pagination');
-// Bookshelf.plugin('bookshelf-update');
-
-const User = Bookshelf.Model.extend({
-  tableName: 'users'
-});
-
-const Topic = Bookshelf.Model.extend({
-  tableName: 'topics',
-  hasTimestamps: true,
-  user: function() {
-    return this.belongsTo(User);
-  }
-});
-
-const Message = Bookshelf.Model.extend({
-  tableName: 'messages',
-  hasTimestamps: true,
-  user: function() {
-    return this.belongsTo(User);
-  }
-});
+const mysqlModels = require('../modules/mysqlModels');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -58,7 +21,7 @@ router.get('/main/:page', function(req, res, next) {
     if (pg < 1) {
       pg = 1;
     }
-    new Topic().orderBy('updated_at', 'DESC')
+    new mysqlModels.Topic().orderBy('updated_at', 'DESC')
     .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
     .then((collection) => {
       const data = {
@@ -75,11 +38,11 @@ router.get('/main/:page', function(req, res, next) {
 });
 
 router.post('/main/delete/:topicid',function(req, res, next){
-  new Topic().orderBy('created_at', 'DESC')
+  new mysqlModels.Topic().orderBy('created_at', 'DESC')
   .where('id', '=', req.params.topicid)
   .fetch()
   .then((topic) => {
-    new Message().orderBy('created_at', 'DESC')
+    new mysqlModels.Message().orderBy('created_at', 'DESC')
     .where('topic_id', '=', topic.id)
     .fetchAll()
     .then((messages) => {

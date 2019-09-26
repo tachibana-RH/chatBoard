@@ -1,26 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
-const mysql = require('mysql');
+const mysqlModels = require('../modules/mysqlModels');
 const crypto = require('crypto');
-const N = 16
+const N = 16;
 
-const knex = require('knex') ({
-  client: 'mysql',
-  connection: {
-    host    : process.env.CHATBOARD_DB_HOST,
-    user    : process.env.CHATBOARD_DB_USER,
-    password: process.env.CHATBOARD_DB_PASSWORD,
-    database: process.env.CHATBOARD_DB_NAME,
-    charset : 'utf8'
-  }
-});
-
-const Bookshelf = require('bookshelf')(knex);
-
-const User = Bookshelf.Model.extend({
-  tableName: 'users'
-});
 
 router.get('/login', function(req, res, next) {
   const data = {
@@ -55,7 +38,7 @@ router.post('/login', function(req, res, next) {
     } else {
       const nm = req.body.name;
       const pw = req.body.password;
-      User.query({where: {name: nm}, andWhere: {password: pw}})
+      mysqlModels.User.query({where: {name: nm}, andWhere: {password: pw}})
       .fetch()
       .then((model) => {
         if (model == null) {
@@ -109,12 +92,12 @@ router.post('/add', function(req, res, next) {
     } else {
       const nm = req.body.name;
       const pw = req.body.password;
-      User.query({where: {name: nm}, andWhere: {password: pw}})
+      mysqlModels.User.query({where: {name: nm}, andWhere: {password: pw}})
       .fetch()
       .then((model) => {
         if (model == null) {
           request.session.login = null;
-          new User(req.body).save().then((model) => {
+          new mysqlModels.User(req.body).save().then((model) => {
             response.redirect('/');
           });
         } else {

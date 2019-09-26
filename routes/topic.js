@@ -1,62 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const mysql = require('mysql');
-// const connection = mysql.createConnection({
-//     host    : process.env.CHATBOARD_DB_HOST,
-//     user    : process.env.CHATBOARD_DB_USER,
-//     password: process.env.CHATBOARD_DB_PASSWORD,
-//     database: process.env.CHATBOARD_DB_NAME,
-//     charset : 'utf8'
-// });
-// connection.connect((err) => {
-//     if (err) throw err;
-//     console.log('Connected!');
-// });
-
-const knex = require('knex') ({
-  client: 'mysql',
-  connection: {
-    host    : process.env.CHATBOARD_DB_HOST,
-    user    : process.env.CHATBOARD_DB_USER,
-    password: process.env.CHATBOARD_DB_PASSWORD,
-    database: process.env.CHATBOARD_DB_NAME,
-    charset : 'utf8'
-  }
-});
-
-const Bookshelf = require('bookshelf')(knex);
-
-Bookshelf.plugin('pagination');
-// Bookshelf.plugin('bookshelf-update');
-
-const User = Bookshelf.Model.extend({
-  tableName: 'users'
-});
-
-const Topic = Bookshelf.Model.extend({
-  tableName: 'topics',
-  hasTimestamps: true,
-  user: function() {
-    return this.belongsTo(User);
-  }
-});
-
-const Message = Bookshelf.Model.extend({
-  tableName: 'messages',
-  hasTimestamps: true,
-  user: function() {
-    return this.belongsTo(User);
-  }
-});
-
-const TopicMessage = Bookshelf.Model.extend({
-    tableName: 'topics',
-    hasTimestamps: true,
-    user: function() {
-        return this.belongsTo(Message);
-    }
-});
+const mysqlModels = require('../modules/mysqlModels');
 
 router.post('/:topicId/sendMsg',function(req, res, next){
 const rec = {
@@ -64,12 +8,12 @@ const rec = {
     user_id: req.session.login.id,
     topic_id: req.params.topicId
 }
-new Message(rec).save().then((model) => {
-    new Topic().where('id','=',req.params.topicId)
+new mysqlModels.Message(rec).save().then((model) => {
+    new mysqlModels.Topic().where('id','=',req.params.topicId)
     .fetch()
     .then((topic) => {
     let cnt = topic.attributes.count + 1;
-    new Topic().where('id','=',req.params.topicId)
+    new mysqlModels.Topic().where('id','=',req.params.topicId)
     .save({count: cnt},{patch:true})
     .then((result) =>{
         console.log(result);
@@ -86,17 +30,17 @@ new Message(rec).save().then((model) => {
 });
 
 router.post('/:topicId/deleteMsg',function(req, res, next){
-    new Message().where('id','=',req.body.msgid)
+    new mysqlModels.Message().where('id','=',req.body.msgid)
     .fetch()
     .then((msg)=>{
         msg.destroy();
     })
     .then(()=>{
-        new Topic().where('id','=',req.params.topicId)
+        new mysqlModels.Topic().where('id','=',req.params.topicId)
         .fetch()
         .then((topic) => {
             let cnt = topic.attributes.count - 1;
-            new Topic().where('id','=',req.params.topicId)
+            new mysqlModels.Topic().where('id','=',req.params.topicId)
             .save({count: cnt},{patch:true})
             .then((result) =>{
                 res.json(result);
@@ -110,7 +54,7 @@ router.post('/:topicId/deleteMsg',function(req, res, next){
 });
 
 router.post('/:topicId/editMsg',function(req, res, next){
-    new Message().where('id','=',req.body.msgid)
+    new mysqlModels.Message().where('id','=',req.body.msgid)
     .fetch()
     .then((msg)=>{
         res.json(msg);
@@ -121,7 +65,7 @@ router.post('/:topicId/editMsg',function(req, res, next){
 });
 
 router.post('/:topicId/retouchMsg',function(req, res, next){
-    new Message().where('id','=',req.body.msgid)
+    new mysqlModels.Message().where('id','=',req.body.msgid)
     .save({message:req.body.msgdata},{patch:true})
     .then((result)=>{
         res.json(result);
@@ -146,10 +90,10 @@ if(req.session.login == null){
     if (pg < 1) {
     pg = 1;
     }
-    new Topic().where('id','=',id)
+    new mysqlModels.Topic().where('id','=',id)
     .fetch()
     .then((Record) => {
-    new Message().orderBy('created_at', 'DESC')
+    new mysqlModels.Message().orderBy('created_at', 'DESC')
     .where('topic_id','=',id)
     .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
     .then((collection) => {

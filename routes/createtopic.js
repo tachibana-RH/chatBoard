@@ -1,36 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-const mysql = require('mysql');
-
-const knex = require('knex') ({
-  client: 'mysql',
-  connection: {
-    host    : process.env.CHATBOARD_DB_HOST,
-    user    : process.env.CHATBOARD_DB_USER,
-    password: process.env.CHATBOARD_DB_PASSWORD,
-    database: process.env.CHATBOARD_DB_NAME,
-    charset : 'utf8'
-  }
-});
-
-const Bookshelf = require('bookshelf')(knex);
-
-const Topic = Bookshelf.Model.extend({
-    tableName: 'topics',
-    hasTimestamps: true,
-    user: function() {
-      return this.belongsTo(User);
-    }
-});
-
-const Message = Bookshelf.Model.extend({
-    tableName: 'messages',
-    hasTimestamps: true,
-    user: function() {
-        return this.belongsTo(User);
-    }
-});
+const mysqlModels = require('../modules/mysqlModels');
 
 router.get('/', function(req, res, next) {
     if(req.session.login == null){
@@ -71,8 +41,8 @@ router.post('/', function(req, res, next) {
                 name: request.body.topicname,
                 user_id: request.session.login.id
             }
-            new Topic(topicRec).save().then((model) => {
-                new Topic().orderBy('created_at', 'DESC')
+            new mysqlModels.Topic(topicRec).save().then((model) => {
+                new mysqlModels.Topic().orderBy('created_at', 'DESC')
                 .where('user_id', '=', topicRec.user_id)
                 .fetch().then((collection) => {
                     const messageRec = {
@@ -80,7 +50,7 @@ router.post('/', function(req, res, next) {
                         user_id: collection.attributes.user_id,
                         topic_id: collection.attributes.id
                     }
-                    new Message(messageRec).save().then((model) => {
+                    new mysqlModels.Message(messageRec).save().then((model) => {
                         response.redirect('/main');
                     });
                 });

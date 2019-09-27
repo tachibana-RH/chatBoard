@@ -84,32 +84,30 @@ router.get('/:topicId/:page', function(req, res, next) {
 if(req.session.login == null){
     res.redirect('/users/login');
 } else {
-    let id = req.params.topicId;
-    let pg = req.params.page;
-    pg *= 1;
-    if (pg < 1) {
-    pg = 1;
-    }
+    let id = parseFloat(req.params.topicId);
+    let pg = parseFloat(req.params.page);
+    if (pg < 1) { pg = 1; }
+
     new mysqlModels.Topic().where('id','=',id)
     .fetch()
     .then((Record) => {
-    new mysqlModels.Message().orderBy('created_at', 'DESC')
-    .where('topic_id','=',id)
-    .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
-    .then((collection) => {
-        const data = {
-        title: 'chatBoard',
-        topicName: Record.attributes.name,
-        topicId: id,
-        login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon},
-        collection: collection.toArray().reverse(),
-        pagination: collection.pagination
-        };
-        res.render('inTopic', data);
-    }).catch((err) => {
-        res.status(500).json({error: true, data: {messages: err.message}});
-        res.redirect('/main');
-    });
+        new mysqlModels.Message().orderBy('created_at', 'DESC')
+        .where('topic_id','=',id)
+        .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+        .then((collection) => {
+            const data = {
+            title: 'chatBoard',
+            topicName: Record.attributes.name,
+            topicId: id,
+            login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon},
+            collection: collection.toArray().reverse(),
+            pagination: collection.pagination
+            };
+            res.render('inTopic', data);
+        }).catch((err) => {
+            res.status(500).json({error: true, data: {messages: err.message}});
+            res.redirect('/main');
+        });
     }).catch((err) => {
     res.redirect('/main');
     })

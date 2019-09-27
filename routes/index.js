@@ -16,11 +16,9 @@ router.get('/main/:page', function(req, res, next) {
   if(req.session.login == null){
     res.redirect('/users/login');
   } else {
-    let pg = req.params.page;
-    pg *= 1;
-    if (pg < 1) {
-      pg = 1;
-    }
+    let pg = parseFloat(req.params.page);
+    if (pg < 1) { pg = 1; }
+    
     new mysqlModels.Topic().orderBy('updated_at', 'DESC')
     .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
     .then((collection) => {

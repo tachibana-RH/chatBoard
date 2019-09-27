@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
                 name: request.body.topicname,
                 user_id: request.session.login.id
             }
-            new mysqlModels.Topic(topicRec).save().then((model) => {
+            new mysqlModels.Topic(topicRec).save().then(() => {
                 new mysqlModels.Topic().orderBy('created_at', 'DESC')
                 .where('user_id', '=', topicRec.user_id)
                 .fetch().then((collection) => {
@@ -50,7 +50,7 @@ router.post('/', function(req, res, next) {
                         user_id: collection.attributes.user_id,
                         topic_id: collection.attributes.id
                     }
-                    new mysqlModels.Message(messageRec).save().then((model) => {
+                    new mysqlModels.Message(messageRec).save().then(() => {
                         response.redirect('/main');
                     });
                 });

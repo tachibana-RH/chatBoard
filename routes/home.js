@@ -10,36 +10,7 @@ router.get('/', (req,res,next) => {
 });
 
 router.get('/:id', (req,res,next) => {
-    res.redirect('/home/' + req.params.id + '/1');
-});
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images')
-  },
-  filename: function (req, file, cb) {
-    cb(null, req.session.login.id + '-' + Date.now() + path.extname(file.originalname))
-  }
-})
-
-// アップロードディレクトリをmulterモジュールに設定
-const uploadDir = multer({ storage: storage });
-
-router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req, res) => {
-
-  console.log('アップロードしたファイル名： ' + req.file.originalname);
-  console.log('保存されたパス：' + req.file.path);
-  console.log('保存されたファイル名： ' + req.file.filename);
-
-  new mysqlModels.User().where('id','=',req.params.id)
-  .save({icon: req.file.filename},{patch:true})
-  .then((result) =>{
-    req.session.login.icon = req.file.filename;
-    res.json(result);
-  })
-  .catch((err) => {
-    res.status(500).json({error: true, data: {messages: err.message}});
-  });
+    res.redirect('/home/' + req.params.id + '/message' + '/1');
 });
 
 router.get('/:id/:contents/:page', (req,res,next) => {
@@ -47,13 +18,9 @@ router.get('/:id/:contents/:page', (req,res,next) => {
   if (req.session.login == null) {
       res.redirect('/users/login');
   } else {
-      let id = req.params.id;
-      id *= 1;
-      let pg = req.params.page;
-      pg *= 1;
-      if (pg < 1) {
-          pg = 1;
-      }
+      let id = parseFloat(req.params.id);
+      let pg = parseFloat(req.params.page);
+      if (pg < 1) { pg = 1; }
 
       if (req.params.contents == 'message') {
         new mysqlModels.Message().orderBy('created_at','DESC')
@@ -91,6 +58,30 @@ router.get('/:id/:contents/:page', (req,res,next) => {
         });
       }
   }
+});
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, req.session.login.id + '-' + Date.now() + path.extname(file.originalname))
+  }
+});
+const uploadDir = multer({ storage: storage });
+
+router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req, res) => {
+
+  new mysqlModels.User().where('id','=',req.params.id)
+  .save({icon: req.file.filename},{patch:true})
+  .then((result) =>{
+    req.session.login.icon = req.file.filename;
+    res.json(result);
+  })
+  .catch((err) => {
+    res.status(500).json({error: true, data: {messages: err.message}});
+  });
+
 });
 
 module.exports = router;

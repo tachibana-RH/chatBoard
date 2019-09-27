@@ -3,14 +3,13 @@ $(function(){
     $(document).on('click', '#iconDelete', function(){
         if (window.confirm('メッセージを削除しますか？')) {
             $.ajax({
-                url:'./deleteMsg',
-                type:'POST',
+                url:'./msg',
+                type:'DELETE',
                 dataType: 'json',
                 data:{
                     'msgid': $(this).attr('data-msgid')
                 }
-            }).then((res) => {
-                console.log(res);
+            }).then(() => {
                 $('html, body').animate({scrollTop: $(document).scrollTop()+30},0);
                 location.reload();
             }).catch((err) => {
@@ -19,8 +18,6 @@ $(function(){
         }
     });
 
-    //aタグ全体の正規表現
-    //
     $(document).on('click', '#iconEdit', function(){
         $.ajax({
             url:'./editMsg',
@@ -40,14 +37,14 @@ $(function(){
 
     $(document).on('click', '.retouchSubmit', function(){
         $.ajax({
-            url:'./retouchMsg',
-            type:'POST',
+            url:'./msg',
+            type:'PUT',
             dataType: 'json',
             data:{
                 'msgid': $('#retouchMsg').attr('data-msgid'),
                 'msgdata': $('#retouchMsg').val()
             }
-        }).then((res) => {
+        }).then(() => {
             location.reload();
         }).catch((err) => {
             console.log(err);

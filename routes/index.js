@@ -35,7 +35,7 @@ router.get('/main/:page', function(req, res, next) {
   }
 });
 
-router.post('/main/delete/:topicid',function(req, res, next){
+router.delete('/main/:topicid',function(req, res, next){
   new mysqlModels.Topic().orderBy('created_at', 'DESC')
   .where('id', '=', req.params.topicid)
   .fetch()
@@ -51,6 +51,8 @@ router.post('/main/delete/:topicid',function(req, res, next){
       topic.destroy();
       res.send('OK');
     });
+  }).catch((err) => {
+    res.status(500).json({error: true, data: {messages: err.message}});
   });
 });
 

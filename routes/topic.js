@@ -2,77 +2,31 @@ const express = require('express');
 const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
 
-router.post('/:topicId/sendMsg',function(req, res, next){
-const rec = {
-    message: req.body.msg,
-    user_id: req.session.login.id,
-    topic_id: req.params.topicId
-}
-new mysqlModels.Message(rec).save().then((model) => {
-    new mysqlModels.Topic().where('id','=',req.params.topicId)
-    .fetch()
-    .then((topic) => {
-    let cnt = topic.attributes.count + 1;
-    new mysqlModels.Topic().where('id','=',req.params.topicId)
-    .save({count: cnt},{patch:true})
-    .then((result) =>{
-        console.log(result);
-        rec['user_name'] = req.session.login.name;
-        rec['user_icon'] = req.session.login.icon;
-        rec['messege_id'] = model.id;
-        res.json(rec);
-    })
-    .catch((err) => {
-        res.status(500).json({error: true, data: {messages: err.message}});
-        res.redirect('./1');
-    });
-    });
-});
-});
-
-router.post('/:topicId/deleteMsg',function(req, res, next){
-    new mysqlModels.Message().where('id','=',req.body.msgid)
-    .fetch()
-    .then((msg)=>{
-        msg.destroy();
-    })
-    .then(()=>{
+router.post('/:topicId/msg',function(req, res, next){
+    const rec = {
+        message: req.body.msg,
+        user_id: req.session.login.id,
+        topic_id: req.params.topicId
+    }
+    new mysqlModels.Message(rec).save().then((model) => {
         new mysqlModels.Topic().where('id','=',req.params.topicId)
         .fetch()
         .then((topic) => {
-            let cnt = topic.attributes.count - 1;
-            new mysqlModels.Topic().where('id','=',req.params.topicId)
-            .save({count: cnt},{patch:true})
-            .then((result) =>{
-                res.json(result);
-            })
-            .catch((err) => {
-                res.status(500).json({error: true, data: {messages: err.message}});
-                res.redirect('./1');
-            });
+        let cnt = topic.attributes.count + 1;
+        new mysqlModels.Topic().where('id','=',req.params.topicId)
+        .save({count: cnt},{patch:true})
+        .then((result) =>{
+            console.log(result);
+            rec['user_name'] = req.session.login.name;
+            rec['user_icon'] = req.session.login.icon;
+            rec['messege_id'] = model.id;
+            res.json(rec);
+        })
+        .catch((err) => {
+            res.status(500).json({error: true, data: {messages: err.message}});
+            res.redirect('./1');
         });
-    });
-});
-
-router.post('/:topicId/editMsg',function(req, res, next){
-    new mysqlModels.Message().where('id','=',req.body.msgid)
-    .fetch()
-    .then((msg)=>{
-        res.json(msg);
-    })
-    .catch((err) => {
-        res.status(500).json({error: true, data: {messages: err.message}});
-    });
-});
-
-router.post('/:topicId/retouchMsg',function(req, res, next){
-    new mysqlModels.Message().where('id','=',req.body.msgid)
-    .save({message:req.body.msgdata},{patch:true})
-    .then((result)=>{
-        res.json(result);
-    })
-    .catch((err) => {
-        res.status(500).json({error: true, data: {messages: err.message}});
+        });
     });
 });
 
@@ -113,6 +67,52 @@ if(req.session.login == null){
     res.redirect('/main');
     })
 }
+});
+
+router.put('/:topicId/msg',function(req, res, next){
+    new mysqlModels.Message().where('id','=',req.body.msgid)
+    .save({message:req.body.msgdata},{patch:true})
+    .then((result)=>{
+        res.json(result);
+    })
+    .catch((err) => {
+        res.status(500).json({error: true, data: {messages: err.message}});
+    });
+});
+
+router.delete('/:topicId/msg',function(req, res, next){
+    new mysqlModels.Message().where('id','=',req.body.msgid)
+    .fetch()
+    .then((msg)=>{
+        msg.destroy();
+    })
+    .then(()=>{
+        new mysqlModels.Topic().where('id','=',req.params.topicId)
+        .fetch()
+        .then((topic) => {
+            let cnt = topic.attributes.count - 1;
+            new mysqlModels.Topic().where('id','=',req.params.topicId)
+            .save({count: cnt},{patch:true})
+            .then((result) =>{
+                res.json(result);
+            })
+            .catch((err) => {
+                res.status(500).json({error: true, data: {messages: err.message}});
+                res.redirect('./1');
+            });
+        });
+    });
+});
+
+router.post('/:topicId/editMsg',function(req, res, next){
+    new mysqlModels.Message().where('id','=',req.body.msgid)
+    .fetch()
+    .then((msg)=>{
+        res.json(msg);
+    })
+    .catch((err) => {
+        res.status(500).json({error: true, data: {messages: err.message}});
+    });
 });
 
 module.exports = router;

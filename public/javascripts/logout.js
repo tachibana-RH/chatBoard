@@ -1,9 +1,9 @@
 $(function() {
     $(document).on('click', '#logout', function(){
         $.ajax({
-            url:'./logout',
+            url:'/main/logout',
             type:'POST'
-        }).then((res) => {
+        }).then(() => {
             window.location.href = '/users/login';
         }).catch((err) => {
             console.log(err);

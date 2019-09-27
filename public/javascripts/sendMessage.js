@@ -106,7 +106,7 @@ $(function(){
     // Ajax button click
     $('#submit').on('click',function(){
         $.ajax({
-            url:'./sendMsg',
+            url:'./msg',
             type:'POST',
             dataType: 'json',
             data:{

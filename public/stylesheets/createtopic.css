@@ -53,6 +53,8 @@ text-align: left;
     background-color: rgb(68, 255, 193);
     border-radius: 10px;
     color: white;
+    font-size: 14px;
+    border: outset 2px rgb(184, 184, 184);
     cursor:pointer;
     opacity: 0.6;
     outline: none;
@@ -67,8 +69,8 @@ text-align: left;
 .return {
     cursor:pointer;
     position: absolute;
-    border: outset 2px rgb(184, 184, 184);/* ラベルのボーダーを指定する */
-    border-radius: 10px; /* ラベルボックスの角丸を指定する */
+    border: outset 2px rgb(184, 184, 184);
+    border-radius: 10px;
     background-color: rgb(127, 219, 255);
     padding: 13px;
     width: 170px;

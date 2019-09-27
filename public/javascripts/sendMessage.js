@@ -83,20 +83,20 @@ const getOtherMessage = (data,messages) => {
                         '<figcaption>\n' + data.user_name + '\n' + '</figcaption>\n' +
                         '</a>\n' +
                         '</th>\n' +
-                        '<td class="messageLeft">\n' +
+                        '<td class="messageLeft" id="' + data.messege_id + '">\n' +
                         messages +
                         '</td>\n' +
                         '<td class="messageDummy"></td>\n' +
                     '</tr>\n' +
-                    // '<tr>\n' +
-                    //     '<th></th>\n' +
-                    //     '<td style = "color: gray;">\n' +
-                    //     '<span>\n' +
-                    //     '<i class="fa fa-clock-o"></i>\n' +
-                    //     currentTime + '\n' +
-                    //     '</span>\n' +
-                    //     '</td>\n' +
-                    // '</tr>\n' +
+                    '<tr>\n' +
+                        '<th></th>\n' +
+                        '<td style = "color: gray;">\n' +
+                        '<span>\n' +
+                        '<i class="fa fa-clock-o"></i>\n' +
+                        currentTime + '\n' +
+                        '</span>\n' +
+                        '</td>\n' +
+                    '</tr>\n' +
                 '</table>\n' +
             '</div>';
     return child;
@@ -113,7 +113,6 @@ $(function(){
                 'msg': $('#msg').val()
             }
         }).then((res) => {
-            console.log('ajax success');
             $('#msg').val('');
             socket.emit('message', res);
         }).catch((err) => {

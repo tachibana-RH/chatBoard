@@ -19,6 +19,7 @@ new mysqlModels.Message(rec).save().then((model) => {
         console.log(result);
         rec['user_name'] = req.session.login.name;
         rec['user_icon'] = req.session.login.icon;
+        rec['messege_id'] = model.id;
         res.json(rec);
     })
     .catch((err) => {

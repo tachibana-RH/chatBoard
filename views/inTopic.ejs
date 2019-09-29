@@ -46,7 +46,7 @@
       <div class="mainBody">
         <div id="msgParent">
           <% for(let index in collection) { %>
-            <%- include('data_item_messages', {val:collection[index], id:login.id, msgid:index}) %>
+            <%- include('data_item_messages', {val:collection[index], id:login.id, type:login.type}) %>
           <% } %>
         </div>
         <div id="dummy" class="msgform"></div>

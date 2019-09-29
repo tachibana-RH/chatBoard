@@ -52,7 +52,7 @@ if(req.session.login == null){
             title: 'chatBoard',
             topicName: Record.attributes.name,
             topicId: id,
-            login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon},
+            login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon, type:req.session.login.type},
             collection: collection.toArray().reverse(),
             pagination: collection.pagination
             };

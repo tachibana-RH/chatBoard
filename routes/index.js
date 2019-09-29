@@ -24,7 +24,7 @@ router.get('/main/:page', function(req, res, next) {
     .then((collection) => {
       const data = {
         title: 'chatBoard',
-        login: {name: req.session.login.name, id: req.session.login.id},
+        login: {name: req.session.login.name, id: req.session.login.id, type: req.session.login.type},
         collection: collection.toArray(),
         pagination: collection.pagination
       };

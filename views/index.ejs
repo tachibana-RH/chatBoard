@@ -28,7 +28,7 @@
         <hr>
         <div class="contents">
         <% for(let index in collection) { %>
-            <%- include('data_item_index', {val:collection[index], id:login.id}) %>
+            <%- include('data_item_index', {val:collection[index], id:login.id, type:login.type}) %>
         <% } %>
         </div>
         <p>

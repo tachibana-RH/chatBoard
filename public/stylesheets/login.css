@@ -37,6 +37,7 @@ position: relative;
     font-size: 15px;
     border-radius: 10px;
     padding: 10px;
+    border: inset 2px rgb(206, 206, 206);
     outline: none;
 }
 #login,#add {
@@ -52,6 +53,10 @@ position: relative;
     position: absolute;
     left: 350px;
     bottom: 55px;
+    opacity: 0.6;
+}
+.submit:hover {
+    opacity: 1.0;
 }
 .add {
     bottom: 120px;
@@ -69,12 +74,12 @@ position: relative;
     width: 200px;
 }
 table {
-position: absolute;
-left: 200px;
-top: 180px;
+    position: absolute;
+    left: 200px;
+    top: 180px;
 }
 .error {
-color: red;
+    color: red;
 }
 
 @media screen and (max-width: 1000px){

@@ -15,29 +15,27 @@ router.post('/:topicId/msg',function(req, res, next){
         let cnt = topic.attributes.count + 1;
         new mysqlModels.Topic().where('id','=',req.params.topicId)
         .save({count: cnt},{patch:true})
-        .then((result) =>{
-            console.log(result);
+        .then(() =>{
             rec['user_name'] = req.session.login.name;
             rec['user_icon'] = req.session.login.icon;
             rec['messege_id'] = model.id;
-            res.json(rec);
+            res.status(201).json(rec);
         })
         .catch((err) => {
             res.status(500).json({error: true, data: {messages: err.message}});
-            res.redirect('./1');
         });
         });
     });
 });
 
 router.get('/:topicId', function(req, res, next) {
-    res.redirect('/topic/' + req.params.topicId + '/1');
+    res.status(303).redirect('/topic/' + req.params.topicId + '/1');
 });
 
 router.get('/:topicId/:page', function(req, res, next) {
 
 if(req.session.login == null){
-    res.redirect('/users/login');
+    res.status(303).redirect('/users/login');
 } else {
     let id = parseFloat(req.params.topicId);
     let pg = parseFloat(req.params.page);
@@ -58,13 +56,12 @@ if(req.session.login == null){
             collection: collection.toArray().reverse(),
             pagination: collection.pagination
             };
-            res.render('inTopic', data);
+            res.status(200).render('inTopic', data);
         }).catch((err) => {
             res.status(500).json({error: true, data: {messages: err.message}});
-            res.redirect('/main');
         });
     }).catch((err) => {
-    res.redirect('/main');
+        res.status(500).json({error: true, data: {messages: err.message}});
     })
 }
 });
@@ -72,8 +69,8 @@ if(req.session.login == null){
 router.put('/:topicId/msg',function(req, res, next){
     new mysqlModels.Message().where('id','=',req.body.msgid)
     .save({message:req.body.msgdata},{patch:true})
-    .then((result)=>{
-        res.json(result);
+    .then(()=>{
+        res.status(204).send('OK');
     })
     .catch((err) => {
         res.status(500).json({error: true, data: {messages: err.message}});
@@ -93,12 +90,11 @@ router.delete('/:topicId/msg',function(req, res, next){
             let cnt = topic.attributes.count - 1;
             new mysqlModels.Topic().where('id','=',req.params.topicId)
             .save({count: cnt},{patch:true})
-            .then((result) =>{
-                res.json(result);
+            .then(() =>{
+                res.status(204).send('OK');
             })
             .catch((err) => {
                 res.status(500).json({error: true, data: {messages: err.message}});
-                res.redirect('./1');
             });
         });
     });
@@ -108,7 +104,7 @@ router.post('/:topicId/editMsg',function(req, res, next){
     new mysqlModels.Message().where('id','=',req.body.msgid)
     .fetch()
     .then((msg)=>{
-        res.json(msg);
+        res.status(201).json(msg);
     })
     .catch((err) => {
         res.status(500).json({error: true, data: {messages: err.message}});

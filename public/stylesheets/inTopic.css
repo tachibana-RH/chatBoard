@@ -1,5 +1,6 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0;
     margin-right:auto;
     margin-left:auto;
 }
@@ -112,7 +113,7 @@ table,tr,th,td {
 .msgform {
     text-align: center;
     width: 100%;
-    height: 110px;
+    height: 180px;
 }
 
 #page {
@@ -200,7 +201,7 @@ table,tr,th,td {
     border-bottom: 10px solid transparent;
 }
 .link {
-    color: rgb(219, 255, 222);
+    color: rgb(206, 252, 255);
 }
 .disable {
     display: none;

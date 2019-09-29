@@ -4,14 +4,14 @@ const mysqlModels = require('../modules/mysqlModels');
 
 router.get('/', function(req, res, next) {
     if(req.session.login == null){
-        res.redirect('/users/login');
+        res.status(303).redirect('/users/login');
     } else {
         const data  = {
         title: 'chatBoard',
         form: {topicname:'',msg:''},
         content:''
         }
-        res.render('createTopic', data);
+        res.status(200).render('createTopic', data);
     }
 })
 
@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
                 content: content,
                 form: req.body
             }
-            response.render('createTopic', data);
+            response.status(200).render('createTopic', data);
         } else {
             const topicRec  = {
                 name: request.body.topicname,
@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
                         topic_id: collection.attributes.id
                     }
                     new mysqlModels.Message(messageRec).save().then(() => {
-                        response.redirect('/main');
+                        response.status(201).redirect('/main');
                     });
                 });
             });

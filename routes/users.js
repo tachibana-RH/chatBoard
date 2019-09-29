@@ -4,14 +4,13 @@ const mysqlModels = require('../modules/mysqlModels');
 const crypto = require('crypto');
 const N = 16;
 
-
 router.get('/login', function(req, res, next) {
   const data = {
     title: 'Login',
     form: {name:'',password:''},
     content:'※名前とパスワードを入力してください。※'
   }
-  res.render('users/login', data);
+  res.status(200).render('users/login', data);
 });
 
 router.post('/login', function(req, res, next) {
@@ -34,7 +33,7 @@ router.post('/login', function(req, res, next) {
         content: content,
         form: req.body
       }
-      response.render('users/login', data);
+      response.status(200).render('users/login', data);
     } else {
       const nm = req.body.name;
       const pw = req.body.password;
@@ -43,15 +42,15 @@ router.post('/login', function(req, res, next) {
       .then((model) => {
         if (model == null) {
           const data = {
-            title: '再入力',
-            content: '<p>名前またはパスワードが違います。</p>',
+            title: 'retry',
+            content: '<p class="error">※名前またはパスワードが違います。※</p>',
             form: req.body
           }
-          response.render('users/login',data);
+          response.status(200).render('users/login',data);
         } else {
           request.session.login = model.attributes;
           request.session.login.password = crypto.randomBytes(N).toString('base64').substring(0, N);
-          response.redirect('/main/1');
+          response.status(303).redirect('/main/1');
         }
       });
     }
@@ -65,7 +64,7 @@ router.get('/add', function(req, res, next) {
     form: {name:'',password:'',comment:''},
     content:'※登録する名前・パスワード・コメントを入力してください。※'
   }
-  res.render('users/add', data);
+  res.status(200).render('users/add', data);
 });
 
 router.post('/add', function(req, res, next) {
@@ -88,7 +87,7 @@ router.post('/add', function(req, res, next) {
         content: content,
         form: req.body
       }
-      response.render('users/add', data);
+      response.status(200).render('users/add', data);
     } else {
       const nm = req.body.name;
       const pw = req.body.password;
@@ -97,8 +96,8 @@ router.post('/add', function(req, res, next) {
       .then((model) => {
         if (model == null) {
           request.session.login = null;
-          new mysqlModels.User(req.body).save().then((model) => {
-            response.redirect('/');
+          new mysqlModels.User(req.body).save().then(() => {
+            response.status(303).redirect('/main');
           });
         } else {
           const data = {
@@ -106,7 +105,7 @@ router.post('/add', function(req, res, next) {
             form: {name: req.body.name,password: req.body.password,comment: req.body.comment},
             content:'<a class="error">※すでに利用されているユーザー名です※</a>'
           }
-          res.render('users/add', data);
+          res.status(200).render('users/add', data);
         }
       });
     }

@@ -11,9 +11,13 @@ function blurA( $this ) {
 }
 
 $(function(){
-
+    if($(window).scrollTop() > 60) {
+        $('#titleDummy').removeClass('disable');
+        $('#titleDummy').addClass('dummyOn');
+        $('#title').addClass('fixed');
+    }
     $(window).scroll(function () {
-        if ($(this).scrollTop() > 99) {
+        if ($(this).scrollTop() > 60) {
             $('#titleDummy').removeClass('disable');
             $('#titleDummy').addClass('dummyOn');
             $('#title').addClass('fixed');
@@ -23,5 +27,4 @@ $(function(){
             $('#title').removeClass('fixed');
         };
     });
-
 });

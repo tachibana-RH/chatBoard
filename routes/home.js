@@ -6,17 +6,17 @@ const mysqlModels = require('../modules/mysqlModels');
 
 
 router.get('/', (req,res,next) => {
-    res.redirect('/');
+    res.status(303).redirect('/');
 });
 
 router.get('/:id', (req,res,next) => {
-    res.redirect('/home/' + req.params.id + '/message' + '/1');
+    res.status(303).redirect('/home/' + req.params.id + '/message' + '/1');
 });
 
 router.get('/:id/:contents/:page', (req,res,next) => {
 
   if (req.session.login == null) {
-      res.redirect('/users/login');
+      res.status(303).redirect('/users/login');
   } else {
       let id = parseFloat(req.params.id);
       let pg = parseFloat(req.params.page);
@@ -35,7 +35,7 @@ router.get('/:id/:contents/:page', (req,res,next) => {
                 collection: collection.toArray(),
                 pagination: collection.pagination
             };
-            res.render('home', data);
+            res.status(200).render('home', data);
         }).catch((err) => {
             res.status(500).json({error: true, data: {message: err.message}});
         });
@@ -52,7 +52,7 @@ router.get('/:id/:contents/:page', (req,res,next) => {
                 collection: collection.toArray(),
                 pagination: collection.pagination
             };
-            res.render('home', data);
+            res.status(200).render('home', data);
         }).catch((err) => {
             res.status(500).json({error: true, data: {message: err.message}});
         });
@@ -76,7 +76,7 @@ router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req,
   .save({icon: req.file.filename},{patch:true})
   .then((result) =>{
     req.session.login.icon = req.file.filename;
-    res.json(result);
+    res.status(201).json(result);
   })
   .catch((err) => {
     res.status(500).json({error: true, data: {messages: err.message}});

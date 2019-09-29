@@ -4,17 +4,17 @@ const mysqlModels = require('../modules/mysqlModels');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.redirect('/main');
+  res.status(303).redirect('/main');
 });
 
 router.get('/main', function(req, res, next) {
-  res.redirect('/main/1');
+  res.status(303).redirect('/main/1');
 });
 
 router.get('/main/:page', function(req, res, next) {
 
   if(req.session.login == null){
-    res.redirect('/users/login');
+    res.status(303).redirect('/users/login');
   } else {
     let pg = parseFloat(req.params.page);
     if (pg < 1) { pg = 1; }
@@ -28,7 +28,7 @@ router.get('/main/:page', function(req, res, next) {
         collection: collection.toArray(),
         pagination: collection.pagination
       };
-      res.render('index', data);
+      res.status(200).render('index', data);
     }).catch((err) => {
       res.status(500).json({error: true, data: {messages: err.message}});
     });
@@ -49,7 +49,7 @@ router.delete('/main/:topicid',function(req, res, next){
         msgObj[i].destroy();
       }
       topic.destroy();
-      res.send('OK');
+      res.status(204).send('OK');
     });
   }).catch((err) => {
     res.status(500).json({error: true, data: {messages: err.message}});
@@ -57,12 +57,12 @@ router.delete('/main/:topicid',function(req, res, next){
 });
 
 router.get('/main/logout',function(req, res, next){
-  res.redirect('/main');
+  res.status(303).redirect('/main');
 });
 
 router.post('/main/logout',function(req, res, next){
   delete req.session.login;
-  res.send('OK');
+  res.status(200).redirect('/users/login');
 });
 
 module.exports = router;

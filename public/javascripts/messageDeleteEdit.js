@@ -52,7 +52,8 @@ $(function(){
     });
 
     $(document).on('click', '.retouchCancel', function(){
-        $('.drawer').drawer('close');
+        // $('.drawer').drawer('close');
+        location.reload();
     });
 
 });

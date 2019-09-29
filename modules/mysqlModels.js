@@ -3,10 +3,10 @@ const mysql = require('mysql');
 const knex = require('knex') ({
   client: 'mysql',
   connection: {
-    host    : process.env.CHATBOARD_DB_HOST,
-    user    : process.env.CHATBOARD_DB_USER,
-    password: process.env.CHATBOARD_DB_PASSWORD,
-    database: process.env.CHATBOARD_DB_NAME,
+    host    : process.env.NODE_CHATBOARD_DB_HOST,
+    user    : process.env.NODE_CHATBOARD_DB_USER,
+    password: process.env.NODE_CHATBOARD_DB_PASSWORD,
+    database: process.env.NODE_CHATBOARD_DB_NAME,
     charset : 'utf8'
   }
 });

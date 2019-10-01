@@ -87,7 +87,37 @@ color: red;
 }
 
 @media screen and (max-width: 1000px){
-    .main {
-        width: 750px;
-    }
+.main {
+    width: 100%;
+    height: 100%;
+}
+table {
+    width: 100%;
+    height: 100%;
+}
+#title,#msg {
+    width: 50%;
+}
+#submit {
+    position: absolute;
+    left: 57%;
+    bottom: 50%;
+    width: 40%;
+    height: 40%;
+    font-size: 25px;
+    opacity: 1.0;
+}
+.return {
+    width: 37%;
+    left: 57%;
+    bottom: 15%;
+    font-size: 25px;
+    opacity: 1.0;
+}
+table tr th {
+    font-size: 25px;
+}
+#title,#msg {
+    font-size: 25px;
+}
 }

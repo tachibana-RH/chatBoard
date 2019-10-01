@@ -14,6 +14,12 @@
   <script src="/javascripts/visualChange.js"></script>
   <script src="/javascripts/messageDeleteEdit.js"></script>
   <script>
+    const socket = io.connect('<%= NODE_NAME %>');
+    
+    socket.on('news',function(data){
+      displayMessage(data);
+    });
+
     $(document).ready(function() {
         $('.drawer').drawer();
     });

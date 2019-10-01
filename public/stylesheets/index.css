@@ -84,20 +84,35 @@ color: red;
 }
 
 @media screen and (max-width: 1000px){
-.main {
-  width: 750px;
-}
-.list-title {
-  width: 530px;
+h2 {
   font-size: 30px;
 }
+.main {
+  width: 100%;
+  font-size: 20px;
+  height: 100%;
+}
+p {
+  font-size: 20px;
+}
+.list-title {
+  font-size: 50px;
+  width: 70%;
+}
+.list-form a {
+  font-size: 20px;
+}
+.home img {
+  width: 60px;
+  height: 60px;
+}
 .topics table {
-  width: 95%;
+  width: 100%;
 }
 th {
   width: 20%;
 }
 .delete {
-  padding-left: 18px;
+  padding-left: 10px;
 }
 }

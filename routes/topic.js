@@ -50,6 +50,7 @@ if(req.session.login == null){
         .then((collection) => {
             const data = {
             title: 'chatBoard',
+            NODE_NAME: process.env.NODE_NAME,
             topicName: Record.attributes.name,
             topicId: id,
             login: {name: req.session.login.name, id: req.session.login.id, icon:req.session.login.icon, type:req.session.login.type},

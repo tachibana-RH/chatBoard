@@ -36,6 +36,32 @@ var session_opt = {
 };
 app.use(session(session_opt));
 
+const ALLOWED_METHODS = [
+  'GET',
+  'POST',
+  'PUT',
+  'PATCH',
+  'DELETE',
+  'HEAD',
+  'OPTIONS'
+];
+const ALLOWED_ORIGINS = [
+  'http://localhost:8080',
+  'http://localhost:3000',
+  'http://chatsboard.com:49160'
+];
+// レスポンスHeaderを組み立てる
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if(ALLOWED_ORIGINS.indexOf(req.headers.origin) > -1) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Methods', ALLOWED_METHODS.join(','));
+      res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      res.setHeader("Access-Control-Allow-Credentials",true);
+  }
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/createtopic', createRouter);
 app.use('/topic', topicRouter);

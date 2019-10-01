@@ -84,29 +84,53 @@ table {
 
 @media screen and (max-width: 1000px){
 .login,.useradd {
-width: 750px;
+width: 90%;
+height: 100%;
+font-size: 25px;
 }
 .formdata {
-bottom: 150px;
+bottom: 15%;
+}
+table {
+    left: 10%;
+    width: 80%;
+}
+.formInput {
+    font-size: 25px;
+}
+table tr th {
+    font-size: 25px;
 }
 .submit {
-    top: 130px;
-    left: 70px;
+    top: 110%;
+    left: 28%;
+    opacity: 1.0;
+}
+#login {
+    font-size: 20px;
+    height: 70px;
+    width: 250px;
 }
 .create {
-    left: 90px;
+    left: 33%;
     bottom: 0px;
-    top: 200px;
+    top: 170%;
+    font-size: 20px;
 }
 .add {
-    top: 240px;
+    top: 105%;
+}
+#add {
+    font-size: 20px;
+    height: 70px;
+    width: 250px;
 }
 .addform {
     padding-bottom: 80px;
 }
 .returnlogin {
-    top: 310px;
+    top: 130%;
     bottom: 8px;
-    left: 130px;
+    left: 38%;
 }
 }

@@ -217,13 +217,30 @@ table,tr,th,td {
 }
 
 @media screen and (max-width: 1000px){
+p {
+    font-size: 18px;
+}
+.link {
+    font-size: 10px;
+}
+.home img {
+    width: 60px;
+    height: 60px;
+}
 .mainBody {
-    width: 750px;
+    font-size: 20px;
+    width: 100%;
     margin-right:auto;
     margin-left:auto;
 }
 .title-inner {
-    width: 700px;
+    width: 90%;
+}
+.fixed {
+    height: 60px;
+}
+.topicname,.titleback {
+    font-size: 25px;
 }
 .messageDummy {
     width: 30%;
@@ -242,5 +259,28 @@ table,tr,th,td {
 }
 .messageRight:after {
     right:-35px;
+}
+.messageLeft a {
+    font-size: 25px;
+}
+.messageRight a {
+    font-size: 25px;
+}
+.msgfixed {
+    position: fixed;
+    background-color: white;
+    top: 85%;
+    height: 150px;
+}
+.msg {
+    height: 30PX;
+}
+#msg {
+    font-size: 25px;
+}
+#submit {
+    font-size: 25px;
+    width: 150%;
+    opacity: 1.0;
 }
 }

@@ -1,18 +1,18 @@
 
-const socket = io.connect('http://localhost:3000');
-
-socket.on('news',function(data){
-    displayMessage(data);
-});
-
 const displayMessage = (data) => {
     if($('#title').data('topicid') == data.topic_id) {
+
+        if ($('#msgParent').children().length == 10) {
+            $('#msgParent div:first-child').remove();
+        };
+
+//        const messages = msgCreate(data.message.split(/\r?\n/g));
         const messagesArray = data.message.split(/\r?\n/g);
         let messages = '';
         for (let index in messagesArray) {
             if (messagesArray[index] === '') {
                 messages += '<br>\n';
-            } else { 
+            } else {
                 if (messagesArray[index].substr(0,4) == 'http') {
                     messages += '<p>\n' + 
                     '<a style="color: rgb(219, 255, 222);" href="' + messagesArray[index] + '" target="_blank">\n' +
@@ -21,10 +21,6 @@ const displayMessage = (data) => {
                     messages += '<p>\n' + messagesArray[index] + '\n' + '</p>\n';
                 };
             };
-        };
-
-        if ($('#msgParent').children().length == 10) {
-            $('#msgParent div:first-child').remove();
         };
 
         if($('#title').data('userid') == data.user_id) {
@@ -38,6 +34,23 @@ const displayMessage = (data) => {
         };
 
     };
+}
+
+const msgCreate = (messagesArray) => {
+    for (let index in messagesArray) {
+        if (messagesArray[index] === '') {
+            messages += '<br>\n';
+        } else {
+            if (messagesArray[index].substr(0,4) == 'http') {
+                messages += '<p>\n' + 
+                '<a style="color: rgb(219, 255, 222);" href="' + messagesArray[index] + '" target="_blank">\n' +
+                messagesArray[index] + '</a>\n</p>\n';
+            } else {
+                messages += '<p>\n' + messagesArray[index] + '\n' + '</p>\n';
+            };
+        };
+    };
+    return messages;
 }
 
 const getSelfMessage = (data,messages) => {

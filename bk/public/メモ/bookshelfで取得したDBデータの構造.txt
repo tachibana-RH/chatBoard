@@ -1,0 +1,642 @@
+[Object: null prototype] {
+  id: 1,
+  name: 'kominami',
+  password: '6j3Y21CRmhqzAUnE',
+  comment: 'よろしく！',
+  icon: '' }
+POST /users/login 200 112.121 ms - 1260
+GET /stylesheets/style.css 304 0.443 ms - -
+GET /main/1 304 21.678 ms - -
+GET /stylesheets/style.css 304 0.353 ms - -
+[ ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 49,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとメッセージ送った時のリダイレクトをページの一番下にしたい',
+       created_at: 2019-09-11T16:51:29.000Z,
+       updated_at: 2019-09-11T16:51:29.000Z },
+    _previousAttributes:
+     { id: 49,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとメッセージ送った時のリダイレクトをページの一番下にしたい',
+       created_at: 2019-09-11T16:51:29.000Z,
+       updated_at: 2019-09-11T16:51:29.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c15',
+    id: 49 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 48,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとアイコンをまるくしたい',
+       created_at: 2019-09-11T16:50:27.000Z,
+       updated_at: 2019-09-11T16:50:27.000Z },
+    _previousAttributes:
+     { id: 48,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとアイコンをまるくしたい',
+       created_at: 2019-09-11T16:50:27.000Z,
+       updated_at: 2019-09-11T16:50:27.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c16',
+    id: 48 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 47,
+       user_id: 2,
+       topic_id: 3,
+       message:
+        '改善すること\r\n・タイトルとメッセージ送信を固定にする\r\n・メッセージのテキストエリアのサイズ
+を可変にする（クリックすると大きくなり、離すと小さくなる）\r\n・メッセージの削除機能を追加\r\n・個別メッ
+セージの機能を追加\r\n・なにか他サービスとの連携（twitterとか）\r\n・トップ画面をもう少しにぎやかにした
+い',
+       created_at: 2019-09-11T15:50:49.000Z,
+       updated_at: 2019-09-11T15:50:49.000Z },
+    _previousAttributes:
+     { id: 47,
+       user_id: 2,
+       topic_id: 3,
+       message:
+        '改善すること\r\n・タイトルとメッセージ送信を固定にする\r\n・メッセージのテキストエリアのサイズ
+を可変にする（クリックすると大きくなり、離すと小さくなる）\r\n・メッセージの削除機能を追加\r\n・個別メッ
+セージの機能を追加\r\n・なにか他サービスとの連携（twitterとか）\r\n・トップ画面をもう少しにぎやかにした
+い',
+       created_at: 2019-09-11T15:50:49.000Z,
+       updated_at: 2019-09-11T15:50:49.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c17',
+    id: 47 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 46,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは\r\n\r\n海洋\r\n\r\nかかか\r\n\r\nたち\r\n\r\nあああ',
+       created_at: 2019-09-11T08:28:56.000Z,
+       updated_at: 2019-09-11T08:28:56.000Z },
+    _previousAttributes:
+     { id: 46,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは\r\n\r\n海洋\r\n\r\nかかか\r\n\r\nたち\r\n\r\nあああ',
+       created_at: 2019-09-11T08:28:56.000Z,
+       updated_at: 2019-09-11T08:28:56.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c18',
+    id: 46 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 45,
+       user_id: 1,
+       topic_id: 3,
+       message: '改行テスト\r\n\r\nこんにちは',
+       created_at: 2019-09-11T08:28:05.000Z,
+       updated_at: 2019-09-11T08:28:05.000Z },
+    _previousAttributes:
+     { id: 45,
+       user_id: 1,
+       topic_id: 3,
+       message: '改行テスト\r\n\r\nこんにちは',
+       created_at: 2019-09-11T08:28:05.000Z,
+       updated_at: 2019-09-11T08:28:05.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c19',
+    id: 45 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 44,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-11T06:50:24.000Z,
+       updated_at: 2019-09-11T06:50:24.000Z },
+    _previousAttributes:
+     { id: 44,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-11T06:50:24.000Z,
+       updated_at: 2019-09-11T06:50:24.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c20',
+    id: 44 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 43,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんばんは！',
+       created_at: 2019-09-10T15:21:29.000Z,
+       updated_at: 2019-09-10T15:21:29.000Z },
+    _previousAttributes:
+     { id: 43,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんばんは！',
+       created_at: 2019-09-10T15:21:29.000Z,
+       updated_at: 2019-09-10T15:21:29.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c21',
+    id: 43 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 42,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-10T15:19:04.000Z,
+       updated_at: 2019-09-10T15:19:04.000Z },
+    _previousAttributes:
+     { id: 42,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-10T15:19:04.000Z,
+       updated_at: 2019-09-10T15:19:04.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c22',
+    id: 42 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 41,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは！',
+       created_at: 2019-09-10T15:17:48.000Z,
+       updated_at: 2019-09-10T15:17:48.000Z },
+    _previousAttributes:
+     { id: 41,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは！',
+       created_at: 2019-09-10T15:17:48.000Z,
+       updated_at: 2019-09-10T15:17:48.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c23',
+    id: 41 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 34,
+       user_id: 2,
+       topic_id: 3,
+       message: 'テスト',
+       created_at: 2019-09-10T13:45:54.000Z,
+       updated_at: 2019-09-10T13:45:54.000Z },
+    _previousAttributes:
+     { id: 34,
+       user_id: 2,
+       topic_id: 3,
+       message: 'テスト',
+       created_at: 2019-09-10T13:45:54.000Z,
+       updated_at: 2019-09-10T13:45:54.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c24',
+    id: 34 } ]
+GET /main/3/1 200 66.685 ms - 11446
+GET /stylesheets/style.css 304 0.565 ms - -
+GET /images/icon_default.jpeg 304 6.848 ms - -
+{ count: 11, updated_at: 2019-09-11T17:11:25.594Z }
+POST /main/3/sendMsg 302 18.870 ms - 50
+[ ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 50,
+       user_id: 1,
+       topic_id: 3,
+       message: '配列の中身をみるぞ',
+       created_at: 2019-09-11T17:11:25.000Z,
+       updated_at: 2019-09-11T17:11:25.000Z },
+    _previousAttributes:
+     { id: 50,
+       user_id: 1,
+       topic_id: 3,
+       message: '配列の中身をみるぞ',
+       created_at: 2019-09-11T17:11:25.000Z,
+       updated_at: 2019-09-11T17:11:25.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c37',
+    id: 50 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 49,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとメッセージ送った時のリダイレクトをページの一番下にしたい',
+       created_at: 2019-09-11T16:51:29.000Z,
+       updated_at: 2019-09-11T16:51:29.000Z },
+    _previousAttributes:
+     { id: 49,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとメッセージ送った時のリダイレクトをページの一番下にしたい',
+       created_at: 2019-09-11T16:51:29.000Z,
+       updated_at: 2019-09-11T16:51:29.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c38',
+    id: 49 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 48,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとアイコンをまるくしたい',
+       created_at: 2019-09-11T16:50:27.000Z,
+       updated_at: 2019-09-11T16:50:27.000Z },
+    _previousAttributes:
+     { id: 48,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとアイコンをまるくしたい',
+       created_at: 2019-09-11T16:50:27.000Z,
+       updated_at: 2019-09-11T16:50:27.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c39',
+    id: 48 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 47,
+       user_id: 2,
+       topic_id: 3,
+       message:
+        '改善すること\r\n・タイトルとメッセージ送信を固定にする\r\n・メッセージのテキストエリアのサイズ
+を可変にする（クリックすると大きくなり、離すと小さくなる）\r\n・メッセージの削除機能を追加\r\n・個別メッ
+セージの機能を追加\r\n・なにか他サービスとの連携（twitterとか）\r\n・トップ画面をもう少しにぎやかにした
+い',
+       created_at: 2019-09-11T15:50:49.000Z,
+       updated_at: 2019-09-11T15:50:49.000Z },
+    _previousAttributes:
+     { id: 47,
+       user_id: 2,
+       topic_id: 3,
+       message:
+        '改善すること\r\n・タイトルとメッセージ送信を固定にする\r\n・メッセージのテキストエリアのサイズ
+を可変にする（クリックすると大きくなり、離すと小さくなる）\r\n・メッセージの削除機能を追加\r\n・個別メッ
+セージの機能を追加\r\n・なにか他サービスとの連携（twitterとか）\r\n・トップ画面をもう少しにぎやかにした
+い',
+       created_at: 2019-09-11T15:50:49.000Z,
+       updated_at: 2019-09-11T15:50:49.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c40',
+    id: 47 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 46,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは\r\n\r\n海洋\r\n\r\nかかか\r\n\r\nたち\r\n\r\nあああ',
+       created_at: 2019-09-11T08:28:56.000Z,
+       updated_at: 2019-09-11T08:28:56.000Z },
+    _previousAttributes:
+     { id: 46,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは\r\n\r\n海洋\r\n\r\nかかか\r\n\r\nたち\r\n\r\nあああ',
+       created_at: 2019-09-11T08:28:56.000Z,
+       updated_at: 2019-09-11T08:28:56.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c41',
+    id: 46 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 45,
+       user_id: 1,
+       topic_id: 3,
+       message: '改行テスト\r\n\r\nこんにちは',
+       created_at: 2019-09-11T08:28:05.000Z,
+       updated_at: 2019-09-11T08:28:05.000Z },
+    _previousAttributes:
+     { id: 45,
+       user_id: 1,
+       topic_id: 3,
+       message: '改行テスト\r\n\r\nこんにちは',
+       created_at: 2019-09-11T08:28:05.000Z,
+       updated_at: 2019-09-11T08:28:05.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c42',
+    id: 45 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 44,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-11T06:50:24.000Z,
+       updated_at: 2019-09-11T06:50:24.000Z },
+    _previousAttributes:
+     { id: 44,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-11T06:50:24.000Z,
+       updated_at: 2019-09-11T06:50:24.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c43',
+    id: 44 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 43,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんばんは！',
+       created_at: 2019-09-10T15:21:29.000Z,
+       updated_at: 2019-09-10T15:21:29.000Z },
+    _previousAttributes:
+     { id: 43,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんばんは！',
+       created_at: 2019-09-10T15:21:29.000Z,
+       updated_at: 2019-09-10T15:21:29.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c44',
+    id: 43 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 42,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-10T15:19:04.000Z,
+       updated_at: 2019-09-10T15:19:04.000Z },
+    _previousAttributes:
+     { id: 42,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-10T15:19:04.000Z,
+       updated_at: 2019-09-10T15:19:04.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c45',
+    id: 42 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 41,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは！',
+       created_at: 2019-09-10T15:17:48.000Z,
+       updated_at: 2019-09-10T15:17:48.000Z },
+    _previousAttributes:
+     { id: 41,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは！',
+       created_at: 2019-09-10T15:17:48.000Z,
+       updated_at: 2019-09-10T15:17:48.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c46',
+    id: 41 } ]
+GET /main/3/1 200 50.005 ms - 11507
+GET /stylesheets/style.css 304 0.676 ms - -
+GET /images/icon_default.jpeg 304 0.311 ms - -
+[ ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 50,
+       user_id: 1,
+       topic_id: 3,
+       message: '配列の中身をみるぞ',
+       created_at: 2019-09-11T17:11:25.000Z,
+       updated_at: 2019-09-11T17:11:25.000Z },
+    _previousAttributes:
+     { id: 50,
+       user_id: 1,
+       topic_id: 3,
+       message: '配列の中身をみるぞ',
+       created_at: 2019-09-11T17:11:25.000Z,
+       updated_at: 2019-09-11T17:11:25.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c56',
+    id: 50 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 49,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとメッセージ送った時のリダイレクトをページの一番下にしたい',
+       created_at: 2019-09-11T16:51:29.000Z,
+       updated_at: 2019-09-11T16:51:29.000Z },
+    _previousAttributes:
+     { id: 49,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとメッセージ送った時のリダイレクトをページの一番下にしたい',
+       created_at: 2019-09-11T16:51:29.000Z,
+       updated_at: 2019-09-11T16:51:29.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c57',
+    id: 49 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 48,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとアイコンをまるくしたい',
+       created_at: 2019-09-11T16:50:27.000Z,
+       updated_at: 2019-09-11T16:50:27.000Z },
+    _previousAttributes:
+     { id: 48,
+       user_id: 1,
+       topic_id: 3,
+       message: 'あとアイコンをまるくしたい',
+       created_at: 2019-09-11T16:50:27.000Z,
+       updated_at: 2019-09-11T16:50:27.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c58',
+    id: 48 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 47,
+       user_id: 2,
+       topic_id: 3,
+       message:
+        '改善すること\r\n・タイトルとメッセージ送信を固定にする\r\n・メッセージのテキストエリアのサイズ
+を可変にする（クリックすると大きくなり、離すと小さくなる）\r\n・メッセージの削除機能を追加\r\n・個別メッ
+セージの機能を追加\r\n・なにか他サービスとの連携（twitterとか）\r\n・トップ画面をもう少しにぎやかにした
+い',
+       created_at: 2019-09-11T15:50:49.000Z,
+       updated_at: 2019-09-11T15:50:49.000Z },
+    _previousAttributes:
+     { id: 47,
+       user_id: 2,
+       topic_id: 3,
+       message:
+        '改善すること\r\n・タイトルとメッセージ送信を固定にする\r\n・メッセージのテキストエリアのサイズ
+を可変にする（クリックすると大きくなり、離すと小さくなる）\r\n・メッセージの削除機能を追加\r\n・個別メッ
+セージの機能を追加\r\n・なにか他サービスとの連携（twitterとか）\r\n・トップ画面をもう少しにぎやかにした
+い',
+       created_at: 2019-09-11T15:50:49.000Z,
+       updated_at: 2019-09-11T15:50:49.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c59',
+    id: 47 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 46,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは\r\n\r\n海洋\r\n\r\nかかか\r\n\r\nたち\r\n\r\nあああ',
+       created_at: 2019-09-11T08:28:56.000Z,
+       updated_at: 2019-09-11T08:28:56.000Z },
+    _previousAttributes:
+     { id: 46,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは\r\n\r\n海洋\r\n\r\nかかか\r\n\r\nたち\r\n\r\nあああ',
+       created_at: 2019-09-11T08:28:56.000Z,
+       updated_at: 2019-09-11T08:28:56.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c60',
+    id: 46 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 45,
+       user_id: 1,
+       topic_id: 3,
+       message: '改行テスト\r\n\r\nこんにちは',
+       created_at: 2019-09-11T08:28:05.000Z,
+       updated_at: 2019-09-11T08:28:05.000Z },
+    _previousAttributes:
+     { id: 45,
+       user_id: 1,
+       topic_id: 3,
+       message: '改行テスト\r\n\r\nこんにちは',
+       created_at: 2019-09-11T08:28:05.000Z,
+       updated_at: 2019-09-11T08:28:05.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c61',
+    id: 45 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 44,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-11T06:50:24.000Z,
+       updated_at: 2019-09-11T06:50:24.000Z },
+    _previousAttributes:
+     { id: 44,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-11T06:50:24.000Z,
+       updated_at: 2019-09-11T06:50:24.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c62',
+    id: 44 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 43,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんばんは！',
+       created_at: 2019-09-10T15:21:29.000Z,
+       updated_at: 2019-09-10T15:21:29.000Z },
+    _previousAttributes:
+     { id: 43,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんばんは！',
+       created_at: 2019-09-10T15:21:29.000Z,
+       updated_at: 2019-09-10T15:21:29.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c63',
+    id: 43 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 42,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-10T15:19:04.000Z,
+       updated_at: 2019-09-10T15:19:04.000Z },
+    _previousAttributes:
+     { id: 42,
+       user_id: 1,
+       topic_id: 3,
+       message: '良い天気ですね',
+       created_at: 2019-09-10T15:19:04.000Z,
+       updated_at: 2019-09-10T15:19:04.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c64',
+    id: 42 },
+  ModelBase {
+    attributes:
+     [Object: null prototype] {
+       id: 41,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは！',
+       created_at: 2019-09-10T15:17:48.000Z,
+       updated_at: 2019-09-10T15:17:48.000Z },
+    _previousAttributes:
+     { id: 41,
+       user_id: 1,
+       topic_id: 3,
+       message: 'こんにちは！',
+       created_at: 2019-09-10T15:17:48.000Z,
+       updated_at: 2019-09-10T15:17:48.000Z },
+    changed: [Object: null prototype] {},
+    relations: { user: [ModelBase] },
+    cid: 'c65',
+    id: 41 } ]

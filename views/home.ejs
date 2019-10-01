@@ -5,11 +5,13 @@
         <%= title %>
     </title>
     <link rel="stylesheet" href="/stylesheets/home.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="/javascripts/uploadImage.js"></script>
 <script src="/javascripts/mypageMenu.js"></script>
 <body>
+    <div class="wrap">
     <div role="main" class="background">
         <h2><%= collection[0].relations.user.attributes.name %>さんのマイページ</h2>
         <div class="maincontents">
@@ -20,6 +22,7 @@
             <% } else { %>
                 <img src="/images/<%= collection[0].relations.user.attributes.icon %>" width="80px" height="80px">
             <% } %>
+
             <% if( collection[0].relations.user.attributes.id == login.id ) { %>
                 <br>
                 <br>
@@ -31,6 +34,11 @@
                 </label>
                 </form>
                 </div>
+            <% } else { %>
+                <br>
+                <br>
+                <br>
+                <br>
             <% } %>
                 <div class="comment">
                     comment
@@ -80,6 +88,7 @@
         </p>
         </div>
         </div>
+    </div>
     </div>
 </body>
 </html>

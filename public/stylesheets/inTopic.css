@@ -218,7 +218,10 @@ table,tr,th,td {
 
 @media screen and (max-width: 1000px){
 p {
-    font-size: 18px;
+    font-size: 25px;
+}
+.wrap {
+    overflow: hidden;
 }
 .link {
     font-size: 10px;
@@ -270,7 +273,7 @@ p {
     position: fixed;
     background-color: white;
     top: 85%;
-    height: 150px;
+    height: 250px;
 }
 .msg {
     height: 30PX;
@@ -282,5 +285,17 @@ p {
     font-size: 25px;
     width: 150%;
     opacity: 1.0;
+}
+#retouchMsg {
+    font-size: 25px;
+    width: 380px;
+    height: 150px;
+}
+.header li {
+    font-size: 25px;
+}
+.side-form li {
+    font-size: 20px;
+    border: solid rgb(163, 163, 163);
 }
 }

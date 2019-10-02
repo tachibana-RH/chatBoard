@@ -88,7 +88,7 @@ color: red;
 
 @media screen and (max-width: 1000px){
 .main {
-    width: 750px;
+    width: 90%;
     height: 100%;
 }
 table {

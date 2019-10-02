@@ -127,7 +127,7 @@ p {
     overflow: hidden;
 }
 .background {
-    width: 750px;
+    width: 90%;
     height: 100%;
     overflow: hidden;
 }
@@ -153,11 +153,11 @@ table {
     position: relative;
 }
 .icon img {
-    width: 120px;
-    height: 120px;
+    width: 20%;
+    height: 20%;
 }
 .upload {
-    width: 250px;
+    width: 30%;
 }
 .message {
     width: 100%;

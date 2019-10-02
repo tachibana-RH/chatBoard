@@ -1,0 +1,142 @@
+
+body {
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: rgb(148, 148, 148);
+}
+a {
+color: rgb(0, 204, 17);
+text-decoration: none;
+}
+h2 {
+font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: white;
+}
+p {
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.background {
+    background: url(../images/cork-board/cork-board/cork-board.png);
+    width: 1000px;
+    margin-right:auto;
+    margin-left:auto;
+    padding: 10px;
+}
+.maincontents {
+    background-color: white;
+    padding: 8px;
+    border: 2px double #bbb;
+    border-radius: 10px;
+}
+.header {
+    text-align: right;
+    padding: 15px;
+}
+table {
+    width: 600px;
+    table-layout:fixed;
+    background-color: rgb(214, 255, 208);
+}
+th,td {
+    background-color:white;
+}
+table,th,td {
+    padding: 8px;
+    border: 1px solid #bbb;
+    word-wrap:break-word;
+}
+.date {
+    width: 100px;
+}
+.message {
+    width: 50%;
+}
+.topic {
+    width: 50%;
+}
+.userdoc {
+    position: absolute;
+    width: 300px;
+    height: 368px;
+}
+.comment {
+    margin-top: 10px;
+}
+.comment-contents {
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    padding: 5px;
+}
+.menu li,#pageback {
+    display: inline-block;
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #bbb;
+    padding: 10px;
+}
+li:hover {
+    background-color: #bbb;
+    color: white;
+}
+.contents {
+    margin-left: 36%;
+    position: relative;
+    width: 615px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 760px;
+    border: double 4px rgb(155, 155, 155);
+    border-radius: 10px;
+}
+.views {
+    /* position: absolute; */
+}
+.pagenations {
+    text-align: center;
+}
+.upload {
+    background-color: rgb(16, 199, 255);
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border: solid 4px rgb(255, 255, 255);
+    width: 180px;
+    text-align: center;
+}
+label > input {
+display:none;
+}
+label {
+    cursor:pointer;
+}
+
+@media screen and (max-width: 1000px){
+.background {
+    width: 750px;
+    height: 800px;
+}
+table {
+    width: 400px;
+}
+.date {
+    width: 25%;
+}
+.message {
+    width: 75%;
+}
+.userdoc {
+    width: 300px;
+    height: 368px;
+}
+.contents {
+    width: 415px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 500px;
+    margin-left: 42%;
+    border: double 4px rgb(155, 155, 155);
+    border-radius: 10px;
+}
+}

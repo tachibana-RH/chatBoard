@@ -85,29 +85,33 @@ color: red;
 
 @media screen and (max-width: 1000px){
 h2 {
-  font-size: 30px;
+  font-size: 20px;
 }
 .main {
-  width: 100%;
-  font-size: 20px;
+  width: 750px;
+  font-size: 16px;
   height: 100%;
 }
-a {
-  font-size: 25px;
+.topicNames a {
+  font-size: 16px;
 }
 p {
+  font-size: 16px;
+}
+span {
   font-size: 20px;
 }
 .list-title {
-  font-size: 50px;
+  font-size: 40px;
   width: 70%;
 }
 .list-form a {
-  font-size: 20px;
+  font-size: 16px;
+  border: solid 2px rgb(122, 122, 122);
 }
 .home img {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 .topics table {
   width: 100%;

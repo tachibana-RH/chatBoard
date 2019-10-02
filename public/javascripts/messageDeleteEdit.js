@@ -52,8 +52,8 @@ $(function(){
     });
 
     $(document).on('click', '.retouchCancel', function(){
-        // $('.drawer').drawer('close');
-        location.reload();
+        $('.drawer').drawer('close');
+        //location.reload();
     });
 
 });

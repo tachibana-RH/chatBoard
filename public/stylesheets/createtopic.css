@@ -88,7 +88,7 @@ color: red;
 
 @media screen and (max-width: 1000px){
 .main {
-    width: 100%;
+    width: 750px;
     height: 100%;
 }
 table {
@@ -104,20 +104,20 @@ table {
     bottom: 50%;
     width: 40%;
     height: 40%;
-    font-size: 25px;
+    font-size: 16px;
     opacity: 1.0;
 }
 .return {
-    width: 37%;
+    width: 36%;
     left: 57%;
     bottom: 15%;
-    font-size: 25px;
+    font-size: 16px;
     opacity: 1.0;
 }
 table tr th {
-    font-size: 25px;
+    font-size: 16px;
 }
 #title,#msg {
-    font-size: 25px;
+    font-size: 16px;
 }
 }

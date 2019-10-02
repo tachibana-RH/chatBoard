@@ -12,7 +12,6 @@ const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSec
 const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
 
 %>
-
 <% if (contents == 'message') { %>
     <% let message = val.attributes.message.split(/\r?\n/g); %>
     <table>

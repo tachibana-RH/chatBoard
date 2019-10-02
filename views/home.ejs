@@ -13,17 +13,17 @@
 <body>
     <div class="wrap">
     <div role="main" class="background">
-        <h2><%= collection[0].relations.user.attributes.name %>さんのマイページ</h2>
+        <h2><%= userdata.attributes.name %>さんのマイページ</h2>
         <div class="maincontents">
         <div class="userdoc">
             <div class="icon">
-            <% if( collection[0].relations.user.attributes.icon == null ){ %>
-                <img src="/images/icon_default.jpeg" width="80px" height="80px">
+            <% if( userdata.attributes.icon == null ){ %>
+                <img src="/images/icon_default.jpeg">
             <% } else { %>
-                <img src="/images/<%= collection[0].relations.user.attributes.icon %>" width="80px" height="80px">
+                <img src="/images/<%= userdata.attributes.icon %>">
             <% } %>
 
-            <% if( collection[0].relations.user.attributes.id == login.id ) { %>
+            <% if( userdata.attributes.id == login.id ) { %>
                 <br>
                 <br>
                 <div class="upload">
@@ -44,14 +44,14 @@
                     comment
                 </div>
                 <div class="comment-contents">
-                    <p><%= collection[0].relations.user.attributes.comment %></p>
+                    <p><%= userdata.attributes.comment %></p>
                 </div>
             </div>
             <div class="menu">
-            <li value="/home/<%= collection[0].relations.user.attributes.id %>/message/1">メッセージ履歴</li>
-            <li value="/home/<%= collection[0].relations.user.attributes.id %>/topic/1">作成したトピック</li>
+            <li value="/home/<%= userdata.attributes.id %>/message/1">メッセージ履歴</li>
+            <li value="/home/<%= userdata.attributes.id %>/topic/1">作成したトピック</li>
             <!-- <li value="/main">投稿したドキュメント</li>
-            <% if( collection[0].relations.user.attributes.id == login.id ) { %>
+            <% if( userdata.attributes.id == login.id ) { %>
             <li value="/main">ドキュメントを作成</li>
             <% } %> -->
             <li value="/main"><%= title %>へ戻る</li>
@@ -59,8 +59,12 @@
         </div>
         <div class="contents">
             <div id="contentsClass" class="views">
-            <% for(let index in collection) { %>
-                <%- include('data_item_home', {val:collection[index],contents:contents}) %>
+            <% if (collection[0] != null) { %>
+                <% for(let index in collection) { %>
+                    <%- include('data_item_home', {val:collection[index],contents:contents}) %>
+                <% } %>
+            <% } else { %>
+                <p style="text-align: center;">※履歴がありません※ </p>
             <% } %>
             </div>
         </div>

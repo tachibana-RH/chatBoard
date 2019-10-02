@@ -87,8 +87,6 @@ li:hover {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     height: 760px;
-    border: double 4px rgb(155, 155, 155);
-    border-radius: 10px;
 }
 .pagenations {
     text-align: center;
@@ -108,24 +106,28 @@ display:none;
 label {
     cursor:pointer;
 }
+.icon img {
+    width: 80px;
+    height: 80px;
+}
 
 @media screen and (max-width: 1000px){
 body {
-    font-size: 25px;
+    font-size: 16px;
     margin-right:auto;
     margin-left:auto;
 }
 h2 {
-    font-size: 30px;    
+    font-size: 20px;    
 }
 p {
-    font-size: 20px;
+    font-size: 16px;
 }
 .wrap {
     overflow: hidden;
 }
 .background {
-    width: 100%;
+    width: 750px;
     height: 100%;
     overflow: hidden;
 }
@@ -155,7 +157,7 @@ table {
     height: 120px;
 }
 .upload {
-    width: 300px;
+    width: 250px;
 }
 .message {
     width: 100%;
@@ -167,7 +169,7 @@ table {
     top: 10%;
 }
 .contents {
-    width: 100%;
+    width: 90%;
     margin-left: 0%;
     margin-top: 5%;
     overflow: auto;
@@ -176,5 +178,7 @@ table {
     border: double 4px rgb(155, 155, 155);
     border-radius: 10px;
     position: static;
+    margin-right:auto;
+    margin-left:auto;
 }
 }

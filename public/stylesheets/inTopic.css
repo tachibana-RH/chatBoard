@@ -212,13 +212,18 @@ table,tr,th,td {
     margin-left:auto;
     width: 1000px;
 }
+#retouchMsg {
+    width: 380px;
+    height: 150px;
+}
+
 .error {
     color: red;
 }
 
 @media screen and (max-width: 1000px){
 p {
-    font-size: 25px;
+    font-size: 16px;
 }
 .wrap {
     overflow: hidden;
@@ -227,12 +232,12 @@ p {
     font-size: 10px;
 }
 .home img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 .mainBody {
-    font-size: 20px;
-    width: 100%;
+    font-size: 16px;
+    width: 750px;
     margin-right:auto;
     margin-left:auto;
 }
@@ -240,10 +245,10 @@ p {
     width: 90%;
 }
 .fixed {
-    height: 60px;
+    height: 50px;
 }
 .topicname,.titleback {
-    font-size: 25px;
+    font-size: 20px;
 }
 .messageDummy {
     width: 30%;
@@ -264,10 +269,10 @@ p {
     right:-35px;
 }
 .messageLeft a {
-    font-size: 25px;
+    font-size: 16px;
 }
 .messageRight a {
-    font-size: 25px;
+    font-size: 16px;
 }
 .msgfixed {
     position: fixed;
@@ -277,25 +282,27 @@ p {
 }
 .msg {
     height: 30PX;
+    margin-left: 65px;
+}
+.msgFocus {
+    margin-left: 65px;
 }
 #msg {
-    font-size: 25px;
+    font-size: 16px;
 }
 #submit {
-    font-size: 25px;
+    font-size: 16px;
     width: 150%;
     opacity: 1.0;
 }
 #retouchMsg {
-    font-size: 25px;
-    width: 380px;
-    height: 150px;
+    font-size: 16px;
 }
 .header li {
-    font-size: 25px;
+    font-size: 20px;
 }
 .side-form li {
-    font-size: 20px;
+    font-size: 16px;
     border: solid rgb(163, 163, 163);
 }
 }

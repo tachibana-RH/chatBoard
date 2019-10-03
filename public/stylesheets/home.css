@@ -158,7 +158,7 @@ table {
     font-size: 12px;
 }
 .comment {
-    margin-top: 5%;
+    margin-top: 10%;
 }
 .message {
     width: 100%;
@@ -167,7 +167,7 @@ table {
     width: 100%;
     position: absolute;
     left: 42%;
-    top: 10%;
+    top: 5%;
 }
 .contents {
     width: 95%;

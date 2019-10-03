@@ -234,14 +234,18 @@ p {
     width: 30px;
     height: 30px;
 }
+.main {
+    width: 100%;
+}
 .mainBody {
     font-size: 10px;
-    width: 100%;
+    width: 94%;
     margin-right:auto;
     margin-left:auto;
 }
+
 .title-inner {
-    width: 90%;
+    width: 100%;
 }
 .fixed {
     width: 100%;
@@ -281,8 +285,8 @@ p {
 .msgfixed {
     position: fixed;
     background-color: white;
-    top: 85%;
-    height: 30%;
+    top: 80%;
+    height: 40%;
 }
 .sendMsg {
     width: 100%;

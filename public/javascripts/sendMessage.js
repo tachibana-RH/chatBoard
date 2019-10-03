@@ -71,6 +71,11 @@ const getSelfMessage = (data,messages) => {
                     '<tr>\n' +
                         '<th></th>\n' +
                         '<td style = "color: gray; text-align: right;">\n' +
+                        '<span>\n' +
+                        '<i class="fa fa-clock-o"></i>\n' +
+                        data.create_time + '\n' +
+                        '</span>\n' +
+                        '<br>' +
                         '<span id="iconDelete" class="messageDelete" data-msgid="' + data.messege_id + '">\n' +
                         '<i class="fa fa-times-circle-o" aria-hidden="true"></i>\n' +
                             '削除\n' +
@@ -78,10 +83,6 @@ const getSelfMessage = (data,messages) => {
                         '<span id="iconEdit" class="messageEdit" data-msgid="' + data.messege_id + '">\n' +
                         '<i class="fa fa-edit" aria-hidden="true" data-msgid="' + data.messege_id + '"></i>\n' +
                             '編集\n' +
-                        '</span>\n' +
-                        '<span>\n' +
-                        '<i class="fa fa-clock-o"></i>\n' +
-                        data.create_time + '\n' +
                         '</span>\n' +
                         '</td>\n' +
                     '</tr>\n' +

@@ -87,6 +87,9 @@ color: red;
 }
 
 @media screen and (max-width: 900px){
+h1 {
+    font-size: 25px;
+}
 .createTopic {
     padding-top: 15%;
 }

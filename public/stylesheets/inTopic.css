@@ -225,17 +225,17 @@ table,tr,th,td {
     overflow: hidden;
 }
 p {
-    font-size: 12px;
+    font-size: 10px;
 }
 .link {
-    font-size: 12px;
+    font-size: 10px;
 }
 .home img {
     width: 30px;
     height: 30px;
 }
 .mainBody {
-    font-size: 12px;
+    font-size: 10px;
     width: 100%;
     margin-right:auto;
     margin-left:auto;
@@ -249,7 +249,6 @@ p {
 .topicname,.titleback {
     font-size: 12px;
 }
-
 .messageDummy {
     width: 30%;
 }
@@ -274,10 +273,10 @@ p {
     top:calc(50% - 8px);
 }
 .messageLeft a {
-    font-size: 12px;
+    font-size: 10px;
 }
 .messageRight a {
-    font-size: 12px;
+    font-size: 10px;
 }
 .msgfixed {
     position: fixed;
@@ -288,20 +287,22 @@ p {
 .sendMsg {
     width: 100%;
     height: auto;
+    margin-left: 6%;
 }
 .sendMsg th {
-    text-align: center;
+    text-align: right;
 }
 .sendMsg td {
     text-align: left;
-    width: 10%;
 }
 .msg {
     width: 70%;
+    margin-left: 0px;
 }
 .msgFocus {
     height: 50px;
     width: 70%;
+    margin-left: 0px;
 }
 #msg {
     font-size: 16px;
@@ -322,31 +323,8 @@ p {
     width: 50%;
     border: solid rgb(163, 163, 163);
 }
-/* .drawer-nav {
-    width:12.5rem;
-} */
-/* .drawer--left .drawer-nav {
-    left:-12.5rem;
+#page {
+    font-size: 12px;
 }
-.drawer--left.drawer-open .drawer-hamburger{
-    left:12.5rem;
-}
-.drawer--right .drawer-nav{
-    right:-12.5rem;
-}
-.drawer--right.drawer-open .drawer-hamburger{
-    right:12.5rem;
-}
-.drawer--sidebar .drawer-nav{
-    width:12.5rem;
-}
-.drawer--sidebar.drawer--left .drawer-contents{
-    margin-left:12.5rem;
-}
-.drawer--sidebar.drawer--right .drawer-contents{
-    margin-right:12.5rem;
-}
-.drawer-navbar .drawer-dropdown-menu{
-    width:12.5rem;
-} */
+
 }

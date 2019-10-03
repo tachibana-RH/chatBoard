@@ -16,9 +16,20 @@ router.post('/:topicId/msg',function(req, res, next){
         new mysqlModels.Topic().where('id','=',req.params.topicId)
         .save({count: cnt},{patch:true})
         .then(() =>{
+
+            const date = new Date(model.attributes.created_at);
+            const dateYear = date.getFullYear();
+            const dateMonth = ((date.getMonth() + 1).toString().length == 1)?'0' + (date.getMonth() + 1):(date.getMonth() + 1);
+            const dateDate = (date.getDate().toString().length == 1)?'0' + date.getDate():date.getDate();
+            const dateHours = (date.getHours().toString().length == 1)?'0' + date.getHours():date.getHours();
+            const dateMinutes = (date.getMinutes().toString().length == 1)?'0' + date.getMinutes():date.getMinutes();
+            const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSeconds():date.getSeconds(); 
+            const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
+
             rec['user_name'] = req.session.login.name;
             rec['user_icon'] = req.session.login.icon;
-            rec['messege_id'] = model.id;
+            rec['messege_id'] = model.attributes.id;
+            rec['create_time'] = dateStr;
             res.status(201).json(rec);
         })
         .catch((err) => {

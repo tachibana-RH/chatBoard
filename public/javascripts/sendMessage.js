@@ -27,7 +27,6 @@ const displayMessage = (data) => {
             const child = getSelfMessage(data,messages);
             $('#msgParent').append(child);
             $('html, body').animate({scrollTop: $(document).height()},0);
-            location.reload();
         } else {
             const child = getOtherMessage(data,messages);
             $('#msgParent').append(child);
@@ -54,13 +53,12 @@ const msgCreate = (messagesArray) => {
 }
 
 const getSelfMessage = (data,messages) => {
-    const currentTime = Date();
     const user_icon = data.user_icon || "icon_default.jpeg";
     const child = '<div class="message">\n' +
                 '<table>\n' + 
                     '<tr>\n' +
                         '<td class="messageDummy"></td>\n' +
-                        '<td class="messageRight">\n' +
+                        '<td class="messageRight" id="' + data.messege_id + '">\n' +
                         messages +
                         '</td>\n' +
                         '<th>\n' +
@@ -73,9 +71,17 @@ const getSelfMessage = (data,messages) => {
                     '<tr>\n' +
                         '<th></th>\n' +
                         '<td style = "color: gray; text-align: right;">\n' +
+                        '<span id="iconDelete" class="messageDelete" data-msgid="' + data.messege_id + '">\n' +
+                        '<i class="fa fa-times-circle-o" aria-hidden="true"></i>\n' +
+                            '削除\n' +
+                        '</span>\n' +
+                        '<span id="iconEdit" class="messageEdit" data-msgid="' + data.messege_id + '">\n' +
+                        '<i class="fa fa-edit" aria-hidden="true" data-msgid="' + data.messege_id + '"></i>\n' +
+                            '編集\n' +
+                        '</span>\n' +
                         '<span>\n' +
                         '<i class="fa fa-clock-o"></i>\n' +
-                        currentTime + '\n' +
+                        data.create_time + '\n' +
                         '</span>\n' +
                         '</td>\n' +
                     '</tr>\n' +
@@ -85,7 +91,6 @@ const getSelfMessage = (data,messages) => {
 }
 
 const getOtherMessage = (data,messages) => {
-    const currentTime = Date();
     const user_icon = data.user_icon || "icon_default.jpeg";
     const child = '<div class="message">\n' +
                 '<table>\n' +
@@ -106,7 +111,7 @@ const getOtherMessage = (data,messages) => {
                         '<td style = "color: gray;">\n' +
                         '<span>\n' +
                         '<i class="fa fa-clock-o"></i>\n' +
-                        currentTime + '\n' +
+                        data.create_time + '\n' +
                         '</span>\n' +
                         '</td>\n' +
                     '</tr>\n' +

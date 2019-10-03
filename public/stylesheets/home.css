@@ -35,7 +35,7 @@ font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 table {
     width: 600px;
     table-layout:fixed;
-    background-color: rgb(214, 255, 208);
+    background-color: rgb(242, 255, 240);
 }
 th,td {
     background-color:white;
@@ -111,25 +111,24 @@ label {
     height: 80px;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 900px){
 body {
-    font-size: 16px;
-    margin-right:auto;
-    margin-left:auto;
+    font-size: 12px;
 }
 h2 {
     font-size: 20px;    
 }
 p {
-    font-size: 16px;
+    font-size: 12px;
 }
 .wrap {
     overflow: hidden;
+    margin-right:auto;
+    margin-left:auto;
 }
 .background {
-    width: 90%;
+    width: 98%;
     height: 100%;
-    overflow: hidden;
 }
 .maincontents {
     width: 90%;
@@ -141,11 +140,11 @@ table {
     position: static;
 }
 .date {
-    width: 25%;
+    width: 30%;
     text-align: center;
 }
 .message {
-    width: 75%;
+    width: 70%;
 }
 .userdoc {
     width: 100%;
@@ -157,7 +156,8 @@ table {
     height: 20%;
 }
 .upload {
-    width: 30%;
+    width: 35%;
+    font-size: 12px;
 }
 .message {
     width: 100%;
@@ -169,7 +169,7 @@ table {
     top: 10%;
 }
 .contents {
-    width: 90%;
+    width: 95%;
     margin-left: 0%;
     margin-top: 5%;
     overflow: auto;

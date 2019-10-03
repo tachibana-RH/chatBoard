@@ -86,9 +86,12 @@ text-align: left;
 color: red;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 900px){
+.createTopic {
+    padding-top: 15%;
+}
 .main {
-    width: 90%;
+    width: 100%;
     height: 100%;
 }
 table {
@@ -96,26 +99,24 @@ table {
     height: 100%;
 }
 #title,#msg {
-    width: 50%;
+    width: 93%;
 }
 #submit {
-    position: absolute;
-    left: 57%;
-    bottom: 50%;
-    width: 40%;
-    height: 40%;
-    font-size: 16px;
+    position: static;
+    width: 100%;
+    font-size: 12px;
     opacity: 1.0;
 }
+#return {
+    width: 100%;
+}
 .return {
-    width: 36%;
-    left: 57%;
-    bottom: 15%;
-    font-size: 16px;
+    position: static;
+    font-size: 12px;
     opacity: 1.0;
 }
 table tr th {
-    font-size: 16px;
+    font-size: 12px;
 }
 #title,#msg {
     font-size: 16px;

@@ -29,9 +29,13 @@ th {
   font-size: 15px;
 }
 .list-title {
-  width: 785px;
   font-size: 50px;
   color: rgb(235, 235, 235);
+  width: 0%;
+}
+.list-form {
+  float: right;
+  margin: 3px;
 }
 .list-form li {
  float: right;
@@ -103,10 +107,11 @@ span {
 }
 .list-title {
   font-size: 30px;
-  width: 100%;
+  width: 0%;
 }
 .list-form {
-  text-align: right;
+  float: right;
+  margin: 3px;
 }
 .list-form a {
   font-size: 12px;

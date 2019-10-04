@@ -102,13 +102,14 @@ table {
     height: 100%;
 }
 #title,#msg {
-    width: 93%;
+    width: 90%;
 }
 #submit {
     position: static;
     width: 100%;
     font-size: 12px;
     opacity: 1.0;
+    border: solid 2px rgb(184, 184, 184);
 }
 #return {
     width: 100%;
@@ -117,6 +118,7 @@ table {
     position: static;
     font-size: 12px;
     opacity: 1.0;
+    border: solid 2px rgb(184, 184, 184);
 }
 table tr th {
     font-size: 12px;

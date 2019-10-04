@@ -141,7 +141,7 @@ table {
     width: 30%;
     text-align: center;
 }
-.message {
+.message, .topic {
     width: 70%;
 }
 .userdoc {
@@ -150,8 +150,8 @@ table {
     position: relative;
 }
 .icon img {
-    width: 20%;
-    height: 20%;
+    width: 80px;
+    height: 80px;
 }
 .upload {
     width: 35%;
@@ -159,9 +159,6 @@ table {
 }
 .comment {
     margin-top: 10%;
-}
-.message {
-    width: 100%;
 }
 .menu {
     width: 100%;

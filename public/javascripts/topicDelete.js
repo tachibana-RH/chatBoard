@@ -1,3 +1,6 @@
+/**
+ * トピック削除処理
+ */
 $(function() {
     $(document).on('click', '#deleteBtn', function(){
         if (window.confirm('トピックを削除しますか？')) {

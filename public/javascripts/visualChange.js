@@ -1,15 +1,6 @@
-
-function focusA( $this ) {
-    $("#msg").removeClass('msg');
-    $("#msg").addClass('msgFocus');
-    $("#page").addClass('disable');
-}
-function blurA( $this ) {
-    $("#msg").removeClass('msgFocus');
-    $("#msg").addClass('msg');
-    $("#page").removeClass('disable');
-}
-
+/**
+ * ヘッダーとメッセージ入力フォームの変化処理
+ */
 $(function(){
     if($(window).scrollTop() > 60) {
         $('#titleDummy').removeClass('disable');
@@ -28,3 +19,14 @@ $(function(){
         };
     });
 });
+
+function focusA( $this ) {
+    $("#msg").removeClass('msg');
+    $("#msg").addClass('msgFocus');
+    $("#page").addClass('disable');
+}
+function blurA( $this ) {
+    $("#msg").removeClass('msgFocus');
+    $("#msg").addClass('msg');
+    $("#page").removeClass('disable');
+}

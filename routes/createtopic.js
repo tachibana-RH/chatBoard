@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
 
+// トピック作成画面の描画処理
 router.get('/', function(req, res, next) {
     if(req.session.login == null){
         res.status(303).redirect('/users/login');
@@ -15,8 +16,9 @@ router.get('/', function(req, res, next) {
     }
 })
 
+// トピック新規作成処理
 router.post('/', function(req, res, next) {
-
+    // バリデーションチェック（nullでないか）
     const request = req;
     const response = res;
     req.check('topicname','トピック名 は必ず入力してください。').notEmpty();
@@ -37,6 +39,7 @@ router.post('/', function(req, res, next) {
             }
             response.status(200).render('createTopic', data);
         } else {
+            // トピックを保存し、保存後のIDをメッセージテーブルへも保存する
             const topicRec  = {
                 name: request.body.topicname,
                 user_id: request.session.login.id

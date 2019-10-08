@@ -1,3 +1,6 @@
+/**
+ * メッセージの削除・変更処理
+ */
 $(function(){
 
     $(document).on('click', '#iconDelete', function(){

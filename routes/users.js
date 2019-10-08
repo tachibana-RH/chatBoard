@@ -4,6 +4,7 @@ const mysqlModels = require('../modules/mysqlModels');
 const crypto = require('crypto');
 const N = 16;
 
+//　ログインページの描画処理
 router.get('/login', function(req, res, next) {
   const data = {
     title: 'Login',
@@ -13,7 +14,9 @@ router.get('/login', function(req, res, next) {
   res.status(200).render('users/login', data);
 });
 
+//　ログイン処理
 router.post('/login', function(req, res, next) {
+  // バリデーションチェック（nullでないか）
   const request = req;
   const response = res;
   req.check('name','NAME は必ず入力してください。').notEmpty();
@@ -57,7 +60,7 @@ router.post('/login', function(req, res, next) {
   });
 });
 
-/* GET users listing. */
+// ユーザー新規作成ページの描画処理
 router.get('/add', function(req, res, next) {
   const data = {
     title: 'Create',
@@ -66,8 +69,9 @@ router.get('/add', function(req, res, next) {
   }
   res.status(200).render('users/add', data);
 });
-
+// ユーザー新規作成実行処理
 router.post('/add', function(req, res, next) {
+  // バリデーションチェック（nullでないか）
   const request = req;
   const response = res;
   req.check('name','NAME は必ず入力してください。').notEmpty();
@@ -89,9 +93,9 @@ router.post('/add', function(req, res, next) {
       }
       response.status(200).render('users/add', data);
     } else {
+      // 同名のユーザーが存在しない時新規作成を行う
       const nm = req.body.name;
-      const pw = req.body.password;
-      mysqlModels.User.query({where: {name: nm}, andWhere: {password: pw}})
+      mysqlModels.User.query({where: {name: nm}})
       .fetch()
       .then((model) => {
         if (model == null) {
@@ -102,7 +106,7 @@ router.post('/add', function(req, res, next) {
         } else {
           const data = {
             title: 'Create',
-            form: {name: req.body.name,password: req.body.password,comment: req.body.comment},
+            form: req.body,
             content:'<a class="error">※すでに利用されているユーザー名です※</a>'
           }
           res.status(200).render('users/add', data);

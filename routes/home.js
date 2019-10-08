@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const path = require('path')
 const mysqlModels = require('../modules/mysqlModels');
-
 
 router.get('/', (req,res,next) => {
     res.status(303).redirect('/');
@@ -13,6 +10,7 @@ router.get('/:id', (req,res,next) => {
     res.status(303).redirect('/home/' + req.params.id + '/message' + '/1');
 });
 
+// マイページ画面の描画処理
 router.get('/:id/:contents/:page', (req,res,next) => {
 
   if (req.session.login == null) {
@@ -26,7 +24,7 @@ router.get('/:id/:contents/:page', (req,res,next) => {
       .where('id','=',id)
       .fetch()
       .then((user) => {
-
+      // コンテンツごとに描画処理を分岐する
         if (req.params.contents == 'message') {
           new mysqlModels.Message().orderBy('created_at','DESC')
           .where('user_id','=',id)
@@ -69,14 +67,21 @@ router.get('/:id/:contents/:page', (req,res,next) => {
   }
 });
 
+// アイコン画像アップロード処理
+const multer = require('multer');
+const path = require('path');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    // アップロードした画像の保存場所をプロジェクト内のimagesディレクトリへ変更する
     cb(null, 'public/images')
   },
   filename: function (req, file, cb) {
+    // 保存時の画像ファイル名を変更する
     cb(null, req.session.login.id + '-' + Date.now() + path.extname(file.originalname))
   }
 });
+// 上記の設定をライブラリへ反映する
 const uploadDir = multer({ storage: storage });
 
 router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req, res) => {
@@ -84,6 +89,7 @@ router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req,
   new mysqlModels.User().where('id','=',req.params.id)
   .save({icon: req.file.filename},{patch:true})
   .then((result) =>{
+    // 保存したファイル名を該当ユーザーのセッションへ設定
     req.session.login.icon = req.file.filename;
     res.status(201).json(result);
   })

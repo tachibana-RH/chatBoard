@@ -1,4 +1,6 @@
-
+/**
+ * メッセージの送信・描画処理
+ */
 const displayMessage = (data) => {
     if($('#title').data('topicid') == data.topic_id) {
 
@@ -6,7 +8,6 @@ const displayMessage = (data) => {
             $('#msgParent div:first-child').remove();
         };
 
-//        const messages = msgCreate(data.message.split(/\r?\n/g));
         const messagesArray = data.message.split(/\r?\n/g);
         let messages = '';
         for (let index in messagesArray) {

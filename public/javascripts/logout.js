@@ -1,3 +1,6 @@
+/**
+ * ログアウト処理
+ */
 $(function() {
     $(document).on('click', '#logout', function(){
         $.ajax({

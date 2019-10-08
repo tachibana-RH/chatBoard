@@ -1,8 +1,8 @@
 /**
  * ログアウト処理
  */
-$(function() {
-    $(document).on('click', '#logout', function(){
+$(() =>  {
+    $(document).on('click', '#logout', () => {
         $.ajax({
             url:'/main/logout',
             type:'POST'

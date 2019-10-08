@@ -1,9 +1,9 @@
 /**
  * メッセージの送信・描画処理
  */
-const displayMessage = (data) => {
+const displayMessage = data => {
     if($('#title').data('topicid') == data.topic_id) {
-
+        
         if ($('#msgParent').children().length == 10) {
             $('#msgParent div:first-child').remove();
         };
@@ -36,7 +36,7 @@ const displayMessage = (data) => {
     };
 }
 
-const msgCreate = (messagesArray) => {
+const msgCreate = messagesArray => {
     for (let index in messagesArray) {
         if (messagesArray[index] === '') {
             messages += '<br>\n';
@@ -122,9 +122,8 @@ const getOtherMessage = (data,messages) => {
     return child;
 }
 
-$(function(){
-    // Ajax button click
-    $('#submit').on('click',function(){
+$(() => {
+    $('#submit').on('click',() => {
         $.ajax({
             url:'./msg',
             type:'POST',

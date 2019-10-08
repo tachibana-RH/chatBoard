@@ -1,8 +1,8 @@
 /**
  * トピック削除処理
  */
-$(function() {
-    $(document).on('click', '#deleteBtn', function(){
+$(() =>  {
+    $(document).on('click', '#deleteBtn', function() {
         if (window.confirm('トピックを削除しますか？')) {
             url = '/main/' + $(this).attr('data-topicid');
             $.ajax({

@@ -13,16 +13,16 @@ const knex = require('knex') ({
 
 const Bookshelf = require('bookshelf')(knex);
 Bookshelf.plugin('pagination');
+Bookshelf.plugin('registry');
+Bookshelf.plugin(require('bookshelf-transaction-manager'));
 
-module.exports.Bookshelf = require('bookshelf')(knex);
+module.exports.Bookshelf = Bookshelf;
 
 const User = Bookshelf.Model.extend({
     tableName: 'users'
 });
 
-module.exports.User = Bookshelf.Model.extend({
-    tableName: 'users'
-});
+module.exports.User = User;
 
 module.exports.Topic = Bookshelf.Model.extend({
     tableName: 'topics',

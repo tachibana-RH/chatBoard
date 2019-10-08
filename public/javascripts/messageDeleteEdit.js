@@ -1,9 +1,9 @@
 /**
  * メッセージの削除・変更処理
  */
-$(function(){
+$(() => {
 
-    $(document).on('click', '#iconDelete', function(){
+    $(document).on('click', '#iconDelete', function() {
         if (window.confirm('メッセージを削除しますか？')) {
             $.ajax({
                 url:'./msg',
@@ -21,7 +21,7 @@ $(function(){
         }
     });
 
-    $(document).on('click', '#iconEdit', function(){
+    $(document).on('click', '#iconEdit', function() {
         $.ajax({
             url:'./editMsg',
             type:'POST',
@@ -38,7 +38,7 @@ $(function(){
         })
     });
 
-    $(document).on('click', '.retouchSubmit', function(){
+    $(document).on('click', '.retouchSubmit', function() {
         $.ajax({
             url:'./msg',
             type:'PUT',
@@ -54,7 +54,7 @@ $(function(){
         })
     });
 
-    $(document).on('click', '.retouchCancel', function(){
+    $(document).on('click', '.retouchCancel', function() {
         $('.drawer').drawer('close');
         //location.reload();
     });

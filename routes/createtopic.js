@@ -3,7 +3,7 @@ const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
 
 // トピック作成画面の描画処理
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
     if(req.session.login == null){
         res.status(303).redirect('/users/login');
     } else {
@@ -17,14 +17,14 @@ router.get('/', function(req, res, next) {
 })
 
 // トピック新規作成処理
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
     // バリデーションチェック（nullでないか）
     const request = req;
     const response = res;
     req.check('topicname','トピック名 は必ず入力してください。').notEmpty();
     req.check('msg','ひと言 は必ず入力してください。').notEmpty();
 
-    req.getValidationResult().then((result) => {
+    req.getValidationResult().then( result => {
         if (!result.isEmpty()) {
             let content = '<tr><th><ul class="error">';
             const result_arr = result.array();
@@ -39,24 +39,25 @@ router.post('/', function(req, res, next) {
             }
             response.status(200).render('createTopic', data);
         } else {
-            // トピックを保存し、保存後のIDをメッセージテーブルへも保存する
+            // トピックを保存し、保存後のIDと共にメッセージも保存する
             const topicRec  = {
                 name: request.body.topicname,
                 user_id: request.session.login.id
             }
-            new mysqlModels.Topic(topicRec).save().then(() => {
-                new mysqlModels.Topic().orderBy('created_at', 'DESC')
-                .where('user_id', '=', topicRec.user_id)
-                .fetch().then((collection) => {
+            mysqlModels.Bookshelf.transaction( t =>{
+                return new mysqlModels.Topic(topicRec).save(null, {transaction: t})
+                .then( topicRec => {
                     const messageRec = {
                         message: request.body.msg,
-                        user_id: collection.attributes.user_id,
-                        topic_id: collection.attributes.id
+                        user_id: topicRec.attributes.user_id,
+                        topic_id: topicRec.attributes.id
                     }
-                    new mysqlModels.Message(messageRec).save().then(() => {
-                        response.status(201).redirect('/main');
-                    });
+                    return new mysqlModels.Message(messageRec).save(null, {transaction: t});
                 });
+            }).then(() => {
+                response.status(201).redirect('/main');
+            }).catch( err => {
+                res.status(500).json({error: true, data: {messages: err.message}});
             });
         };
     });

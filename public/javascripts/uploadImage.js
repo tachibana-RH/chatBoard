@@ -1,7 +1,7 @@
 /**
  * アイコン画像のアップロード処理
  */
-function fileupload(fileObj){
+const fileupload = fileObj => {
     //　FormDataオブジェクト生成
     const fd = new FormData();
     fd.append('uploadfile', fileObj);
@@ -20,8 +20,8 @@ function fileupload(fileObj){
     });
 }
 
-$(function(){
-    $('#file_upload').on('change',function(image){
+$(() => {
+    $('#file_upload').on('change',image => {
         
         //ファイルオブジェクトを取得する
         const file = image.target.files[0];

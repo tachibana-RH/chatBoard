@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
-const crypto = require('crypto');
-const N = 16;
 
 //　ログインページの描画処理
 router.get('/login', (req, res, next) => {
@@ -42,21 +40,63 @@ router.post('/login', (req, res, next) => {
 			mysqlModels.User.query({where: {name: nm}, andWhere: {password: pw}})
 			.fetch()
 			.then( model => {
-			if (model == null) {
-				const data = {
-					title: 'retry',
-					content: '<p class="error">※名前またはパスワードが違います。※</p>',
-					form: req.body
+				if (model == null) {
+					const data = {
+						title: 'retry',
+						content: '<p class="error">※名前またはパスワードが違います。※</p>',
+						form: req.body
+					}
+				response.status(401).render('users/login',data);
+				} else {
+					request.session.login = model.attributes;
+					request.session.login.password = 'secret';
+					response.status(303).redirect('/main/1');
 				}
-			response.status(200).render('users/login',data);
-			} else {
-				request.session.login = model.attributes;
-				request.session.login.password = crypto.randomBytes(N).toString('base64').substring(0, N);
-				response.status(303).redirect('/main/1');
-			}
 			});
 		}
 	});
+});
+
+const crypto = require('crypto');
+const N = 24;
+
+// ゲストユーザーのログイン処理
+router.post('/guestlogin', (req, res, next) => {
+	const cookie = req.cookies;
+	const guest_token = crypto.randomBytes(N).toString('base64').substring(0, N);
+	if (cookie.guest_token === undefined) {
+		res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
+		const guestdata = {
+			token: guest_token,
+			name: 'ゲスト',
+			password: 'guest',
+			comment: 'ゲストユーザーです。',
+			icon: null,
+			type: 'guest'
+		}
+		new mysqlModels.User(guestdata).save().then( model => {
+			req.session.login = model.attributes;
+			res.status(200).send('OK');
+		});
+	} else {
+		new mysqlModels.User().where('token','=',cookie.guest_token).fetch()
+		.then( model => {
+			req.session.login = model.attributes;
+			req.session.login.token = guest_token;
+			new mysqlModels.User().where('token','=',cookie.guest_token)
+			.save({token:guest_token},{patch:true})
+			.then(()=>{
+				res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
+				res.status(200).send('OK');
+			})
+			.catch( err => {
+				res.status(400).json({error: true, data: {messages: err.message}});
+			});
+		})
+		.catch( err => {
+			res.status(404).json({error: true, data: {messages: err.message}});
+		});
+	}
 });
 
 // ユーザー新規作成ページの描画処理
@@ -100,7 +140,7 @@ router.post('/add', (req, res, next) => {
 			if (model == null) {
 				request.session.login = null;
 				new mysqlModels.User(req.body).save().then(() => {
-					response.status(303).redirect('/main');
+					response.status(303).redirect('/users/login');
 				});
 			} else {
 				const data = {

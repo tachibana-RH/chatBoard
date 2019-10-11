@@ -23,12 +23,12 @@
                 <img src="/images/<%= userdata.attributes.icon %>">
             <% } %>
 
-            <% if( userdata.attributes.id == login.id ) { %>
+            <% if( userdata.attributes.id == login.id && userdata.attributes.type != 'guest' ) { %>
                 <br>
                 <br>
                 <div class="upload">
                 <form action="./image/upload" method="POST" enctype="multipart/form-data">
-                <label for="file_upload">
+                <label class="upload_label" for="file_upload">
                     アイコンを選択
                     <input type="file" id="file_upload" name="uploadfile">
                 </label>
@@ -44,7 +44,25 @@
                     comment
                 </div>
                 <div class="comment-contents">
-                    <p><%= userdata.attributes.comment %></p>
+                    <% let comments = userdata.attributes.comment.split(/\r?\n/g); %>
+                    <% for(let index in comments) { %>
+                        <% if(comments[index] === '') { %>
+                            <br>
+                        <% } else { %>
+                            <% if(comments[index].substr(0,4) === 'http') { %>
+                                <p>
+                                <a class="link" href="<%= comments[index] %>" target="_blank">
+                                    <%= comments[index] %>
+                                </a>
+                                </p>
+                            <% } else { %>
+                                <p>
+                                <%= comments[index] %>
+                                </p>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                    <!-- <p><%= userdata.attributes.comment %></p> -->
                 </div>
             </div>
             <div class="menu">

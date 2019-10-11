@@ -3,18 +3,18 @@ const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
 
 router.get('/', (req,res,next) => {
-    res.status(303).redirect('/');
+    res.status(302).redirect('/');
 });
 
 router.get('/:id', (req,res,next) => {
-    res.status(303).redirect('/home/' + req.params.id + '/message' + '/1');
+    res.status(302).redirect('/home/' + req.params.id + '/message' + '/1');
 });
 
 // マイページ画面の描画処理
 router.get('/:id/:contents/:page', (req,res,next) => {
 
 	if (req.session.login == null) {
-		res.status(303).redirect('/users/login');
+		res.status(302).redirect('/users/login');
 	} else {
 		let id = parseFloat(req.params.id);
 		let pg = parseFloat(req.params.page);
@@ -37,7 +37,7 @@ router.get('/:id/:contents/:page', (req,res,next) => {
 				};
 				res.status(200).render('home', data);
 			}).catch( err => {
-				res.status(500).json({error: true, data: {message: err.message}});
+				res.status(404).json({error: true, data: {message: err.message}});
 			});
 		} else {
 			new mysqlModels.Topic().orderBy('updated_at','DESC')
@@ -54,11 +54,11 @@ router.get('/:id/:contents/:page', (req,res,next) => {
 				};
 				res.status(200).render('home', data);
 			}).catch( err => {
-				res.status(500).json({error: true, data: {message: err.message}});
+				res.status(404).json({error: true, data: {message: err.message}});
 			});
 		}
 		}).catch( err => {
-			res.status(500).json({error: true, data: {message: err.message}});
+			res.status(404).json({error: true, data: {message: err.message}});
 		});
 	}
 });
@@ -89,7 +89,7 @@ router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req,
 		res.status(201).json(result);
 	})
 	.catch( err => {
-		res.status(500).json({error: true, data: {messages: err.message}});
+		res.status(404).json({error: true, data: {messages: err.message}});
 	});
 });
 

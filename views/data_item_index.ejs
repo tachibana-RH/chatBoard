@@ -25,9 +25,9 @@ const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + 
             <th class="creater">
                 <a class="home" href="/home/<%= val.attributes.user_id %>/message/1">
                     <% if( val.relations.user.attributes.icon === null ){ %>
-                        <img src="/images/icon_default.jpeg" width="30px" height="30px">
+                        <img src="/images/icon_default.jpeg">
                     <% } else { %>
-                        <img src="/images/<%= val.relations.user.attributes.icon %>" width="30px" height="30px">
+                        <img src="/images/<%= val.relations.user.attributes.icon %>">
                     <% } %>
                     <figcaption><%= val.relations.user.attributes.name %></figcaption>
                 </a>

@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/javascripts/guestlogin.js"></script>
 <body>
     <div role="main" class="login">
         <h1><%= title %></h1>
         <div class="form">
-        <p><%- content %></p>
+        <p><%- content %></p><br>
         <form method="POST" action="/users/login">
             <table>
-                <div class="formdata">
                 <tr>
                     <th>NAME</th>
                     <td><input class="formInput" type="text" name="name" value="<%= form.name %>" autocomplete="off"></td>
@@ -22,10 +23,17 @@
                     <th>PASSWORD</th>
                     <td><input class="formInput" type="password" name="password" value="<%= form.password %>"  autocomplete="off"></td>
                 </tr>
-                </div>
                 <tr>
-                    <td class="create"><a href="/users/add">アカウントの作成&gt;&gt;</a></td>
+                    <td></td>
                     <td class="submit"><input id="login" type="submit" value="ログイン"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="create"><a href="/users/add"><div class="inner">アカウントを作成する&gt;&gt;</div></a></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="guestlogin" class="create"><div class="inner guestlogin">&lt;&lt; ゲストでログインする</div></td>
                 </tr>
             </table>
         </form>

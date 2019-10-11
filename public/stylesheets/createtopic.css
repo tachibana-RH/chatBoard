@@ -1,38 +1,38 @@
 body {
-font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 h1 {
-color: rgb(235, 235, 235);
-text-align: right;
-font-size: 50px;
+    color: rgb(235, 235, 235);
+    text-align: right;
+    font-size: 50px;
 }
 table {
-width: 650px;
-height: 200px;
-margin-right:auto;
-margin-left:auto;
-background-color: white;
-position: relative;
-border: solid 2px rgb(155, 155, 155);
-border-radius: 10px;
+    width: 650px;
+    height: 200px;
+    margin-right:auto;
+    margin-left:auto;
+    background-color: white;
+    position: relative;
+    border: solid 2px rgb(155, 155, 155);
+    border-radius: 10px;
 }
 table tr th {
-padding: 8px;
+    padding: 8px;
 }
 table tr td {
-padding: 8px;
+    padding: 8px;
 }
 
 .main {
-width: 1000px;
-margin-right:auto;
-margin-left:auto;
+    width: 1000px;
+    margin-right:auto;
+    margin-left:auto;
 }
 .createTopic {
-background: url(../images/cork-board/cork-board/cork-board.png);
-padding: 10px;
-padding-top: 180px;
-height: 500px;
+    background: url(../images/cork-board/cork-board/cork-board.png);
+    padding: 10px;
+    padding-top: 180px;
+    height: 500px;
 }
 .createTopic tr th {
 text-align: left;
@@ -111,14 +111,13 @@ table {
     opacity: 1.0;
     border: solid 2px rgb(184, 184, 184);
 }
-#return {
-    width: 100%;
-}
 .return {
-    position: static;
+    left: 0%;
+    bottom: -20%;
+    width: 50%;
     font-size: 12px;
     opacity: 1.0;
-    border: solid 2px rgb(184, 184, 184);
+    border: solid 2px rgb(255, 255, 255);
 }
 table tr th {
     font-size: 12px;

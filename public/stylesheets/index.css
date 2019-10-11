@@ -71,6 +71,8 @@ th {
   border-radius: 10px; /* ラベルボックスの角丸を指定する */
   width: 80%;
   background-color: white;
+  table-layout:fixed;
+  word-wrap:break-word;
 }
 .topics tr td {
   text-align: center;
@@ -78,13 +80,21 @@ th {
 .topics p {
   text-align: center;
 }
+.home img {
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  background-position: center center;
+  border: solid 2px rgb(228, 228, 228);
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
 .delete {
   color: red;
   cursor: pointer;
   padding-left: 100px;
 }
 .error {
-color: red;
+  color: red;
 }
 
 @media screen and (max-width: 900px){
@@ -118,8 +128,8 @@ span {
   border: solid 2px rgb(122, 122, 122);
 }
 .home img {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
 }
 .topics table {
   width: 100%;

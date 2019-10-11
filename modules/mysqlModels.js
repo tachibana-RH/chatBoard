@@ -14,7 +14,7 @@ const knex = require('knex') ({
 const Bookshelf = require('bookshelf')(knex);
 Bookshelf.plugin('pagination');
 Bookshelf.plugin('registry');
-Bookshelf.plugin(require('bookshelf-transaction-manager'));
+Bookshelf.plugin('bookshelf-transaction-manager');
 
 module.exports.Bookshelf = Bookshelf;
 

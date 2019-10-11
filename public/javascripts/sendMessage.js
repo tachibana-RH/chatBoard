@@ -6,9 +6,8 @@ const displayMessage = data => {
         
         if ($('#msgParent').children().length == 10) {
             $('#msgParent div:first-child').remove();
-        };
-
-        const messagesArray = data.message.split(/\r?\n/g);
+        }
+        const messagesArray = escape_html(data.message).split(/\r?\n/g);
         let messages = '';
         for (let index in messagesArray) {
             if (messagesArray[index] === '') {
@@ -20,9 +19,9 @@ const displayMessage = data => {
                     messagesArray[index] + '</a>\n</p>\n';
                 } else {
                     messages += '<p>\n' + messagesArray[index] + '\n' + '</p>\n';
-                };
-            };
-        };
+                }
+            }
+        }
 
         if($('#title').data('userid') == data.user_id) {
             const child = getSelfMessage(data,messages);
@@ -31,26 +30,9 @@ const displayMessage = data => {
         } else {
             const child = getOtherMessage(data,messages);
             $('#msgParent').append(child);
-        };
+        }
 
-    };
-}
-
-const msgCreate = messagesArray => {
-    for (let index in messagesArray) {
-        if (messagesArray[index] === '') {
-            messages += '<br>\n';
-        } else {
-            if (messagesArray[index].substr(0,4) == 'http') {
-                messages += '<p>\n' + 
-                '<a style="color: rgb(219, 255, 222);" href="' + messagesArray[index] + '" target="_blank">\n' +
-                messagesArray[index] + '</a>\n</p>\n';
-            } else {
-                messages += '<p>\n' + messagesArray[index] + '\n' + '</p>\n';
-            };
-        };
-    };
-    return messages;
+    }
 }
 
 const getSelfMessage = (data,messages) => {
@@ -122,6 +104,22 @@ const getOtherMessage = (data,messages) => {
     return child;
 }
 
+const escape_html = string => {
+    if(typeof string !== 'string') {
+        return string;
+    }
+    return string.replace(/[&'`"<>]/g, match => {
+        return {
+        '&': '&amp;',
+        "'": '&#x27;',
+        '`': '&#x60;',
+        '"': '&quot;',
+        '<': '&lt;',
+        '>': '&gt;',
+        }[match]
+    });
+}
+
 $(() => {
     $('#submit').on('click',() => {
         $.ajax({
@@ -129,14 +127,13 @@ $(() => {
             type:'POST',
             dataType: 'json',
             data:{
-                'msg': $('#msg').val()
+                'msg': $('#msg').val() + ''
             }
         }).then((res) => {
             $('#msg').val('');
             socket.emit('message', res);
         }).catch((err) => {
             console.log(err);
-        })
+        });
     });
-
 });

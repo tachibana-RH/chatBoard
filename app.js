@@ -32,9 +32,11 @@ const session_opt = {
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
+  name: 'cht3sid3',
   cookie: { maxAge: 180 * 60 * 1000 }
 };
 app.use(session(session_opt));
+app.disable('x-powered-by');
 
 const ALLOWED_METHODS = [
   'GET',
@@ -46,7 +48,6 @@ const ALLOWED_METHODS = [
   'OPTIONS'
 ];
 const ALLOWED_ORIGINS = [
-  'http://localhost:8080',
   'http://localhost:3000',
   'http://chatsboard.com:49160'
 ];

@@ -17,7 +17,7 @@ router.post('/:topicId/msg',(req, res, next) => {
             new mysqlModels.Message(rec).save(null, {transaction: t}),
             new mysqlModels.Message(rec).where('topic_id','=',req.params.topicId).fetchAll({transaction: t})
             .then((msgs)=>{
-                return new mysqlModels.Topic().where('id','=',req.params.topicId).save({count: msgs.length},{patch:true},{transaction: t});
+                return new mysqlModels.Topic().where('id','=',req.params.topicId).save({count: msgs.length + 1},{patch:true},{transaction: t});
             })
         ]).spread((msg)=>{
             // フロント側で使用するデータをレスポンスに追加する

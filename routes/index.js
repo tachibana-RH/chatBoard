@@ -4,17 +4,17 @@ const mysqlModels = require('../modules/mysqlModels');
 const Promise = require('bluebird');
 
 router.get('/', (req, res, next) => {
-  res.status(303).redirect('/main');
+  res.status(302).redirect('/main');
 });
 
 router.get('/main', (req, res, next) => {
-  res.status(303).redirect('/main/1');
+  res.status(302).redirect('/main/1');
 });
 
 // メインページの描画処理
 router.get('/main/:page', (req, res, next) => {
 	if(req.session.login == null){
-		res.status(303).redirect('/users/login');
+		res.status(302).redirect('/users/login');
 	} else {
 		let pg = parseFloat(req.params.page);
 		if (pg < 1) { pg = 1; }
@@ -29,7 +29,7 @@ router.get('/main/:page', (req, res, next) => {
 			};
 			res.status(200).render('index', data);
 		}).catch( err => {
-			res.status(500).json({error: true, data: {messages: err.message}});
+			res.status(404).json({error: true, data: {messages: err.message}});
 		});
 	}
 });
@@ -50,17 +50,17 @@ router.delete('/main/:topicid', (req, res, next) => {
 	}).then(() => {
 		res.status(204).send('OK');
 	}).catch( err => {
-		res.status(500).json({error: true, data: {messages: err.message}});
+		res.status(404).json({error: true, data: {messages: err.message}});
 	});
 });
 
 // ログアウト処理
 router.get('/main/logout',(req, res, next) => {
-  res.status(303).redirect('/main');
+  res.status(302).redirect('/main');
 });
 router.post('/main/logout',(req, res, next) => {
   delete req.session.login;
-  res.status(200).redirect('/users/login');
+  res.status(303).redirect('/users/login');
 });
 
 module.exports = router;

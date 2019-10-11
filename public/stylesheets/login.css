@@ -52,25 +52,36 @@ position: relative;
 .submit {
     position: absolute;
     left: 350px;
-    bottom: 55px;
+    bottom: 107px;
     opacity: 0.6;
 }
 .submit:hover {
     opacity: 1.0;
 }
 .add {
-    bottom: 120px;
+    bottom: 150px;
 }
 .returnlogin {
     position: absolute;
     left: 350px;
-    bottom: 80px;
+    bottom: 100px;
     width: 200px;
+}
+#guestlogin {
+    bottom: -30px;
+    left: 0px;
+    background-color: rgb(121, 121, 121);
+    color: white;
+    border-radius: 10px;
+    border: solid 2px rgb(206, 206, 206);
+    width: 170px;
+    text-align: center;
+    cursor: pointer;
 }
 .create {
     position: absolute;
     left: 350px;
-    bottom: 8px;
+    bottom: 60px;
     width: 200px;
 }
 table {
@@ -88,8 +99,14 @@ table {
     height: 100%;
     font-size: 12px;
 }
+.form {
+    height: 400px;
+    margin: auto;
+}
+.addform {
+    height: 500px;
+}
 table {
-    padding-top: 10%;
     position: static;
     width: 80%;
     margin-right:auto;
@@ -101,27 +118,51 @@ table tr th {
 
 .formInput {
     font-size: 16px;
-    width: 100%;
     border: solid 2px rgb(206, 206, 206);
+    width: 92%;
 }
 
 .submit {
     opacity: 1.0;
     position: static;
     width: 100%;
+    text-align: center;
 }
 #login {
     font-size: 12px;
     width: 100%;
+    text-align: center;
+    border-radius: 5px;
 }
 .create {
     font-size: 12px;
     position: static;
     text-align: center;
 }
+.inner {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: solid 2px rgb(206, 206, 206);
+    padding: 3%;
+    cursor: pointer;
+}
+#guestlogin {
+    bottom: initial;
+    left: initial;
+    background-color: initial;
+    color: initial;
+    border-radius: initial;
+    border: initial;
+    width: initial;
+}
+.guestlogin {
+    background-color: rgb(121, 121, 121);
+    color: white;
+}
 #add {
     font-size: 12px;
     width: 100%;
+    border-radius: 5px;
 }
 .returnlogin {
     font-size: 12px;

@@ -15,8 +15,8 @@
   <script src="/javascripts/visualChange.js"></script>
   <script src="/javascripts/messageDeleteEdit.js"></script>
   <script>
-    const socket = io.connect('<%= NODE_NAME %>');
-    
+    const socket = io();
+    // .connect('NODE_NAME:port')
     socket.on('news',function(data){
       displayMessage(data);
     });

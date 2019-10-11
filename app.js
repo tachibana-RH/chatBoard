@@ -33,7 +33,7 @@ const session_opt = {
   resave: false,
   saveUninitialized: false,
   name: 'cht3sid3',
-  cookie: { maxAge: 180 * 60 * 1000 }
+  cookie: { maxAge: 180 * 60 * 1000, secure: true}
 };
 app.use(session(session_opt));
 app.disable('x-powered-by');
@@ -48,8 +48,7 @@ const ALLOWED_METHODS = [
   'OPTIONS'
 ];
 const ALLOWED_ORIGINS = [
-  'http://localhost:3000',
-  'http://chatsboard.com:49160'
+  'https://chatsboard.com:49160'
 ];
 // レスポンスHeaderを組み立てる
 app.use((req, res, next) => {

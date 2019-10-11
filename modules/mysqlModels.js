@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+require('dotenv').config();
 
 const knex = require('knex') ({
   client: 'mysql',

@@ -235,15 +235,15 @@ p {
     font-size: 10px;
 }
 .home img {
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
 }
 .main {
     width: 100%;
 }
 .mainBody {
     font-size: 10px;
-    width: 94%;
+    width: 100%;
     margin-right:auto;
     margin-left:auto;
 }

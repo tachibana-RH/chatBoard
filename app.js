@@ -28,12 +28,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
 
+if (process.env.NODE_ENV.trim() === 'development') {
+  cookieSecureOpt = false;
+} else {
+  cookieSecureOpt = true;
+}
+
 const session_opt = {
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
   name: 'cht3sid3',
-  cookie: { maxAge: 180 * 60 * 1000, secure: true}
+  cookie: { maxAge: 180 * 60 * 1000, secure: cookieSecureOpt}
 };
 app.use(session(session_opt));
 app.disable('x-powered-by');

@@ -4,31 +4,36 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('chatboard:server');
+let app = require('../app');
+const debug = require('debug')('chatboard:server');
+const fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTPS server.
  */
+let server;
 if (process.env.NODE_ENV.trim() === 'development') {
-  var http = require('http');
-  var server = http.createServer(app);
+  const http = require('http');
+  server = http.createServer(app);
   console.log('create-http');
 } else {
-  var https = require('https');
+  const https = require('https');
   let opts = {
-    key: process.env.NODE_KEY,
-    cert: process.env.NODE_CERT,
-    ca: [process.env.NODE_CHAIN, process.env.NODE_FULLCHAIN]
+    key: fs.readFileSync(process.env.NODE_KEY),
+    cert: fs.readFileSync(process.env.NODE_CERT),
+    ca: [
+      fs.readFileSync(process.env.NODE_CHAIN),
+      fs.readFileSync(process.env.NODE_FULLCHAIN)
+    ]
   };
-  var server = https.createServer(opts,app);
+  server = https.createServer(opts,app);
   console.log('create-https');
 }
 

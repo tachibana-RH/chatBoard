@@ -14,6 +14,7 @@ tables:
         updated_at - datetime
     users:
         id(praymary) - int
+        token - varchar(255)
         name - varchar(255)
         password - varchar(255)
         comment - varchar(255)

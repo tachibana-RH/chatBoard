@@ -12,7 +12,7 @@ url:https://chatsboard.com
 - アイコン画像アップロード機能
 - トピック保存とメッセージ保存などのトランザクション機能
 ## 公開までに使用した技術など
-- GCE_VMインスタンス
+- GCE_VMインスタンス(CentOS7)
 - CloudDNS
 - Apache
 - Let's Encrypt

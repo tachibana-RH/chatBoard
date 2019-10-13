@@ -17,8 +17,8 @@ router.post('/login', (req, res, next) => {
 	// バリデーションチェック（nullでないか）
 	const request = req;
 	const response = res;
-	req.check('name','NAME は必ず入力してください。').notEmpty();
-	req.check('password','PASSWORD は必ず入力してください。').notEmpty();
+	req.check('name','NAME を入力してください。').notEmpty();
+	req.check('password','PASSWORD を入力してください。').notEmpty();
 
 	req.getValidationResult().then( result => {
 		if (!result.isEmpty()) {
@@ -76,25 +76,24 @@ router.post('/guestlogin', (req, res, next) => {
 		}
 		new mysqlModels.User(guestdata).save().then( model => {
 			req.session.login = model.attributes;
-			res.status(200).send('OK');
+			res.status(303).redirect('/main/1');
 		});
 	} else {
-		new mysqlModels.User().where('token','=',cookie.guest_token).fetch()
-		.then( model => {
-			req.session.login = model.attributes;
-			req.session.login.token = guest_token;
-			new mysqlModels.User().where('token','=',cookie.guest_token)
-			.save({token:guest_token},{patch:true})
-			.then(()=>{
-				res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
-				res.status(200).send('OK');
-			})
-			.catch( err => {
-				res.status(400).json({error: true, data: {messages: err.message}});
+		//セッション内のトークン更新とDB内のトークン更新を行う
+		//トランザクションによってどちらかが失敗したらロールバックする
+		mysqlModels.Bookshelf.transaction( t => {
+			return new mysqlModels.User().where('token','=',cookie.guest_token).fetch({transaction: t})
+			.then( model => {
+				req.session.login = model.attributes;
+				req.session.login.token = guest_token;
+				return new mysqlModels.User().where('token','=',cookie.guest_token).save({token:guest_token},{patch:true},{transaction: t});
 			});
-		})
-		.catch( err => {
-			res.status(404).json({error: true, data: {messages: err.message}});
+		}).then( () => {
+			res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
+			res.status(303).redirect('/main/1');
+		}).catch( err => {
+			console.log(err);
+			res.status(400).json({error: true, data: {messages: err.message}});
 		});
 	}
 });
@@ -114,8 +113,11 @@ router.post('/add', (req, res, next) => {
 	// バリデーションチェック（nullでないか）
 	const request = req;
 	const response = res;
-	req.check('name','NAME は必ず入力してください。').notEmpty();
-	req.check('password','PASSWORD は必ず入力してください。').notEmpty();
+	req.check('name','NAME を入力してください。').notEmpty();
+	req.check('name','NAME は10文字以内で指定してください。').isLength({max:10});
+	req.check('password','PASSWORD を入力してください。').notEmpty();
+	req.check('password','PASSWORD は8文字以上で入力してください。').isLength({min:8});
+	req.check('comment','COMMENT を入力してください。').notEmpty();
 
 	req.getValidationResult().then( result => {
 		if (!result.isEmpty()) {
@@ -137,19 +139,19 @@ router.post('/add', (req, res, next) => {
 			mysqlModels.User.query({where: {name: nm}})
 			.fetch()
 			.then( model => {
-			if (model == null) {
-				request.session.login = null;
-				new mysqlModels.User(req.body).save().then(() => {
-					response.status(303).redirect('/users/login');
-				});
-			} else {
-				const data = {
-					title: 'Create',
-					form: req.body,
-					content:'<a class="error">※すでに利用されているユーザー名です※</a>'
+				if (model == null && nm != 'ゲスト') {
+					request.session.login = null;
+					new mysqlModels.User(req.body).save().then(() => {
+						response.status(303).redirect('/users/login');
+					});
+				} else {
+					const data = {
+						title: 'Create',
+						form: req.body,
+						content:'<a class="error">※すでに利用されているか使用不可のユーザー名です※</a>'
+					}
+					res.status(200).render('users/add', data);
 				}
-				res.status(200).render('users/add', data);
-			}
 			});
 		}
 	});

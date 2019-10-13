@@ -5,7 +5,7 @@ const mysqlModels = require('../modules/mysqlModels');
 // トピック作成画面の描画処理
 router.get('/', (req, res, next) => {
     if(req.session.login == null){
-        res.status(302).redirect('/users/login');
+        res.status(302).redirect('/main/1');
     } else {
         const data  = {
         title: 'chatBoard',
@@ -40,6 +40,7 @@ router.post('/', (req, res, next) => {
             response.status(200).render('createTopic', data);
         } else {
             // トピックを保存し、保存後のIDと共にメッセージも保存する
+            // トランザクションによってどちらかが失敗したらロールバックする
             const topicRec  = {
                 name: request.body.topicname,
                 user_id: request.session.login.id,

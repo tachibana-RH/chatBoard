@@ -1,59 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-  </head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="/javascripts/logout.js"></script>
-  <script src="/javascripts/topicDelete.js"></script>
-  <body>
-    <div class="main">
-    <div class="head">
-        <li class="list-title">
-            <%= title %>
-        </li>
-        <li class="list-form">
-            <a id="logout">ログアウト</a>
-        </li>
-        <li class="list-form">
-            <a href="/createtopic">
-            トピックを作成
-            </a>
-        </li>
+</head>
+<body>
+    <div class="introduction">
+        <h1><%= title %></h1>
+        <p>知らない人たちと匿名・チャット形式でお話しできるサイトです</p>
+        <p>日常のトレンド、ニュース、仕事のことなどなど<br>トピックを立ててなんでも話しましょう！</p>
+        <form class="form" action="/users/guestlogin" method="post">
+            <input class="start" type="submit" value="さっそく始める">
+        </form>
     </div>
-    <div role="main" class="topics">
-        <h2>ようこそ、<a href="/home/<%=login.id%>/message/1"><%= login.name %></a>さん</h2>
-        <hr>
-        <div class="contents">
-        <% for(let index in collection) { %>
-            <%- include('data_item_index', {val:collection[index], id:login.id, type:login.type}) %>
-        <% } %>
-        </div>
-        <p>
-            <% if (pagination.page > 1) { %>
-            <span>
-                <a href="/<%= pagination.page - 1 %>">&lt;&lt; prev</a>
-            </span>
-            <% } else { %>
-            <span>
-                &lt;&lt; prev
-            </span>
-            <% } %>
-
-            <% if (pagination.page < pagination.pageCount) { %>
-            <span>
-                <a href="/<%= pagination.page + 1 %>">Next &gt;&gt;</a>
-            </span>
-            <% } else { %>
-            <span>
-                Next &gt;&gt;
-            </span>
-            <% } %>
-        </p>
-    </div>
-    </div>
-  </body>
+</body>
 </html>

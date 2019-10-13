@@ -11,12 +11,14 @@ router.post('/:topicId/msg',(req, res, next) => {
         user_id: req.session.login.id,
         topic_id: req.params.topicId
     }
-    // トランザクション処理でメッセージの保存・メッセージ数の更新を行う
+    // 並列処理でメッセージの保存・メッセージ数の更新を行う
+    // トランザクションによってどちらかが失敗したらロールバックする
     mysqlModels.Bookshelf.transaction( t => {
         return Promise.all([
             new mysqlModels.Message(rec).save(null, {transaction: t}),
             new mysqlModels.Message(rec).where('topic_id','=',req.params.topicId).fetchAll({transaction: t})
             .then((msgs)=>{
+                console.log(msgs.length);
                 return new mysqlModels.Topic().where('id','=',req.params.topicId).save({count: msgs.length + 1},{patch:true},{transaction: t});
             })
         ]).spread((msg)=>{
@@ -26,12 +28,12 @@ router.post('/:topicId/msg',(req, res, next) => {
             rec['messege_id'] = msg.attributes.id;
             rec['create_time'] = dateFormat.exec(new Date(msg.attributes.created_at));
             return rec;
-        });
+        }).catch(next);
     }).then( rec => {
         res.status(201).json(rec);
     }).catch( err => {
-        console.log(err);
-        res.status(500).json({error: true, data: {messages: err.message}});
+        t.rollback();
+        res.status(400).json({error: true, data: {messages: err.message}});
     });
 });
 
@@ -42,7 +44,7 @@ router.get('/:topicId', (req, res, next) => {
 
 router.get('/:topicId/:page', (req, res, next) => {
     if(req.session.login == null){
-        res.status(303).redirect('/users/login');
+        res.status(303).redirect('/main/1');
     } else {
         let id = parseFloat(req.params.topicId);
         let pg = parseFloat(req.params.page);

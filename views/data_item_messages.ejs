@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <% if(val != null) { %>
 <%
+
 const date = new Date(val.attributes.created_at);
 const dateYear = date.getFullYear();
 const dateMonth = ((date.getMonth() + 1).toString().length == 1)?'0' + (date.getMonth() + 1):(date.getMonth() + 1);

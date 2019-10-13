@@ -3,7 +3,7 @@ const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
 
 router.get('/', (req,res,next) => {
-    res.status(302).redirect('/');
+    res.status(302).redirect('/main/1');
 });
 
 router.get('/:id', (req,res,next) => {
@@ -14,7 +14,7 @@ router.get('/:id', (req,res,next) => {
 router.get('/:id/:contents/:page', (req,res,next) => {
 
 	if (req.session.login == null) {
-		res.status(302).redirect('/users/login');
+		res.status(302).redirect('/main/1');
 	} else {
 		let id = parseFloat(req.params.id);
 		let pg = parseFloat(req.params.page);
@@ -23,6 +23,7 @@ router.get('/:id/:contents/:page', (req,res,next) => {
 		.then( user => {
 		// コンテンツごとに描画処理を分岐する
 		if (req.params.contents == 'message') {
+			// メッセージ履歴の描画処理
 			new mysqlModels.Message().orderBy('created_at','DESC')
 			.where('user_id','=',id)
 			.fetchPage({page:pg, pageSize:10, withRelated: ['user']})
@@ -40,6 +41,7 @@ router.get('/:id/:contents/:page', (req,res,next) => {
 				res.status(404).json({error: true, data: {message: err.message}});
 			});
 		} else {
+			// トピック作成履歴の描画処理
 			new mysqlModels.Topic().orderBy('updated_at','DESC')
 			.where('user_id','=',id)
 			.fetchPage({page:pg, pageSize:10, withRelated: ['user']})
@@ -83,7 +85,7 @@ const uploadDir = multer({ storage: storage });
 router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req, res) => {
 	new mysqlModels.User().where('id','=',req.params.id)
 	.save({icon: req.file.filename},{patch:true})
-	.then( result =>{
+	.then( result => {
 		// 保存したファイル名を該当ユーザーのセッションへ設定
 		req.session.login.icon = req.file.filename;
 		res.status(201).json(result);

@@ -83,12 +83,6 @@ p {
 table,tr,th,td {
     padding: 10px;
 }
-
-.message {
-    /* display: flex;
-    flex-direction: column; */
-    /* padding: 0px; */
-}
 .message table {
     margin-right:auto;
     margin-left:auto;

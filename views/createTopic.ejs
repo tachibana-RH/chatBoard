@@ -2,30 +2,47 @@
 <html>
 <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/createtopic.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
 </head>
 <body>
-    <head>
-        <h1><%= title %></h1>
-    </head>
-    <div class="createTopic">
-    <form action="./createTopic/submit" method="POST">
-    <table>
-        <tr>
-            <th>title</th>
-        </tr>
-        <tr>
-            <td><input type="text" name="topicname" size="50" value="<%= topicName %>"></td>
-        </tr>
-        <tr>
-            <th>ひと言</th>
-        </tr>
-        <tr>
-            <td><textarea name="msg" cols="55" rows="10"></textarea></td>
-        </tr>
-        <tr><td><input type="submit"></td></tr>
-    </table>
-    </form>
+    <div class="main">
+        <header>
+            <h1><%= title %></h1>
+        </header>
+        <div class="createTopic">
+        <form action="/createTopic" method="POST">
+        <table>
+            <%- content %>
+            <tr>
+                <th>トピック名</th>
+            </tr>
+            <tr>
+                <td><input id="title" type="text" name="topicname" autocomplete="off" value="<%= form.topicname %>"></td>
+            </tr>
+            <tr>
+                <th>ひと言</th>
+            </tr>
+            <tr>
+                <td><textarea id="msg" name="msg"><%= form.msg %></textarea></td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="submit" type="submit" value="トピックを作成する">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a id="return" href="/main/1">
+                    <div class="return">
+                    トップへ戻る
+                    </div>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        </form>
+        </div>
     </div>
 </body>
 </html>

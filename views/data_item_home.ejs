@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<% if(val != null) { %>
+<%
+const date = new Date(val.attributes.created_at);
+const dateYear = date.getFullYear();
+const dateMonth = ((date.getMonth() + 1).toString().length == 1)?'0' + (date.getMonth() + 1):(date.getMonth() + 1);
+const dateDate = (date.getDate().toString().length == 1)?'0' + date.getDate():date.getDate();
+const dateHours = (date.getHours().toString().length == 1)?'0' + date.getHours():date.getHours();
+const dateMinutes = (date.getMinutes().toString().length == 1)?'0' + date.getMinutes():date.getMinutes();
+const dateSeconds = (date.getSeconds().toString().length == 1)?'0' + date.getSeconds():date.getSeconds();
+
+const dateStr = dateYear + '-' + dateMonth + '-' + dateDate + ' ' + dateHours + ':' + dateMinutes + ':' + dateSeconds;
+
+%>
+<% if (contents == 'message') { %>
+    <% let message = val.attributes.message.split(/\r?\n/g); %>
+    <table>
+        <tr>
+            <td class="date">
+                <%= dateStr %>
+            </td>
+            <td class="message">
+            <% for(let index in message) { %>
+                <% if(message[index] == '') { %>
+                    <br>
+                <% } else { %>
+                    <% if(message[index].substr(0,4) == 'http') { %>
+                        <a href="<%= message[index] %>" target="_blank">
+                            <%= message[index] %>
+                        </a><br>
+                    <% } else { %>
+                        <%= message[index] %><br>
+                    <% } %>
+                <% } %>
+            <% } %>
+            </td>
+        </tr>
+    </table>
+<% } else { %>
+    <table>
+        <tr>
+            <td class="date">
+                <%= dateStr %>
+            </td>
+            <td class="topic">
+                <a href="/topic/<%= val.attributes.id %>/1">
+                    <%= val.attributes.name %>
+                </a>
+            </td>
+        </tr>
+    </table>
+<% } %>
+<% } %>

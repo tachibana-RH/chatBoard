@@ -1,0 +1,41 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 0;
+    background: url(../images/circles-and-roundabouts/circles-and-roundabouts/circles-and-roundabouts.png.png);
+}
+h1 {
+    color: rgb(169, 241, 179);
+    text-align: center;
+    font-size: 70px;
+    font-family: SF Optimized, system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', "hiragino kaku gothic pro",meiryo,"ms pgothic",sans-serif;
+}
+p {
+    text-align: center;
+}
+
+.introduction {
+    width: 100%;
+    height: 100%;
+}
+.form {
+    text-align: center;
+}
+.start {
+    margin: 5%;
+    padding: 2% 5% 2% 5%;
+    text-align: center;
+    background-color: aquamarine;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px){
+    h1 {
+        font-size: 40px;
+        margin: 15%;
+    }
+    p {
+        font-size: 12px;
+    }
+}

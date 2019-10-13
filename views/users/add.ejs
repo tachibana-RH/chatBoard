@@ -1,34 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
 <body>
-    <head>
+    <div role="main" class="useradd">
         <h1><%= title %></h1>
-    </head>
-    <div role="main">
-        <p><%- content %></p>
+        <div class="form addform">
+        <p><%- content %></p><br>
         <form method="POST" action="/users/add">
             <table>
+                <div class="formdata">
                 <tr>
-                    <th>Name</th>
-                    <td><input type="text" name="name" value="<%= form.name %>"></td>
+                    <th>NAME</th>
+                    <td><input class="formInput" type="text" name="name" value="<%= form.name %>" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <th>PASSWORD</th>
-                    <td><input type="text" name="password" value="<%= form.password %>"></td>
+                    <td><input class="formInput" type="password" name="password" value="<%= form.password %>" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <th>COMMENT</th>
-                    <td><textarea name="comment"><%= form.comment %></textarea></td>
+                    <td><textarea class="formInput" name="comment" rows="5" cols="22"><%= form.comment %></textarea></td>
                 </tr>
                 <tr>
-                    <th></th>
-                    <td><input type="submit" value="作成"></td>
+                    <td></td>
+                    <td class="submit add"><input id="add" type="submit" value="作成"></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td class="returnlogin"><a href="/users/login"><div class="inner">&lt;&lt; ログイン画面へ戻る</div></a></td>
+                </tr>
+                </div>
             </table>
         </form>
     </div>

@@ -1,104 +1,98 @@
-var express = require('express');
-var router = express.Router();
-const multer = require('multer');
-var path = require('path')
-
-var mysql = require('mysql');
-
-var knex = require('knex') ({
-  client: 'mysql',
-  connection: {
-    host    :'localhost',
-    user    :'root',
-    password:'',
-    database:'miniboard-db',
-    charset :'utf8'
-  }
-});
-
-var Bookshelf = require('bookshelf')(knex);
-
-Bookshelf.plugin('pagination');
-
-var User = Bookshelf.Model.extend({
-  tableName: 'users'
-});
-
-var Message = Bookshelf.Model.extend({
-  tableName: 'messages',
-  hasTimestamps: true,
-  user: function() {
-    return this.belongsTo(User);
-  }
-});
+const express = require('express');
+const router = express.Router();
+const mysqlModels = require('../modules/mysqlModels');
 
 router.get('/', (req,res,next) => {
-    res.redirect('/');
+    res.status(302).redirect('/main/1');
 });
 
 router.get('/:id', (req,res,next) => {
-    res.redirect('/home/' + req.params.id + '/1');
+    res.status(302).redirect('/home/' + req.params.id + '/message' + '/1');
 });
 
-router.get('/:id/:page', (req,res,next) => {
+// マイページ画面の描画処理
+router.get('/:id/:contents/:page', (req,res,next) => {
 
-    if (req.session.login == null) {
-        res.redirect('/users/login');
-    } else {
-        let id = req.params.id;
-        id *= 1;
-        let pg = req.params.page;
-        pg *= 1;
-        if (pg < 1) {
-            pg = 1;
-        }
-        new Message().orderBy('created_at','DESC')
-        .where('user_id','=',id)
-        .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
-        .then((collection) => {
-            const data = {
-                title: 'chatBoard',
-                login: req.session.login,
-                user_id: id,
-                collection: collection.toArray(),
-                pagination: collection.pagination
-            };
-            res.render('home', data);
-        }).catch((err) => {
-            res.status(500).json({error: true, data: {message: err.message}});
-        });
-    }
+	if (req.session.login == null) {
+		res.status(302).redirect('/main/1');
+	} else {
+		let id = parseFloat(req.params.id);
+		let pg = parseFloat(req.params.page);
+		if (pg < 1) { pg = 1; }
+		new mysqlModels.User().where('id','=',id).fetch()
+		.then( user => {
+		// コンテンツごとに描画処理を分岐する
+		if (req.params.contents == 'message') {
+			// メッセージ履歴の描画処理
+			new mysqlModels.Message().orderBy('created_at','DESC')
+			.where('user_id','=',id)
+			.fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+			.then( collection => {
+				const data = {
+					title: 'chatBoard',
+					login: req.session.login,
+					userdata: user,
+					contents: req.params.contents,
+					collection: collection.toArray(),
+					pagination: collection.pagination
+				};
+				res.status(200).render('home', data);
+			}).catch( err => {
+				res.status(404).json({error: true, data: {message: err.message}});
+			});
+		} else {
+			// トピック作成履歴の描画処理
+			new mysqlModels.Topic().orderBy('updated_at','DESC')
+			.where('user_id','=',id)
+			.fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+			.then( collection => {
+				const data = {
+					title: 'chatBoard',
+					login: req.session.login,
+					userdata: user,
+					contents: req.params.contents,
+					collection: collection.toArray(),
+					pagination: collection.pagination
+				};
+				res.status(200).render('home', data);
+			}).catch( err => {
+				res.status(404).json({error: true, data: {message: err.message}});
+			});
+		}
+		}).catch( err => {
+			res.status(404).json({error: true, data: {message: err.message}});
+		});
+	}
 });
+
+// アイコン画像アップロード処理
+const multer = require('multer');
+const path = require('path');
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: (req, file, cb) => {
+    // アップロードした画像の保存場所をプロジェクト内のimagesディレクトリへ変更する
     cb(null, 'public/images')
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
+    // 保存時の画像ファイル名を変更する
     cb(null, req.session.login.id + '-' + Date.now() + path.extname(file.originalname))
   }
-})
-
-// アップロードディレクトリを設定したmulterモジュール
+});
+// 上記の設定をライブラリへ反映する
 const uploadDir = multer({ storage: storage });
 
-router.post('/:id/upload', uploadDir.single('uploadfile'), (req, res) => {
-
-  console.log('アップロードしたファイル名： ' + req.file.originalname);
-  console.log('保存されたパス：' + req.file.path);
-  console.log('保存されたファイル名： ' + req.file.filename);
-
-  new User().where('id','=',req.params.id)
-  .save({icon: req.file.filename},{patch:true})
-  .then((result) =>{
-    console.log(result);
-    req.session.login.icon = req.file.filename;
-    res.redirect('./');
-  })
-  .catch((err) => {
-    res.status(500).json({error: true, data: {messages: err.message}});
-    res.redirect('./');
-  });
+router.post('/:id/:contents/image/upload', uploadDir.single('uploadfile'), (req, res) => {
+	new mysqlModels.User().where('id','=',req.params.id)
+	.save({icon: req.file.filename},{patch:true})
+	.then( result => {
+		// 保存したファイル名を該当ユーザーのセッションへ設定
+		req.session.login.icon = req.file.filename;
+		res.status(201).json(result);
+	})
+	.catch( err => {
+		res.status(404).json({error: true, data: {messages: err.message}});
+	});
 });
 
 module.exports = router;

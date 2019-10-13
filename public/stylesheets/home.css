@@ -1,11 +1,186 @@
+
+body {
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: rgb(148, 148, 148);
+}
+a {
+color: rgb(0, 204, 17);
+text-decoration: none;
+}
+h2 {
+font: 20px "Lucida Grande", Helvetica, Arial, sans-serif;
+color: white;
+}
+p {
+font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.background {
+    background: url(../images/cork-board/cork-board/cork-board.png);
+    width: 1000px;
+    margin-right:auto;
+    margin-left:auto;
+    padding: 10px;
+}
+.maincontents {
+    background-color: white;
+    padding: 8px;
+    border: 2px double #bbb;
+    border-radius: 10px;
+}
+.header {
+    text-align: right;
+    padding: 15px;
+}
+table {
+    width: 600px;
+    table-layout:fixed;
+    background-color: rgb(242, 255, 240);
+}
+th,td {
+    background-color:white;
+}
+table,th,td {
+    padding: 8px;
+    border: 1px solid #bbb;
+    word-wrap:break-word;
+}
+.date {
+    width: 100px;
+}
+.message {
+    width: 50%;
+}
+.topic {
+    width: 50%;
+}
+.userdoc {
+    position: absolute;
+    width: 300px;
+    height: 368px;
+}
+.comment {
+    margin-top: 10px;
+}
+.comment-contents {
+    border: 2px double #bbb;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    padding: 5px;
+}
+.menu li,#pageback {
+    display: inline-block;
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #bbb;
+    padding: 10px;
+}
+li:hover {
+    background-color: #bbb;
+    color: white;
+}
+.contents {
+    margin-left: 36%;
+    position: relative;
+    width: 615px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 760px;
+}
+.pagenations {
+    text-align: center;
+}
+.upload {
+    background-color: rgb(16, 199, 255);
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border: solid 4px rgb(255, 255, 255);
+    width: 180px;
+    text-align: center;
+}
 label > input {
-display:none; /* アップロードボタンのスタイルを無効にする */
+    display:none;
 }
 label {
-color: rgb(255, 255, 255); /* ラベルテキストの色を指定する */
-background-color: rgb(0, 195, 255);/* ラベルの背景色を指定する */
-padding: 2px; /* ラベルとテキスト間の余白を指定する */
-border: double 4px rgb(255, 255, 255);/* ラベルのボーダーを指定する */
-border-radius: 10px; /* ラベルボックスの角丸を指定する */
-cursor:pointer; /*マウスカーソルの形を指定する */
+    cursor:pointer;
+    padding: 5% 22.7% 5% 22.7%;
+}
+.icon img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-position: center center;
+    border: solid 2px rgb(228, 228, 228);
+    object-fit: cover;
+}
+
+@media screen and (max-width: 900px){
+body {
+    font-size: 12px;
+}
+h2 {
+    font-size: 20px;    
+}
+p {
+    font-size: 12px;
+}
+.wrap {
+    overflow: hidden;
+}
+.background {
+    width: 95%;
+    height: 100%;
+}
+.maincontents {
+    width: 90%;
+    margin-right:auto;
+    margin-left:auto;
+}
+table {
+    width: 100%;
+    position: static;
+}
+.date {
+    width: 30%;
+    text-align: center;
+}
+.message, .topic {
+    width: 70%;
+}
+.userdoc {
+    width: 100%;
+    height: 20%;
+    position: relative;
+}
+.upload {
+    width: 35%;
+    font-size: 12px;
+}
+label {
+    padding: 0;
+}
+.comment {
+    margin-top: 10%;
+}
+.menu {
+    width: 100%;
+    position: absolute;
+    left: 42%;
+    top: 5%;
+}
+.contents {
+    width: 95%;
+    margin-left: 0%;
+    margin-top: 5%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    height: 20%;
+    border: double 4px rgb(155, 155, 155);
+    border-radius: 10px;
+    position: static;
+    margin-right:auto;
+    margin-left:auto;
+}
 }

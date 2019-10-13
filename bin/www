@@ -4,33 +4,38 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('chatboard:server');
-var http = require('http');
+let app = require('../app');
+const debug = require('debug')('chatboard:server');
+const fs = require('fs');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTP or HTTPS server.
  */
-
-var server = http.createServer(app);
-
-/**
- * Create websocket.
- */
-var io = require('socket.io')(server);
-
-io.on('connection', function (socket) {
-  socket.on('message', function (data) {
-    io.sockets.emit('news', data);
-  });
-});
+let server;
+if (process.env.NODE_ENV.trim() === 'development') {
+	const http = require('http');
+  	server = http.createServer(app);
+  	console.log('create-http');
+} else {
+  	const https = require('https');
+  	let opts = {
+    	key: fs.readFileSync(process.env.NODE_KEY),
+    	cert: fs.readFileSync(process.env.NODE_CERT),
+    	ca: [
+      	fs.readFileSync(process.env.NODE_CHAIN),
+      	fs.readFileSync(process.env.NODE_FULLCHAIN)
+    	]
+  	};
+  	server = https.createServer(opts,app);
+  	console.log('create-https');
+}
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -39,6 +44,17 @@ io.on('connection', function (socket) {
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Upgrade websocket.
+ */
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  socket.on('message', function (data) {
+    io.sockets.emit('news', data);
+  });
+});
 
 /**
  * Normalize a port into a number, string, or false.

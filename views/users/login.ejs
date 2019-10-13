@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <body>
-    <h1><%= title %></h1>
     <div role="main" class="login">
+        <h1><%= title %></h1>
+        <div class="form">
+        <p><%- content %></p><br>
         <form method="POST" action="/users/login">
-            <table style="width: 10%;">
-                <tr>
-                    <p><%- content %></p>
-                </tr>
+            <table>
                 <tr>
                     <th>NAME</th>
-                    <td style="background-color: white;"><input type="text" name="name" value="<%= form.name %>"></td>
+                    <td><input class="formInput" type="text" name="name" value="<%= form.name %>" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <th>PASSWORD</th>
-                    <td style="background-color: white;"><input type="password" name="password" value="<%= form.password %>"></td>
+                    <td><input class="formInput" type="password" name="password" value="<%= form.password %>"  autocomplete="off"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="submit"><input id="login" type="submit" value="ログイン"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="create"><a href="/users/add"><div class="inner">アカウントを作成する&gt;&gt;</div></a></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td id="guestlogin" class="create"><a href="/main/1"><div class="inner guestlogin">&lt;&lt; トップへ戻る</div></a></td>
                 </tr>
             </table>
-            <input type="submit" value="ログイン">
-            <p>
-                <a href="/main/1">&lt;&lt; Top へ戻る</a>
-                <a href="/users/add">アカウントの作成&gt;&gt;</a>
-            </p>
         </form>
+        </div>
     </div>
 </body>
 </html>

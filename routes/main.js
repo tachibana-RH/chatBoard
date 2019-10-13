@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mysqlModels = require('../modules/mysqlModels');
+const Promise = require('bluebird');
 
 router.get('/', (req, res, next) => {
   res.status(302).redirect('/main/1');

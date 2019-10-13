@@ -18,7 +18,7 @@ url:https://chatsboard.com
 - Let's Encrypt
 - Docker
 - docker-compose
-- Mysql(セッションストアとしても使用)
+- Mysql
 - Node.js
 - express
 - Socket.IO

@@ -43,7 +43,7 @@ const session_opt = {
   cookie: { maxAge: 180 * 60 * 1000, secure: false}
 };
 
-if (app.get('env') === 'production') {
+if (app.get('env').trim() === 'production') {
   // app.set('trust proxy', 1) // trust first proxy
   session_opt.cookie.secure = true // serve secure cookies
 }

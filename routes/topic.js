@@ -50,30 +50,23 @@ router.get('/:topicId/:page', (req, res, next) => {
         let pg = parseFloat(req.params.page);
         if (pg < 1) { pg = 1; }
         // パラメーターに紐付くトピック名とメッセージデータを取得する
-        new mysqlModels.Topic().where('id','=',id)
-        .fetch()
-        .then( Record => {
-            // ページネーションで1ページ当たり10個のメッセージデータを取得する
-            new mysqlModels.Message().orderBy('created_at', 'DESC')
-            .where('topic_id','=',id)
-            .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
-            .then( collection => {
-                const data = {
-                    title: 'chatBoard',
-                    NODE_NAME: process.env.NODE_NAME,
-                    topicName: Record.attributes.name,
-                    topicId: id,
-                    login: req.session.login,
-                    collection: collection.toArray().reverse(),
-                    pagination: collection.pagination
-                };
-                res.status(200).render('inTopic', data);
-            }).catch( err => {
-                res.status(500).json({error: true, data: {messages: err.message}});
-            });
-        }).catch( err => {
+        Promise.all([
+            new mysqlModels.Topic().where('id','=',id).fetch(),
+            new mysqlModels.Message().orderBy('created_at', 'DESC').where('topic_id','=',id).fetchPage({page:pg, pageSize:10, withRelated: ['user']})
+        ]).spread((topicrec,msgrec)=>{
+            const data = {
+                title: 'chatBoard',
+                NODE_NAME: process.env.NODE_NAME,
+                topicName: topicrec.attributes.name,
+                topicId: id,
+                login: req.session.login,
+                collection: msgrec.toArray().reverse(),
+                pagination: msgrec.pagination
+            };
+            res.status(200).render('inTopic', data);
+        }).catch(err=>{
             res.status(500).json({error: true, data: {messages: err.message}});
-        })
+        });
     }
 });
 

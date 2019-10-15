@@ -42,7 +42,7 @@ router.delete('/:topicid', (req, res, next) => {
 			topic.destroy();
 			msgObj = messages.toArray();
 			for (let i of Object.keys(msgObj)) {
-			msgObj[i].destroy();
+				msgObj[i].destroy();
 			}
 		});
 	}).then(() => {

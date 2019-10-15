@@ -19,7 +19,7 @@ router.post('/login', (req, res, next) => {
 	const response = res;
 	req.check('name','NAME を入力してください。').notEmpty();
 	req.check('password','PASSWORD を入力してください。').notEmpty();
-
+	
 	req.getValidationResult().then( result => {
 		if (!result.isEmpty()) {
 			let content = '<ul class="error">';
@@ -46,7 +46,7 @@ router.post('/login', (req, res, next) => {
 						content: '<p class="error">※名前またはパスワードが違います。※</p>',
 						form: req.body
 					}
-				response.status(401).render('users/login',data);
+					response.status(401).render('users/login',data);
 				} else {
 					request.session.login = model.attributes;
 					request.session.login.password = 'secret';
@@ -88,7 +88,7 @@ router.post('/guestlogin', (req, res, next) => {
 				req.session.login.token = guest_token;
 				return new mysqlModels.User().where('token','=',cookie.guest_token).save({token:guest_token},{patch:true},{transaction: t});
 			});
-		}).then( () => {
+		}).then(() => {
 			res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
 			res.status(303).redirect('/main/1');
 		}).catch( err => {

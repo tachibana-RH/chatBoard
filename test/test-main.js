@@ -10,31 +10,19 @@ beforeEach(function () {
 });
 
 describe('main.jsのテスト', function() {
-    describe('GET / request', function() {
-      it('should return status 302', function(done) {
+    describe(' / へのGETリクエスト', function() {
+      it('リダイレクトによって302のステータスコードが返ってくること', function(done) {
         request(app)
             .get('/main')
-            .expect("Content-type",/json/)
-            .expect(200)
             .end((err, res)=>{
+                if (err) return done(err);
                 should(res.status).equal(302);
                 done();
             })
       });
     });
-    describe('GET /:page request', function() {
-        it('should return 302', function(done) {
-        request(app)
-            .get('/main/1')
-            .expect("Content-type",/json/)
-            .expect(200)
-            .end((err, res)=>{
-                should(res.status).equal(302);
-                done();
-            })
-        });
-    });
-    describe('GET /:page request', function() {
+
+    describe('/:page へのGETリクエスト', function() {
         var authenticatedSession;
 
         before(function (done) {
@@ -48,19 +36,19 @@ describe('main.jsのテスト', function() {
             });
         });
 
-        it('should return 302', function(done) {
+        it('認証なしのためリダイレクトによって302のステータスコードが返ってくること', function(done) {
             request(app)
                 .get('/main/1')
-                .expect("Content-type",/json/)
-                .expect(200)
                 .end((err, res)=>{
+                    if (err) return done(err);
                     should(res.status).equal(302);
                     done();
                 })
         });
-        it('should return 200', function(done) {
+        it('認証ありのためGETリクエストで200のステータスコードが返ってくること', function(done) {
             authenticatedSession.get('/main/1')
             .end((err, res) => {
+                if (err) return done(err);
                 should(res.status).equal(200);
                 done();
             })

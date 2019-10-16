@@ -63,7 +63,9 @@ const N = 24;
 // ゲストユーザーのログイン処理
 router.post('/guestlogin', (req, res, next) => {
 	const cookie = req.cookies;
-	const guest_token = crypto.randomBytes(N).toString('base64').substring(0, N);
+  const guest_token = crypto.randomBytes(N).toString('base64').substring(0, N);
+  
+  //cookieが未設定（初参加）の場合はトークンを発行しゲストユーザーとしてDBへ登録する
 	if (cookie.guest_token === undefined) {
 		res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
 		const guestdata = {
@@ -94,7 +96,7 @@ router.post('/guestlogin', (req, res, next) => {
 		}).catch( err => {
 			console.log(err);
 			res.status(400).json({error: true, data: {messages: err.message}});
-		});
+    });
 	}
 });
 
@@ -132,7 +134,7 @@ router.post('/add', (req, res, next) => {
 				content: content,
 				form: req.body
 			}
-			response.status(200).render('users/add', data);
+			response.status(401).render('users/add', data);
 		} else {
 			// 同名のユーザーが存在しない場合は新規作成を行う
 			const nm = req.body.name;
@@ -142,7 +144,7 @@ router.post('/add', (req, res, next) => {
 				if (model == null && nm != 'ゲスト') {
 					request.session.login = null;
 					new mysqlModels.User(req.body).save().then(() => {
-						response.status(303).redirect('/users/login');
+						response.status(302).redirect('/users/login');
 					});
 				} else {
 					const data = {
@@ -150,7 +152,7 @@ router.post('/add', (req, res, next) => {
 						form: req.body,
 						content:'<a class="error">※すでに利用されているか使用不可のユーザー名です※</a>'
 					}
-					res.status(200).render('users/add', data);
+					res.status(401).render('users/add', data);
 				}
 			});
 		}

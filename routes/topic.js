@@ -28,11 +28,10 @@ router.post('/:topicId/msg',(req, res, next) => {
             rec['messege_id'] = msg.attributes.id;
             rec['create_time'] = dateFormat.exec(new Date(msg.attributes.created_at));
             return rec;
-        }).catch(next);
+        });
     }).then( rec => {
         res.status(201).json(rec);
     }).catch( err => {
-        t.rollback();
         res.status(400).json({error: true, data: {messages: err.message}});
     });
 });

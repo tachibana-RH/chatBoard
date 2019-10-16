@@ -5,8 +5,8 @@ var should = require("should");
 var app = require('../bin/www').app;
 
 describe('index.jsのテスト', function() {
-    describe('GET / request', function() {
-      it('should return status 200', function(done) {
+    describe(' / へのGETリクエスト', function() {
+      it('200のステータスコードが返ってくること', function(done) {
         request(app)
         .get('/')
         .expect("Content-type",/json/)

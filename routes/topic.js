@@ -43,12 +43,12 @@ router.get('/:topicId', (req, res, next) => {
 
 router.get('/:topicId/:page', (req, res, next) => {
     if(req.session.login == null){
-        res.status(303).redirect('/main/1');
+        res.status(303).redirect('/');
     } else {
         let id = parseFloat(req.params.topicId);
         let pg = parseFloat(req.params.page);
         if (pg < 1) { pg = 1; }
-        // パラメーターに紐付くトピック名とメッセージデータを取得する
+        // 並列処理でパラメーターに紐付くトピック名とメッセージデータを取得する
         Promise.all([
             new mysqlModels.Topic().where('id','=',id).fetch(),
             new mysqlModels.Message().orderBy('created_at', 'DESC').where('topic_id','=',id).fetchPage({page:pg, pageSize:10, withRelated: ['user']})

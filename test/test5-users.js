@@ -1,23 +1,48 @@
 const request = require('supertest');
-var should = require("should");
-var app = require('../bin/www').app;
+const should = require("should");
+const app = require('../bin/www').app;
+
+const session = require('supertest-session');
+let testSession = null;
+
+beforeEach(function () {
+    testSession = session(app);
+});
 
 describe('users.jsのテスト', function() {
 
+    let guestAuthenticatedSession;
+    let guestCookieOrigin;
+
+    before(
+        function(done) {
+            testSession.post('/users/guestlogin')
+            .expect(302)
+            .end(function (err, res) {
+                if (err) return done(err);
+                // guestCookieOrigin = res.req._header.split('\n')[3];
+                guestCookieOrigin = res.headers['set-cookie'].toString().split(';')[0];
+                guestAuthenticatedSession = testSession;
+                return done();
+            });
+        }
+    );
+
     describe('/login へのGETリクエスト', function() {
-        it('200のステータスコードが返ってくること', function(done) {
+        it('ログインページが描画され200のステータスコードが返ってくること', function(done) {
             request(app)
                 .get('/users/login')
                 .end((err, res)=>{
                     if (err) return done(err);
                     should(res.status).equal(200);
+                    should(res.statusType).equal(2);
                     done();
                 })
         })
     })
 
     describe('/login へのPOSTリクエスト', function() {
-        it('認証が成功し302のステータスコードが返ってくること', function(done) {
+        it('認証が成功しメインページへのリダイレクトによる302のステータスコードが返ってくること', function(done) {
             request(app)
                 .post('/users/login')
                 .set('Accept','application/json')
@@ -25,6 +50,7 @@ describe('users.jsのテスト', function() {
                 .end((err, res)=>{
                     if (err) return done(err);
                     should(res.status).equal(302);
+                    should(res.header.location).equal('/main/1');
                     done();
                 })
         });
@@ -52,49 +78,53 @@ describe('users.jsのテスト', function() {
         });
     });
 
-    // describe('/guestlogin へのPOSTリクエスト', function(){
-    //     it('新規ゲストユーザーが作成され、リダイレクトによる302のステータスコードが返ってくること', function(done){
-    //         request(app)
-    //             .post('/guestlogin')
-    //             .end((err, res)=>{
-    //                 if(err) return done(err);
-    //                 should(res.status).equal(302);
-    //                 done();
-    //             })
-    //     });
-    //     it('トークンが更新され、リダイレクトによる302のステータスコードが返ってくること', function(done){
-    //         request(app)
-    //             .post('/guestlogin')
-    //             //テスト実行する度に更新が必要。。
-    //             .set('Cookie','yH9o9uNTf9OfXRx/aEap/G6d')
-    //             .end((err, res)=>{
-    //                 if(err) return done(err);
-    //                 should(res.status).equal(302);
-    //                 done();
-    //             })
-    //     })
-    // })
+    describe('/guestlogin へのPOSTリクエスト', function(){
+        it('新規ゲストユーザーが作成され、メインページへのリダイレクトによる302のステータスコードが返ってくること', function(done){
+            request(app)
+                .post('/users/guestlogin')
+                .end((err, res)=>{
+                    if(err) return done(err);
+                    should(res.status).equal(302);
+                    should(res.header.location).equal('/main/1');
+                    done();
+                })
+        });
+        it('トークンが更新され、メインページへのリダイレクトによる302のステータスコードが返ってくること', function(done){
+            guestAuthenticatedSession
+                .post('/users/guestlogin')
+                .end((err, res)=>{
+                    if(err) return done(err);
+                    console.log('変更前：' + guestCookieOrigin);
+                    console.log('変更後：' + res.headers['set-cookie'].toString().split(';')[0]);
+                    should(res.status).equal(302);
+                    should(res.header.location).equal('/main/1');
+                    done();
+                })
+        });
+    })
 
     describe('/users/add へのGETリクエスト',function(){
-        it('200のステータスコードが返ってくること', function(done){
+        it('ユーザー新規登録画面が描画され200のステータスコードが返ってくること', function(done){
             request(app)
                 .get('/users/add')
                 .end((err, res)=>{
                     if (err) return done(err);
                     should(res.status).equal(200);
+                    should(res.statusType).equal(2);
                     done();
                 })
         });
     });
 
     describe('/users/add へのPOSTリクエスト',function(){
-        // it('ユーザーの新規作成が成功し、リダイレクトによる302のステータスコードが返ってくること', function(done){
+        // it('ユーザーの新規作成が成功し、メインページへのリダイレクトによる302のステータスコードが返ってくること', function(done){
         //     request(app)
         //         .post('/users/add')
         //         .send({name: "test3", password: "testword3", comment:'test'})
         //         .end((err, res)=>{
         //             if (err) return done(err);
         //             should(res.status).equal(302);
+        //             should(res.header.location).equal('/main/1');
         //             done();
         //         })
         // });

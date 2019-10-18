@@ -71,12 +71,14 @@ position: relative;
     bottom: -30px;
     left: 0px;
     background-color: rgb(121, 121, 121);
-    color: white;
     border-radius: 10px;
     border: solid 2px rgb(206, 206, 206);
     width: 170px;
     text-align: center;
     cursor: pointer;
+}
+.guestlogin {
+    color: white;
 }
 .create {
     position: absolute;

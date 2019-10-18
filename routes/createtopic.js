@@ -5,7 +5,7 @@ const mysqlModels = require('../modules/mysqlModels');
 // トピック作成画面の描画処理
 router.get('/', (req, res, next) => {
     if(req.session.login == null){
-        res.status(302).redirect('/main/1');
+        res.status(302).redirect('/');
     } else {
         const data  = {
         title: 'chatBoard',
@@ -37,14 +37,13 @@ router.post('/', (req, res, next) => {
                 content: content,
                 form: req.body
             }
-            response.status(200).render('createTopic', data);
+            response.status(401).render('createTopic', data);
         } else {
             // トピックを保存し、保存後のIDと共にメッセージも保存する
             // トランザクションによってどちらかが失敗したらロールバックする
             const topicRec  = {
                 name: request.body.topicname,
-                user_id: request.session.login.id,
-                count: 1
+                user_id: request.session.login.id
             }
             mysqlModels.Bookshelf.transaction( t =>{
                 return new mysqlModels.Topic(topicRec).save(null, {transaction: t})
@@ -57,9 +56,9 @@ router.post('/', (req, res, next) => {
                     return new mysqlModels.Message(messageRec).save(null, {transaction: t});
                 });
             }).then(() => {
-                response.status(303).redirect('/main');
+                response.status(303).redirect('/main/1');
             }).catch( err => {
-                res.status(400).json({error: true, data: {messages: err.message}});
+                res.status(404).json({error: true, data: {messages: err.message}});
             });
         }
     });

@@ -42,11 +42,11 @@ router.delete('/:topicid', (req, res, next) => {
 			topic.destroy();
 			msgObj = messages.toArray();
 			for (let i of Object.keys(msgObj)) {
-			msgObj[i].destroy();
+				msgObj[i].destroy();
 			}
 		});
-	}).then(() => {
-		res.status(204).send('OK');
+	}).then((result) => {
+		res.status(200).json(result);
 	}).catch( err => {
 		res.status(404).json({error: true, data: {messages: err.message}});
 	});
@@ -60,7 +60,7 @@ router.post('/logout',(req, res, next) => {
 	new mysqlModels.User().where('token','=',req.cookies.guest_token).fetch()
 	.then(model => {
 		req.session.login = model.attributes;
-		res.status(200).send('OK');
+		res.status(200).json(req.session.login.name);
 	})
 	.catch(err => {
 		res.status(404).json({error: true, data: {messages: err.message}});

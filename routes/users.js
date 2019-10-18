@@ -19,7 +19,7 @@ router.post('/login', (req, res, next) => {
 	const response = res;
 	req.check('name','NAME を入力してください。').notEmpty();
 	req.check('password','PASSWORD を入力してください。').notEmpty();
-
+	
 	req.getValidationResult().then( result => {
 		if (!result.isEmpty()) {
 			let content = '<ul class="error">';
@@ -46,7 +46,7 @@ router.post('/login', (req, res, next) => {
 						content: '<p class="error">※名前またはパスワードが違います。※</p>',
 						form: req.body
 					}
-				response.status(401).render('users/login',data);
+					response.status(401).render('users/login',data);
 				} else {
 					request.session.login = model.attributes;
 					request.session.login.password = 'secret';
@@ -63,7 +63,9 @@ const N = 24;
 // ゲストユーザーのログイン処理
 router.post('/guestlogin', (req, res, next) => {
 	const cookie = req.cookies;
-	const guest_token = crypto.randomBytes(N).toString('base64').substring(0, N);
+  const guest_token = crypto.randomBytes(N).toString('base64').substring(0, N);
+  
+  //cookieが未設定（初参加）の場合はトークンを発行しゲストユーザーとしてDBへ登録する
 	if (cookie.guest_token === undefined) {
 		res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
 		const guestdata = {
@@ -88,13 +90,13 @@ router.post('/guestlogin', (req, res, next) => {
 				req.session.login.token = guest_token;
 				return new mysqlModels.User().where('token','=',cookie.guest_token).save({token:guest_token},{patch:true},{transaction: t});
 			});
-		}).then( () => {
+		}).then(() => {
 			res.cookie("guest_token", guest_token, {maxAge: 14 * 24 * 60 * 60 * 1000});
 			res.status(303).redirect('/main/1');
 		}).catch( err => {
 			console.log(err);
 			res.status(400).json({error: true, data: {messages: err.message}});
-		});
+    });
 	}
 });
 
@@ -132,7 +134,7 @@ router.post('/add', (req, res, next) => {
 				content: content,
 				form: req.body
 			}
-			response.status(200).render('users/add', data);
+			response.status(401).render('users/add', data);
 		} else {
 			// 同名のユーザーが存在しない場合は新規作成を行う
 			const nm = req.body.name;
@@ -142,7 +144,7 @@ router.post('/add', (req, res, next) => {
 				if (model == null && nm != 'ゲスト') {
 					request.session.login = null;
 					new mysqlModels.User(req.body).save().then(() => {
-						response.status(303).redirect('/users/login');
+						response.status(302).redirect('/users/login');
 					});
 				} else {
 					const data = {
@@ -150,7 +152,7 @@ router.post('/add', (req, res, next) => {
 						form: req.body,
 						content:'<a class="error">※すでに利用されているか使用不可のユーザー名です※</a>'
 					}
-					res.status(200).render('users/add', data);
+					res.status(401).render('users/add', data);
 				}
 			});
 		}

@@ -17,7 +17,7 @@ describe('main.jsのテスト', function() {
     before(
         function (done) {
             testSession.post('/users/login')
-            .send({name: "komitest", password: "eenz78sbrh"})
+            .send({name: "komitest", password: "password"})
             .expect(302)
             .end(function (err) {
                 if (err) return done(err);
@@ -34,7 +34,7 @@ describe('main.jsのテスト', function() {
             .end(function (err) {
                 if (err) return done(err);
                 testSession.post('/users/login')
-                .send({name: "komitest", password: "eenz78sbrh"})
+                .send({name: "komitest", password: "password"})
                 .expect(302)
                 .end(function (err, res) {
                     if (err) return done(err);
@@ -99,7 +99,7 @@ describe('main.jsのテスト', function() {
                         new mysqlModels.Topic().orderBy('created_at', 'DESC').fetch()
                         .then((result)=>{
                             should(res.status).equal(200);
-                            console.log('削除後の確認（削除対象のトピック情報が表示されていないか）：');
+                            console.log('削除後の確認（削除対象のトピック情報が表示されていないこと）：');
                             console.log(result.attributes);
                             done();
                         })

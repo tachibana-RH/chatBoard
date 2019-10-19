@@ -46,7 +46,7 @@ describe('users.jsのテスト', function() {
             request(app)
                 .post('/users/login')
                 .set('Accept','application/json')
-                .send({name: "komitest", password: "eenz78sbrh"})
+                .send({name: "komitest", password: "password"})
                 .end((err, res)=>{
                     if (err) return done(err);
                     should(res.status).equal(302);
@@ -58,7 +58,7 @@ describe('users.jsのテスト', function() {
             request(app)
                 .post('/users/login')
                 .set('Accept','application/json')
-                .send({name: "komitest", password: "eenz78sb"})
+                .send({name: "komitest", password: "passwo"})
                 .end((err, res)=>{
                     if (err) return done(err);
                     should(res.status).equal(401);
@@ -69,7 +69,7 @@ describe('users.jsのテスト', function() {
             request(app)
                 .post('/users/login')
                 .set('Accept','application/json')
-                .send({name: "komit", password: "eenz78sbrh"})
+                .send({name: "komit", password: "password"})
                 .end((err, res)=>{
                     if (err) return done(err);
                     should(res.status).equal(401);

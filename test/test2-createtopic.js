@@ -16,7 +16,7 @@ describe('createtopic.jsのテスト', function() {
     before(
         function (done) {
             testSession.post('/users/login')
-            .send({name: "komitest", password: "eenz78sbrh"})
+            .send({name: "komitest", password: "password"})
             .expect(302)
             .end(function (err) {
                 if (err) return done(err);
